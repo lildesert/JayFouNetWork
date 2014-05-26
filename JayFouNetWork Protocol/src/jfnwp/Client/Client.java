@@ -9,12 +9,12 @@ import java.net.UnknownHostException;
 
 public class Client {
 
-	public static void main(String[] args) {
+	public static void main(String[] args)  {
 		
 		String sentence;            
         String modifiedSentence;
  
-        Socket clientSocket;
+        Socket clientSocket = null;
 		try 
 		{
 			clientSocket = new Socket("localhost", 8888);
@@ -37,7 +37,11 @@ public class Client {
 		}
 		finally
 		{
-			clientSocket.close();	
+			try {
+				clientSocket.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}	
 		}
 	}
 
