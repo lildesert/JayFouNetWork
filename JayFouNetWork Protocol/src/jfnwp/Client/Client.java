@@ -8,9 +8,10 @@ import jfnwp.Services.MessageService;
 
 public class Client {
 
-	public static void main(String[] args) {
+
+	public static void main(String[] args)  {
  
-        Socket clientSocket;
+        Socket clientSocket = null;
 		try 
 		{
 			clientSocket = new Socket("localhost", 8888);
