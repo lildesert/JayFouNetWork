@@ -2,34 +2,20 @@ package jfnwp.Services;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.Socket;
 
-public class CommunicationService {
+public class SerializationService {
 
-	public static void SendMessage(Socket s, Message m)
-	{
-        try {
-        	byte[] message = toByteArray(m);
-			DataOutputStream out = new DataOutputStream(s.getOutputStream());
-			out.write(message);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-    public static byte[] toByteArray(Message m) throws IOException {
+	public static byte[] toByteArray(Object o) throws IOException {
         byte[] bytes = null;
         ByteArrayOutputStream bos = null;
         ObjectOutputStream oos = null;
         try {
             bos = new ByteArrayOutputStream();
             oos = new ObjectOutputStream(bos);
-            oos.writeObject(id);
-            oos.writeObject(data);
+            oos.writeObject(o);
             oos.flush();
             bytes = bos.toByteArray();
         } finally {
@@ -43,7 +29,7 @@ public class CommunicationService {
         return bytes;
     }
 
-    public static Message toObject(byte[] bytes) throws IOException, ClassNotFoundException {
+    public static Object toObject(byte[] bytes) throws IOException, ClassNotFoundException {
         Object obj = null;
         ByteArrayInputStream bis = null;
         ObjectInputStream ois = null;
