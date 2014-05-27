@@ -1,4 +1,4 @@
-package jfnwp.Implementation;
+package jfnwp.rpslsImplementation;
 
 /*
  * Used in RPSLS's Move.
