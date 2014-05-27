@@ -99,4 +99,10 @@ public class ChessBoard implements IBoard {
         }
         return true;
 	}
+
+	@Override
+	public Color isFinish() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

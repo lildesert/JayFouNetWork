@@ -21,5 +21,11 @@ public class RpslsBoard implements IBoard {
 	public boolean checkMove(Player j, IMove m) {
 		return false;
 	}
+
+	@Override
+	public Color isFinish() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
