@@ -35,7 +35,7 @@ public class ChessBoard implements IBoard {
 	}
 	
 	@Override
-	public void applyMove(Player j, IMove m) {
+	public void applyMove(Color color, IMove m) {
 		ChessMove mo = (ChessMove) m;
 		Position from = mo.getFrom();
 		Position to = mo.getTo();
@@ -45,7 +45,7 @@ public class ChessBoard implements IBoard {
 	}
 
 	@Override
-	public boolean checkMove(Player j, IMove m) {
+	public boolean checkMove(Color color, IMove m) {
 		ChessMove mo = (ChessMove) m;
 		ChessPiece p = (ChessPiece) getPiece(mo.getFrom());
 		if(p == null)
