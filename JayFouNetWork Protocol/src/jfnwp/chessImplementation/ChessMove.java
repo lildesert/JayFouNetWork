@@ -19,6 +19,11 @@ public class ChessMove implements IMove{
 		this.to = to;
 	}
 	
+	/**
+	 * Check if the object move is not a real move : same place.
+	 * @return Boolean
+	 * @version 1.0
+	 */
 	public Boolean noMove() {
 		if((from.getX() == to.getX()) && (from.getY() == to.getY()))
 			return true;

@@ -6,6 +6,10 @@ import jfnwp.Interfaces.Color;
 import jfnwp.Interfaces.IPosition;
 import jfnwp.Interfaces.Piece;
 
+/**
+ * @see ChessPiece
+ * @version 1.0
+ */
 public class Tower extends Piece {
 	
 	private Boolean firstMouv;

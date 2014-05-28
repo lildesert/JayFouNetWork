@@ -3,6 +3,10 @@ package jfnwp.chessImplementation;
 import jfnwp.Implementation.Position;
 import jfnwp.Interfaces.Color;
 
+/**
+ * @see ChessPiece
+ * @version 1.0
+ */
 public class Queen extends ChessPiece {
 
 	public Queen(Color color) {

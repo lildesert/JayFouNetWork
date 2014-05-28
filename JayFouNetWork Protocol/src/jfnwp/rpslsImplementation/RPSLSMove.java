@@ -2,7 +2,11 @@ package jfnwp.rpslsImplementation;
 
 import jfnwp.Interfaces.IMove;
 import jfnwp.Interfaces.Piece;
+import jfnwp.chessImplementation.ChessPiece;
 
+/**
+ * @version 1.0
+ */
 public class RPSLSMove implements IMove {
 	
 	private Piece p;

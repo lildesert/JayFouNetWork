@@ -8,6 +8,10 @@ import jfnwp.Interfaces.IBoard;
 import jfnwp.Interfaces.IMove;
 import jfnwp.Interfaces.Piece;
 
+/**
+ * The representation of a chess board. 
+ * @version 1.0
+ */
 public class ChessBoard implements IBoard {
 	
 	private Piece[][] board;
@@ -91,7 +95,13 @@ public class ChessBoard implements IBoard {
 			return false;
 		return true;
 	}
-
+	
+	/**
+	 * Check if there is no piece between two positions
+	 * @return Boolean
+	 * @param Move
+	 * @version 1.0
+	 */
 	public boolean freeRoad(ChessMove mv) {
 		Position from = mv.getFrom();
 		Position to = mv.getTo();
@@ -123,6 +133,12 @@ public class ChessBoard implements IBoard {
         return true;
 	}
 	
+	/**
+	 * Check if the King will become mat with the move
+	 * @return Boolean
+	 * @param Move
+	 * @version 1.0
+	 */
 	public Boolean becomeMat(ChessMove mv) {
         
 		Position from = mv.getFrom();
@@ -153,11 +169,22 @@ public class ChessBoard implements IBoard {
         return false;
     }
 	
+	/**
+	 * Move a piece on the board
+	 * @param Position "from" and Position "to"
+	 * @version 1.0
+	 */
 	public void movePiece(Position from, Position to){
 		board[to.getX()][to.getY()] = board[from.getX()][from.getY()];
 		board[from.getX()][from.getY()] = null;
 	}
 	
+	/**
+	 * Check if a piece can be taken by an opponent's piece
+	 * @return Boolean
+	 * @param Position
+	 * @version 1.0
+	 */
 	public Boolean mayBeTaken(Position p) {
 		Piece piece = this.getPiece(p);
         int i, j;
@@ -174,7 +201,13 @@ public class ChessBoard implements IBoard {
         return false;
 	}
 	
-	//@TODO : When the King can be protected by another piece 
+	/**
+	 * Check if the game is over for the player "color"
+	 * @todo When the King can be protected by another piece
+	 * @return Boolean
+	 * @param Color
+	 * @version 1.0
+	 */
 	public Boolean isMat(Color color) {
 		int i, j;
         Piece pieceTmp =null;
