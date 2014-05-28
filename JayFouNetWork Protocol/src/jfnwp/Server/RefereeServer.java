@@ -4,14 +4,16 @@ import java.io.*;
 import java.net.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
 import jfnwp.Services.MessageService;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public class RefereeServer extends Thread {
 
-	private static final int port = 8888;
+	private static final int port = 9890;
 	private static final int maxThread = 8;
 	private Socket s;
+	private static Logger logger = LogManager.getLogger(RefereeServer.class.getName());
 
 	RefereeServer(Socket sock)
 	{
@@ -22,10 +24,11 @@ public class RefereeServer extends Thread {
 	{
 		ExecutorService executorService = Executors.newFixedThreadPool(maxThread);
 		ServerSocket ssock = new ServerSocket(port);
-		System.out.println("Listening");
+		logger.info("Server start");
+		logger.info("test");
 		while (true) {
 			Socket sock = ssock.accept();
-			System.out.println("Connected");
+			logger.info("Connection of a new player");
 			executorService.execute(new RefereeServer(sock));
 		}
 	}
