@@ -1,20 +1,22 @@
 package jfnwp.rpslsImplementation;
 
 import jfnwp.Interfaces.IMove;
+import jfnwp.Interfaces.Piece;
 
 public class RPSLSMove implements IMove {
 	
-	private EnumRPSLS value;
+	private Piece p;
 
-	public RPSLSMove(EnumRPSLS value) {
-		this.value = value;
+	public RPSLSMove(Piece p) {
+		super();
+		this.p = p;
 	}
 
-	public EnumRPSLS getValue() {
-		return value;
+	public Piece getP() {
+		return p;
 	}
 
-	public void setValue(EnumRPSLS value) {
-		this.value = value;
+	public void setP(Piece p) {
+		this.p = p;
 	}
 }

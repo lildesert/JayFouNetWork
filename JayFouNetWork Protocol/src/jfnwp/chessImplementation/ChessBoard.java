@@ -29,41 +29,6 @@ public class ChessBoard implements IBoard {
 		return isMat(turn);
 	}
 	
-	//@TODO : When the King can be protected by another piece 
-	public Boolean isMat(Color color) {
-		int i, j;
-        Piece pieceTmp =null;
-        Position kingPosition = new Position();
-        Position positionTest = new Position();
-        for (i = 0; i < 8; i++) {
-            for (j = 0; j < 8; j++) {
-                if ((board[i][j] instanceof King) && board[i][j].getColor().equals(color)) {
-                    kingPosition = new Position(j, i);
-                	pieceTmp = board[i][j];
-                }
-            }
-        }
-        
-        ChessPiece piece = (ChessPiece) board[kingPosition.getX()][kingPosition.getY()];
-        Position positionTmp = new Position();
-        
-        int x, y;
-        if (mayBeTaken(kingPosition)){
-	        for (y = 0; y < 8; y++) {
-	            for (x = 0; x < 8; x++) {
-	                positionTmp.setX(y);
-	                positionTmp.setY(x);
-	                ChessMove mv = new ChessMove(kingPosition, positionTmp);
-	                if (piece.checkMove(mv, this))
-	                	if(!mayBeTaken(positionTmp))
-	                		return false;
-	            }
-	        }
-	        return true;
-        }
-        return false;
-	}
-	
 	@Override
 	public void applyMove(Player j, IMove m) {
 		ChessMove mo = (ChessMove) m;
@@ -86,12 +51,24 @@ public class ChessBoard implements IBoard {
 		return true;
 	}
 	
+	/**
+	 * Check if a piece is in the position p
+	 * @return Boolean
+	 * @param Position of the piece
+	 * @version 1.0
+	 */
 	public Boolean noPiece(Position p) {
 		if(board[p.getX()][p.getY()] == null)
 			return true;
 		return false;
 	}
 	
+	/**
+	 * Get the piece in position p
+	 * @return Piece
+	 * @param Position of the piece
+	 * @version 1.0
+	 */
 	private Piece getPiece(Position p) {
         Piece piece = null;
         if(! this.noPiece(p) )
@@ -99,6 +76,12 @@ public class ChessBoard implements IBoard {
         return piece;
     }
 	
+	/**
+	 * Check if two pieces come from the same player
+	 * @return Boolean
+	 * @param Two position to compare
+	 * @version 1.0
+	 */
 	public Boolean samePlayer(Position p1, Position p2) {
 		Piece piece1 = getPiece(p1);
 		Piece piece2 = getPiece(p2);
@@ -187,6 +170,41 @@ public class ChessBoard implements IBoard {
                         return true;
                 }
             }
+        }
+        return false;
+	}
+	
+	//@TODO : When the King can be protected by another piece 
+	public Boolean isMat(Color color) {
+		int i, j;
+        Piece pieceTmp =null;
+        Position kingPosition = new Position();
+        Position positionTest = new Position();
+        for (i = 0; i < 8; i++) {
+            for (j = 0; j < 8; j++) {
+                if ((board[i][j] instanceof King) && board[i][j].getColor().equals(color)) {
+                    kingPosition = new Position(j, i);
+                	pieceTmp = board[i][j];
+                }
+            }
+        }
+        
+        ChessPiece piece = (ChessPiece) board[kingPosition.getX()][kingPosition.getY()];
+        Position positionTmp = new Position();
+        
+        int x, y;
+        if (mayBeTaken(kingPosition)){
+	        for (y = 0; y < 8; y++) {
+	            for (x = 0; x < 8; x++) {
+	                positionTmp.setX(y);
+	                positionTmp.setY(x);
+	                ChessMove mv = new ChessMove(kingPosition, positionTmp);
+	                if (piece.checkMove(mv, this))
+	                	if(!mayBeTaken(positionTmp))
+	                		return false;
+	            }
+	        }
+	        return true;
         }
         return false;
 	}
