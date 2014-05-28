@@ -15,6 +15,7 @@ import jfnwp.Interfaces.Piece;
 public class ChessBoard implements IBoard {
 	
 	private Piece[][] board;
+	private Color winner;
 	
 	public ChessBoard(){
 		this.board = new Piece[8][8];
@@ -53,6 +54,11 @@ public class ChessBoard implements IBoard {
 			return false;
 			
 		return true;
+	}
+	
+	@Override
+	public Color getWinner() {
+		return winner;
 	}
 	
 	/**

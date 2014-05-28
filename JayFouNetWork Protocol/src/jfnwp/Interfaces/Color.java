@@ -8,5 +8,6 @@ package jfnwp.Interfaces;
 
 public enum Color {
 	White,
-	Black;
+	Black,
+	Neutral;
 }

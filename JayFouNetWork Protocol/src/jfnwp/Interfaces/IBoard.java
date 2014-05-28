@@ -4,7 +4,8 @@ import jfnwp.Interfaces.IMove;
 import jfnwp.Implementation.Player;
 
 public interface IBoard {
-	public void applyMove(Player j, IMove m);
-	public boolean checkMove(Player j, IMove m);
+	public void applyMove(Color color, IMove m);
+	public boolean checkMove(Color color, IMove m);
 	public Boolean isFinish(Color turn);
+	public Color getWinner();
 }

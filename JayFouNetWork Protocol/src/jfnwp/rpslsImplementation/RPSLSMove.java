@@ -9,18 +9,18 @@ import jfnwp.chessImplementation.ChessPiece;
  */
 public class RPSLSMove implements IMove {
 	
-	private Piece p;
+	private EnumRPSLS m;
 
-	public RPSLSMove(Piece p) {
+	public RPSLSMove(EnumRPSLS m) {
 		super();
-		this.p = p;
+		this.m = m;
 	}
 
-	public Piece getP() {
-		return p;
+	public EnumRPSLS getType() {
+		return m;
 	}
 
-	public void setP(Piece p) {
-		this.p = p;
+	public void setType(EnumRPSLS m) {
+		this.m = m;
 	}
 }
