@@ -14,6 +14,9 @@ public class NetworkService {
 			byte[] message = SerializationService.toByteArray(m);
 			DataOutputStream out = new DataOutputStream(s.getOutputStream());
 			
+			//m.setData("coucou");
+			//System.out.println(m.getData());
+			
 			int msgLength = message.length;
 			out.write(message, 0, msgLength);
 			out.flush();

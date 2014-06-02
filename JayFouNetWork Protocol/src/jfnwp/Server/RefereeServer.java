@@ -4,16 +4,20 @@ import java.io.*;
 import java.net.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import jfnwp.Implementation.Message;
 import jfnwp.Services.MessageService;
+
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
 public class RefereeServer extends Thread {
 
-	private static final int port = 9890;
+	public static final int port = 9890;
 	private static final int maxThread = 8;
 	private Socket s;
 	private static Logger logger = LogManager.getLogger(RefereeServer.class.getName());
+	private static WaitingServer waitingServer;
 
 	RefereeServer(Socket sock)
 	{
@@ -24,25 +28,22 @@ public class RefereeServer extends Thread {
 	{
 		ExecutorService executorService = Executors.newFixedThreadPool(maxThread);
 		ServerSocket ssock = new ServerSocket(port);
-		logger.info("Server start");
-		logger.info("test");
+		waitingServer = new WaitingServer();
+		logger.info("Server runnning on port " + ssock.getLocalPort() + " and address " + ssock.getInetAddress());
 		while (true) {
 			Socket sock = ssock.accept();
-			logger.info("Connection of a new player");
-			executorService.execute(new RefereeServer(sock));
+			logger.info("Connection of " + sock.getInetAddress()); 
+			//executorService.execute(new RefereeServer(sock));
 		}
 	}
 
 	public void run()
 	{
-		try {
-			MessageService m = new MessageService(s);
-			
-			m.Ok();
-			
-			s.close();
-		} catch (IOException e) {
-			System.out.println(e);
+		MessageService m = new MessageService(s);
+		m.Ok();
+		Message mess = m.ReadMessage();
+		if(mess.getId() == 1){ // TODO : change this
+			//Récupérer le type de jeu
 		}
 	}
 }

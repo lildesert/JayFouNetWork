@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import jfnwp.Server.RefereeServer;
 import jfnwp.Services.MessageService;
 
 public class Client {
@@ -14,10 +15,10 @@ public class Client {
         Socket clientSocket = null;
 		try 
 		{
-			clientSocket = new Socket("localhost", 8888);
+			clientSocket = new Socket("localhost", RefereeServer.port);
 			MessageService m = new MessageService(clientSocket);
 			m.Ok();
-	        System.out.println("FROM SERVER: " + m.ReadMessage());
+	        //System.out.println("FROM SERVER: " + m.ReadMessage());
 		} 
 		catch (UnknownHostException e) 
 		{

@@ -1,5 +1,6 @@
 package jfnwp.Interfaces;
 
+import jfnwp.Implementation.Message;
 import jfnwp.Implementation.Move;
 
 public interface IMessages {
@@ -18,5 +19,5 @@ public interface IMessages {
 	void Wait();
 	void Imp();
 	void Error(String errMsg);
-	String ReadMessage();
+	Message ReadMessage();
 }
