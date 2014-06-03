@@ -5,7 +5,6 @@ import java.net.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import jfnwp.Implementation.Message;
 import jfnwp.Services.MessageService;
 
 import org.apache.logging.log4j.Logger;
@@ -41,9 +40,9 @@ public class RefereeServer extends Thread {
 	{
 		MessageService m = new MessageService(s);
 		m.Ok();
-		Message mess = m.ReadMessage();
-		if(mess.getId() == 1){ // TODO : change this
+		//String mess = m.ReadMessage();
+		//if(mess.getId() == 1){ // TODO : change this
 			//Récupérer le type de jeu
-		}
+		//}
 	}
 }

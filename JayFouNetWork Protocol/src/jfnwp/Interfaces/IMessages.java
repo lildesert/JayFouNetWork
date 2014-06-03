@@ -19,5 +19,5 @@ public interface IMessages {
 	void Wait();
 	void Imp();
 	void Error(String errMsg);
-	Message ReadMessage();
+	String ReadMessage();
 }
