@@ -18,7 +18,7 @@ public class Client {
 			clientSocket = new Socket("localhost", RefereeServer.port);
 			MessageService m = new MessageService(clientSocket);
 			m.Ok();
-	        //System.out.println("FROM SERVER: " + m.ReadMessage());
+	        System.out.println("FROM SERVER: " + m.ReadMessage());
 		} 
 		catch (UnknownHostException e) 
 		{

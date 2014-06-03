@@ -100,10 +100,10 @@ public class MessageService implements IMessages {
 	}
 
 	@Override
-	public Message ReadMessage() {
+	public String ReadMessage() {
 		Message m = NetworkService.receiveMessage(s);
-		//return m.ToString();
-		return m;
+		return m.ToString();
+		//return m;
 	}
 
 	
