@@ -1,2 +1,1 @@
-- test
-- zeugdze
+- Définir comment extraire les contenus des messages

@@ -1,4 +1,4 @@
-package jfnwp.rpslsImplementation;
+package jfnwp.Implementation;
 
 public enum EnumGame {
 	Chess,

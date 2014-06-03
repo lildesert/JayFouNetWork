@@ -1,4 +1,4 @@
-package jfnwp.Client;
+package jfnwp.ChessClient;
 
 import java.io.IOException;
 import java.net.Socket;

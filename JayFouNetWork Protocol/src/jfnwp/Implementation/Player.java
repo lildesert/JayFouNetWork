@@ -1,7 +1,6 @@
 package jfnwp.Implementation;
 
 import java.net.Socket;
-import jfnwp.rpslsImplementation.EnumGame;
 
 public class Player {
 	private String nickname;

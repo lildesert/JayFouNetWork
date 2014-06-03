@@ -1,5 +1,11 @@
 package jfnwp.chessImplementation;
 
+import java.net.URL;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+
 import jfnwp.Implementation.Move;
 import jfnwp.Implementation.Player;
 import jfnwp.Implementation.Position;
@@ -14,8 +20,8 @@ import jfnwp.Interfaces.Piece;
  */
 public class ChessBoard implements IBoard {
 	
-	private Piece[][] board;
-	private Color winner;
+	protected Piece[][] board;
+	protected Color winner;
 	
 	public ChessBoard(){
 		this.board = new Piece[8][8];
@@ -26,7 +32,7 @@ public class ChessBoard implements IBoard {
         this.board[0][4] = new King(Color.Black);
         this.board[0][5] = new Bishop(Color.Black);
         this.board[0][6] = new Knight(Color.Black);
-        this.board[0][7] = new Tower(Color.Black);
+        this.board[0][7] = new Tower(Color.Black);       
 	}
 	
 	@Override
@@ -79,7 +85,7 @@ public class ChessBoard implements IBoard {
 	 * @param Position of the piece
 	 * @version 1.0
 	 */
-	private Piece getPiece(Position p) {
+	public Piece getPiece(Position p) {
         Piece piece = null;
         if(! this.noPiece(p) )
             piece = this.board[p.getY()][p.getX()];
@@ -247,4 +253,8 @@ public class ChessBoard implements IBoard {
         }
         return false;
 	}
+	
+	public Boolean emptySquare(Position position) {
+        return this.board[position.getX()][position.getY()] == null;
+    }
 }

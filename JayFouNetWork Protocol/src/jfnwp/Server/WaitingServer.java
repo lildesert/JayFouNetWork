@@ -5,21 +5,28 @@ import java.util.LinkedList;
 
 
 
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import jfnwp.Implementation.Player;
 
 public class WaitingServer {
 	
 	private LinkedList<Player> waitingList;
+	private Logger logger;
 	
 	public WaitingServer() {
 		waitingList = new LinkedList<Player>();
+		logger = LogManager.getLogger(RefereeServer.class.getName());
 	}
 	
 	public void addPlayer(Player p){
 		waitingList.addLast(p);
+		logger.info("Adding Player on waiting list : " + p.getNickname() + " " + p.getGame());
 	}
 	
-	public void run() {
+	public Player getOpponent() {
 		while(true){
 			//For each player of the beginning of the list, find an opponent
 			Iterator it = waitingList.iterator();
