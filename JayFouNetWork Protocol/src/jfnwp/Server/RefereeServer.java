@@ -32,7 +32,7 @@ public class RefereeServer extends Thread {
 		while (true) {
 			Socket sock = ssock.accept();
 			logger.info("Connection of " + sock.getInetAddress()); 
-			//executorService.execute(new RefereeServer(sock));
+			executorService.execute(new RefereeServer(sock));
 		}
 	}
 

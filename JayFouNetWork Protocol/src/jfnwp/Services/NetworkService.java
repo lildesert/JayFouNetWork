@@ -20,7 +20,8 @@ public class NetworkService {
 			byte[] message = SerializationService.toByteArray(m);
 			DataOutputStream out = new DataOutputStream(s.getOutputStream());			
 			int msgLength = message.length;
-			out.write(message, 0, msgLength);
+			out.writeInt(msgLength);
+			out.write(message);
 			logger.info("Message de taille "+msgLength + " envoyé");
 			out.flush();
 		} catch (IOException e) {
@@ -34,10 +35,10 @@ public class NetworkService {
 		try {
 			in = new DataInputStream(s.getInputStream());
 			
-			int msgLen = 0;
+			int msgLen = in.readInt();
 			byte[] msg = new byte[msgLen];
 			
-			in.readFully(msg, 0, msgLen);
+			in.read(msg);
 
 			m = (Message) SerializationService.toObject(msg);
 			logger.info("Message de taille " +msgLen +" reçu");
