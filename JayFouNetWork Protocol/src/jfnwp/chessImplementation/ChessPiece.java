@@ -10,4 +10,11 @@ public abstract class ChessPiece extends Piece {
 	}
 	
 	public abstract Boolean checkMove(ChessMove mv, ChessBoard board);
+	
+	public String toString() {
+        String lettre = "B";
+        if(this.color == Color.White )
+            lettre = "W";
+        return lettre + this.getClass().getSimpleName();
+    }
 }

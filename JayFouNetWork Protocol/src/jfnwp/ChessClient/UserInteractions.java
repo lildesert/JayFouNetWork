@@ -14,14 +14,15 @@ import jfnwp.Interfaces.Color;
 import jfnwp.Interfaces.Piece;
 import jfnwp.chessImplementation.ChessBoard;
 import jfnwp.chessImplementation.ChessMove;
+import jfnwp.chessImplementation.ChessPiece;
 
 public class UserInteractions implements java.awt.event.MouseListener {
     
     private int click;
     public Color tour;
     private Position start, end;
-    protected ChessBoardForDisplay chessBoard;
-    protected ChessBoardForDisplay chessBoardPrecedent;
+    protected ChessBoard chessBoard;
+    protected ChessBoard chessBoardPrecedent;
     protected JLayeredPane layerPane;
     private Graphics graph;
     public boolean modeDeuxJoueurs = false;
@@ -36,8 +37,8 @@ public class UserInteractions implements java.awt.event.MouseListener {
         modeDeuxJoueurs = bool;
     }
     
-    public void setChessBoard(ChessBoardForDisplay board) {
-        this.chessBoard = board;
+    public void setChessBoard(ChessBoard chessBoardPrecedent2) {
+        this.chessBoard = chessBoardPrecedent2;
     }
 
     public void setGraph(Graphics graph) {
@@ -49,10 +50,10 @@ public class UserInteractions implements java.awt.event.MouseListener {
     }
     
     public void testDeplacementOrdi(Position start, Position end) throws IOException{   
-        Piece piece = chessBoard.getPiece(start);
+        ChessPiece piece = (ChessPiece) chessBoard.getPiece(start);
         Boolean deplacementOrdi = false;
         if (piece.getColor() == Color.White) {
-            if (piece.mouvementValide(start, end, chessBoard)) {
+            if(piece.checkMove(new ChessMove(start, end), chessBoard)) {
                 if(! chessBoard.becomeMat(new ChessMove(start, end))){
                 	if (!chessBoard.isMat(Color.Black) || !chessBoard.isMat(Color.White)){
                             int i, j;
@@ -79,26 +80,26 @@ public class UserInteractions implements java.awt.event.MouseListener {
         } else {
             System.out.println("Ce n'est pas votre tour !");
         }
-        this.chessBoard.passeEnEchec(tour, layerPane);
-        this.chessBoard.refresh(layerPane);
-    	if (chessBoard.isMat(Color.Black) || chessBoard.estMat(Color.White))
+        ((ChessBoardForDisplay) this.chessBoard).displayMat(tour, layerPane);
+        ((ChessBoardForDisplay) this.chessBoard).refresh(layerPane);
+    	if (chessBoard.isMat(Color.Black) || chessBoard.isMat(Color.White))
             System.out.println("Vous êtes en échec et mat et mat et mat et mat et mat!");
         if(deplacementOrdi) {
             this.ordiDeplacement();
-            this.chessBoard.refresh(layerPane);
+            ((ChessBoardForDisplay) this.chessBoard).refresh(layerPane);
         }
         tour = Color.White;
     }
     
     public void testDeplacement(Position start, Position end){   
-        Piece piece = chessBoard.getPiece(start);
-        if (piece.getCouleur() == tour) {
-            if (piece.mouvementValide(start, end, chessBoard)) {
+        ChessPiece piece = (ChessPiece) chessBoard.getPiece(start);
+        if (piece.getColor() == tour) {
+            if (piece.checkMove(new ChessMove(start, end), chessBoard)) {
                 if(! chessBoard.becomeMat(new ChessMove(start, end)) ){
                     int i, j;
                     for (i = 0; i < 8; i++) {
                         for (j = 0; j < 8; j++) {
-                            chessBoardPrecedent.chessBoard[j][i] = this.chessBoard.chessBoard[j][i];
+                            chessBoardPrecedent.board[j][i] = this.chessBoard.board[j][i];
                         }
                     }
                     chessBoard.movePiece(start, end);
@@ -108,18 +109,19 @@ public class UserInteractions implements java.awt.event.MouseListener {
                         tour = Color.White;
                     }
                 } else {
-                    System.out.println("Vous êtes en échec !");
+                    System.out.println("You are mat");
                 }
             } else {
-                System.out.println("Déplacement non autorisé !");
+                System.out.println("Incorrect move !");
             }
         } else {
-            System.out.println("Ce n'est pas votre tour !");
+            System.out.println("Not your turn !");
         }
-        if(this.chessBoard.passeEnEchec(tour, this.layerPane)){
+        if(((ChessBoardForDisplay) this.chessBoard).displayMat(tour, this.layerPane)){
         } else {
-            this.chessBoard.refresh(layerPane);
+            
         }
+        ((ChessBoardForDisplay) this.chessBoard).refresh(layerPane);
     }
     
     @Override
@@ -131,34 +133,30 @@ public class UserInteractions implements java.awt.event.MouseListener {
         if(e.getX() > 36 && e.getX() < 600 - 36 && e.getY() > 36 && e.getY() < 600 - 36){
             
             Position pClick=new Position ((e.getX()-36)/66, (e.getY()-36)/66);
-
+           
             if(this.click % 2 == 0){
                 if( ! this.chessBoard.emptySquare(pClick)) {
-                    if( this.chessBoard.getPiece(pClick).getColor() == tour ){
-                        this.chessBoard.clickChoixPiece(this.layerPane, pClick);
+                    if( this.chessBoard.getPiece(pClick).getColor() == tour){
+                        ((ChessBoardForDisplay) this.chessBoard).clickChoixPiece(this.layerPane, pClick);
                         this.click++;
                         this.start = pClick;
                     }
                 }
             } else {
                 if( ! this.chessBoard.emptySquare(pClick) && this.chessBoard.getPiece(pClick).getColor().equals(tour)) {
-                    this.chessBoard.clickChoixPiece(this.layerPane, pClick);
+                    ((ChessBoardForDisplay) this.chessBoard).clickChoixPiece(this.layerPane, pClick);
                     this.start = pClick;
                 } else {
-                    try {
-                        this.end = pClick;
-                        if( this.modeDeuxJoueurs ){
-                            testDeplacement(start, end);
-                        } else {
-                            testDeplacementOrdi(start, end);
-                        }
-                        this.click++;
-                    } catch (IOException ex) {
-                        Logger.getLogger(UserInteractions.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    this.end = pClick;
+					testDeplacement(start, end);
+					this.click++;
                 }
             }
         }
+    }
+    
+    public void ordiDeplacement() throws IOException{   
+    	
     }
 
     @Override

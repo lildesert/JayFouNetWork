@@ -20,11 +20,11 @@ import jfnwp.Interfaces.Piece;
  */
 public class ChessBoard implements IBoard {
 	
-	protected Piece[][] board;
+	public Piece[][] board;
 	protected Color winner;
 	
 	public ChessBoard(){
-		this.board = new Piece[8][8];
+		this.board = new ChessPiece[8][8];
         this.board[0][0] = new Tower(Color.Black);
         this.board[0][1] = new Knight(Color.Black);
         this.board[0][2] = new Bishop(Color.Black);
@@ -32,7 +32,24 @@ public class ChessBoard implements IBoard {
         this.board[0][4] = new King(Color.Black);
         this.board[0][5] = new Bishop(Color.Black);
         this.board[0][6] = new Knight(Color.Black);
-        this.board[0][7] = new Tower(Color.Black);       
+        this.board[0][7] = new Tower(Color.Black);
+        
+        int i;
+        for (i = 0; i < 8; i++) {
+            this.board[1][i] = new Pawn(Color.Black);
+        }
+        for (i = 0; i < 8; i++) {
+            this.board[6][i] = new Pawn(Color.White);
+        }
+        
+        this.board[7][0] = new Tower(Color.White);
+        this.board[7][1] = new Knight(Color.White);
+        this.board[7][2] = new Bishop(Color.White);
+        this.board[7][3] = new Queen(Color.White);
+        this.board[7][4] = new King(Color.White);
+        this.board[7][5] = new Bishop(Color.White);
+        this.board[7][6] = new Knight(Color.White);
+        this.board[7][7] = new Tower(Color.White);
 	}
 	
 	@Override
@@ -74,7 +91,7 @@ public class ChessBoard implements IBoard {
 	 * @version 1.0
 	 */
 	public Boolean noPiece(Position p) {
-		if(board[p.getX()][p.getY()] == null)
+		if(board[p.getY()][p.getX()] == null)
 			return true;
 		return false;
 	}
@@ -187,8 +204,8 @@ public class ChessBoard implements IBoard {
 	 * @version 1.0
 	 */
 	public void movePiece(Position from, Position to){
-		board[to.getX()][to.getY()] = board[from.getX()][from.getY()];
-		board[from.getX()][from.getY()] = null;
+		board[to.getY()][to.getX()] = board[from.getY()][from.getX()];
+		board[from.getY()][from.getX()] = null;
 	}
 	
 	/**
@@ -255,6 +272,6 @@ public class ChessBoard implements IBoard {
 	}
 	
 	public Boolean emptySquare(Position position) {
-        return this.board[position.getX()][position.getY()] == null;
+        return this.board[position.getY()][position.getX()] == null;
     }
 }

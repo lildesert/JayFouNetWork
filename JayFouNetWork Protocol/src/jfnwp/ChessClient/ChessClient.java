@@ -1,5 +1,7 @@
 package jfnwp.ChessClient;
 
+import java.io.File;
+
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -9,6 +11,7 @@ public class ChessClient {
 		try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (InstantiationException e) {
+        	e.printStackTrace();
         } catch (ClassNotFoundException e) {
         } catch (UnsupportedLookAndFeelException e) {
         } catch (IllegalAccessException e) {

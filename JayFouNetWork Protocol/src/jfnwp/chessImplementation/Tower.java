@@ -10,7 +10,7 @@ import jfnwp.Interfaces.Piece;
  * @see ChessPiece
  * @version 1.0
  */
-public class Tower extends Piece {
+public class Tower extends ChessPiece {
 	
 	private Boolean firstMouv;
 	
