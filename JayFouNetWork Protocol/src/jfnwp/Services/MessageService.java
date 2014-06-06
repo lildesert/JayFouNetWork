@@ -3,8 +3,8 @@ package jfnwp.Services;
 import java.net.Socket;
 
 import jfnwp.Interfaces.IMessages;
+import jfnwp.Interfaces.IMove;
 import jfnwp.Implementation.Message;
-import jfnwp.Implementation.Move;
 
 public class MessageService implements IMessages {
 
@@ -34,7 +34,7 @@ public class MessageService implements IMessages {
 	}
 
 	@Override
-	public void Move(Move opponentMove) {
+	public void Move(IMove opponentMove) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -46,7 +46,7 @@ public class MessageService implements IMessages {
 	}
 
 	@Override
-	public void ClientMove(Move m) {
+	public void ClientMove(IMove m) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -104,7 +104,5 @@ public class MessageService implements IMessages {
 		Message m = NetworkService.receiveMessage(s);
 		return m.ToString();
 		//return m;
-	}
-
-	
+	}	
 }

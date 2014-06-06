@@ -8,20 +8,7 @@ public class Message implements Serializable {
 
 	private int id;
 	private String data;
-	private Object[] dataO;
 	
-	public Object[] getDataO() {
-		return dataO;
-	}
-
-	public void setDataO(Object... data) {
-		int i = 0;
-		for (Object o : data) {
-			dataO[i] = o;
-			i++;
-		}
-	}
-
 	public Message()
 	{ }
 	

@@ -8,13 +8,12 @@ import java.util.logging.Logger;
 
 import javax.swing.JLayeredPane;
 
-import jfnwp.Implementation.Move;
+import jfnwp.ChessImplementation.ChessBoard;
+import jfnwp.ChessImplementation.ChessMove;
+import jfnwp.ChessImplementation.ChessPiece;
 import jfnwp.Implementation.Position;
 import jfnwp.Interfaces.Color;
 import jfnwp.Interfaces.Piece;
-import jfnwp.chessImplementation.ChessBoard;
-import jfnwp.chessImplementation.ChessMove;
-import jfnwp.chessImplementation.ChessPiece;
 
 public class UserInteractions implements java.awt.event.MouseListener {
     

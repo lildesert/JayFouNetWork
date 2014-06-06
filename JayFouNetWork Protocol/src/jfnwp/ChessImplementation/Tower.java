@@ -1,34 +1,38 @@
-package jfnwp.chessImplementation;
+package jfnwp.ChessImplementation;
 
 import jfnwp.Implementation.Position;
+import jfnwp.Interfaces.IMove;
 import jfnwp.Interfaces.Color;
+import jfnwp.Interfaces.IPosition;
+import jfnwp.Interfaces.Piece;
 
 /**
  * @see ChessPiece
  * @version 1.0
  */
-public class Bishop extends ChessPiece {
-
-	public Bishop(Color color) {
+public class Tower extends ChessPiece {
+	
+	private Boolean firstMouv;
+	
+	public Tower(Color color) {
 		super(color);
+		firstMouv = true;
 	}
 
-	@Override
 	public Boolean checkMove(ChessMove mv, ChessBoard board) {
         
 		Position from = mv.getFrom();
 		Position to = mv.getTo();
 		
-		if(!board.noPiece(to) && board.samePlayer(from, to))
-            return false;
-        
-        if(Math.abs(from.getX() - to.getX() ) != Math.abs(from.getY() - to.getY()))
+		if(mv.noMove())
+			return false;
+		
+        if(!board.noPiece(to) && board.samePlayer(from, to))
             return false;
         
         if(!board.freeRoad(mv))
             return false;
         
         return true;
-	}
-
+    }
 }

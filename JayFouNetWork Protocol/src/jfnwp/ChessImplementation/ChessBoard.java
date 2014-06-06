@@ -1,4 +1,4 @@
-package jfnwp.chessImplementation;
+package jfnwp.ChessImplementation;
 
 import java.net.URL;
 
@@ -6,7 +6,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 
-import jfnwp.Implementation.Move;
 import jfnwp.Implementation.Player;
 import jfnwp.Implementation.Position;
 import jfnwp.Interfaces.Color;

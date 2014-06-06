@@ -1,4 +1,4 @@
-package jfnwp.rpslsImplementation;
+package jfnwp.RpslsImplementation;
 
 import java.util.HashMap;
 import jfnwp.Interfaces.Color;
