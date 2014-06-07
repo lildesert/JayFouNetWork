@@ -1,4 +1,4 @@
-package jfnwp.chessImplementation;
+package jfnwp.ChessImplementation;
 
 import java.net.URL;
 

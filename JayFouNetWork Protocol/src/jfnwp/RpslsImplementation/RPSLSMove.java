@@ -1,8 +1,8 @@
-package jfnwp.rpslsImplementation;
+package jfnwp.RpslsImplementation;
 
+import jfnwp.ChessImplementation.ChessPiece;
 import jfnwp.Interfaces.IMove;
 import jfnwp.Interfaces.Piece;
-import jfnwp.chessImplementation.ChessPiece;
 
 /**
  * @version 1.0

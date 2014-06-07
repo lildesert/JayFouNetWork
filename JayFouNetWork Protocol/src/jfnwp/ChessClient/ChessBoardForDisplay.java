@@ -6,12 +6,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 
+import jfnwp.ChessImplementation.ChessBoard;
+import jfnwp.ChessImplementation.ChessMove;
+import jfnwp.ChessImplementation.ChessPiece;
+import jfnwp.ChessImplementation.King;
 import jfnwp.Implementation.Position;
 import jfnwp.Interfaces.Color;
-import jfnwp.chessImplementation.ChessBoard;
-import jfnwp.chessImplementation.ChessMove;
-import jfnwp.chessImplementation.ChessPiece;
-import jfnwp.chessImplementation.King;
 
 public class ChessBoardForDisplay extends ChessBoard{
 	

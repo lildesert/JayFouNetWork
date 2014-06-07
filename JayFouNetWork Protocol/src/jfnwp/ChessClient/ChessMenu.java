@@ -40,6 +40,7 @@ public class ChessMenu {
     
     protected static JFrame fenetre;
     protected String player= "";
+    private Color tourJoueur;
 
     public ChessMenu() {
 

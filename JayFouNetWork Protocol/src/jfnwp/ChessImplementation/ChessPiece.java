@@ -1,4 +1,4 @@
-package jfnwp.chessImplementation;
+package jfnwp.ChessImplementation;
 
 import jfnwp.Interfaces.Color;
 import jfnwp.Interfaces.Piece;

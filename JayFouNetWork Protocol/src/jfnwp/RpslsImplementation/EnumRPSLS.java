@@ -1,4 +1,4 @@
-package jfnwp.rpslsImplementation;
+package jfnwp.RpslsImplementation;
 
 /**
  * List the possible moves for a player 
