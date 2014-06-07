@@ -13,6 +13,11 @@ import jfnwp.ChessImplementation.King;
 import jfnwp.Implementation.Position;
 import jfnwp.Interfaces.Color;
 
+/**
+ * User Interface for the Chess client
+ * @see ChessClient
+ * @version 1.0
+ */
 public class ChessBoardForDisplay extends ChessBoard{
 	
 	private JLabel cadre, fond, cadreEchec;
@@ -22,18 +27,30 @@ public class ChessBoardForDisplay extends ChessBoard{
         this.cadre = getImage("ressources/selection.png");
         this.fond = getImage("ressources/chessboard.jpg");
 	}
-
+	
+	/**
+	 * Refresh the layeredPane (after a move for example)
+	 * @version 1.0
+	 */
 	public void refresh(JLayeredPane layeredPane) {
         layeredPane.removeAll();
         this.displayPieces(layeredPane);
         this.displayBackground(layeredPane);
     }
 	
+	/**
+	 * Get an image to inform the player which piece he selected
+	 * @version 1.0
+	 */
 	public void displaySelection(JLayeredPane layeredPane, Position p) {
         layeredPane.add(this.cadre);
         this.cadre.setLocation(35 + p.getX() * 66, 35 + p.getY() * 66);
     }
 	
+	/**
+	 * Insert pieces in the layeredPane
+	 * @version 1.0
+	 */
 	public void displayPieces(JLayeredPane layeredPane) {
         JLabel image;
         int y, x;
@@ -48,10 +65,18 @@ public class ChessBoardForDisplay extends ChessBoard{
         }
     }
 	
+	/**
+	 * Insert the background in the layeredPane
+	 * @version 1.0
+	 */
 	public void displayBackground(JLayeredPane layeredPane) {
         layeredPane.add(this.fond);
     }
 	
+	/**
+	 * Get an image from the folder 'ressources'
+	 * @version 1.0
+	 */
 	public final JLabel getImage(String a) {
         URL url = getClass().getClassLoader().getResource(a);
         ImageIcon icon = new ImageIcon(url);
@@ -60,6 +85,10 @@ public class ChessBoardForDisplay extends ChessBoard{
         return label;
     }
 	
+	/**
+	 * Display an alert when the player is Mat
+	 * @version 1.0
+	 */
 	public Boolean displayMat(Color couleur, JLayeredPane layerPane) {
         int i, j;
         Position positionRoi = new Position();
@@ -81,6 +110,10 @@ public class ChessBoardForDisplay extends ChessBoard{
         return false;
     }
 	
+	/**
+	 * Display the possible moves for a piece
+	 * @version 1.0
+	 */
 	public void displayPossibleMoves(JLayeredPane layeredPane, Position p) {
         ChessPiece piece = (ChessPiece) getPiece(p);
         Position positionTmp = new Position();
@@ -99,6 +132,10 @@ public class ChessBoardForDisplay extends ChessBoard{
         }
     }
 	
+	/**
+	 * Actions when a piece is selected
+	 * @version 1.0
+	 */
 	public void clickChoixPiece(JLayeredPane layeredPane, Position p) {
         layeredPane.removeAll();        
         this.displayPieces(layeredPane);

@@ -15,6 +15,11 @@ import jfnwp.Implementation.Position;
 import jfnwp.Interfaces.Color;
 import jfnwp.Interfaces.Piece;
 
+/**
+ * To listen the mouse's events for the Chess client
+ * @see ChessClient
+ * @version 1.0
+ */
 public class UserInteractions implements java.awt.event.MouseListener {
     
     private int click;
