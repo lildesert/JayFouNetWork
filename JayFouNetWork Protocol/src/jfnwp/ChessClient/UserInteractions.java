@@ -11,7 +11,6 @@ import javax.swing.JLayeredPane;
 import jfnwp.ChessImplementation.ChessBoard;
 import jfnwp.ChessImplementation.ChessMove;
 import jfnwp.ChessImplementation.ChessPiece;
-import jfnwp.Implementation.Move;
 import jfnwp.Implementation.Position;
 import jfnwp.Interfaces.Color;
 import jfnwp.Interfaces.Piece;
