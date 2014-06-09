@@ -5,6 +5,7 @@ import java.net.Socket;
 
 import jfnwp.Interfaces.IMessages;
 import jfnwp.Interfaces.IMove;
+import jfnwp.Implementation.EnumGame;
 import jfnwp.Implementation.Message;
 
 public class MessageService implements IMessages {
@@ -105,5 +106,22 @@ public class MessageService implements IMessages {
 	public Message ReadMessage() {
 		Message m = NetworkService.receiveMessage(s);
 		return m;
+	}
+
+	@Override
+	public void GetGames() {
+		Message m = new Message(15);
+		NetworkService.SendMessage(s, m);
+	}
+
+	@Override
+	public void SendGames() {
+		Message m = new Message(16);
+		String d = "";
+		for (EnumGame eg : EnumGame.values()) {
+			d += eg.toString();
+		}
+		m.setData(d);
+		NetworkService.SendMessage(s, m);
 	}
 }

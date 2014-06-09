@@ -20,5 +20,7 @@ public interface IMessages {
 	void Wait();
 	void Imp();
 	void Error(String errMsg);
+	void GetGames();
+	void SendGames();
 	Message ReadMessage();
 }

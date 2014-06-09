@@ -9,7 +9,9 @@ public class Player {
 	private InetAddress address;
 	private int chatPort;
 	private String chatAddress;
-	private Socket s;
+	private Socket sock;
+	private String state;
+
 	private EnumGame game;
 	
 	public Player(String data, Socket s){
@@ -20,12 +22,12 @@ public class Player {
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
-		this.s = s;
+		this.sock = s;
 	}
 	
 	public Player(String nickname, Socket s, InetAddress a, int chatPort, String chatAddress) {
 		this.nickname = nickname;
-		this.s = s;
+		this.sock = s;
 		this.address = a;
 		this.chatPort = chatPort;
 		this.chatAddress = chatAddress;
@@ -45,5 +47,9 @@ public class Player {
 
 	public void setGame(EnumGame game) {
 		this.game = game;
+	}
+	
+	public Socket getSock() {
+		return sock;
 	}
 }
