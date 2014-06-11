@@ -25,8 +25,9 @@ public class MessageService implements IMessages {
 
 	@Override
 	public void Start(String name) {
-		// TODO Auto-generated method stub
-
+		Message m = new Message(2);
+		m.setData(name);
+		NetworkService.SendMessage(s, m);
 	}
 
 	@Override

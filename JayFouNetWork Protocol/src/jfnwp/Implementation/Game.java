@@ -1,56 +1,37 @@
 package jfnwp.Implementation;
 
-import jfnwp.Interfaces.Color;
+import java.util.ArrayList;
+import java.util.List;
+
+import jfnwp.Exception.GameFullException;
 import jfnwp.Interfaces.IGame;
 import jfnwp.Interfaces.IMove;
 
-public class Game implements IGame {
+public abstract class Game implements IGame {
 
-	private String name;
-	private int nbMaxPlayer;
-	private int timeOut;
-	private Rules r;
-	
-	@Override
-	public void applyMove(IMove m) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
-	public void gameOver() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
-	public void getWinner() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	public String getName() {
-		return name;
+	protected Rules r;
+	protected int nbMaxPlayer;
+	protected int nbMinPlayer = 2;
+	protected int timeOut = 60;
+	protected List<Player> playerList = new ArrayList<Player>();
+
+	public abstract void applyMove(IMove m);
+
+	public abstract void gameOver();
+
+	public abstract void getWinner();
+
+	public List<Player> getPlayerList() {
+		return playerList;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getNbMaxPlayer() {
-		return nbMaxPlayer;
-	}
-
-	public void setNbMaxPlayer(int nbMaxPlayer) {
-		this.nbMaxPlayer = nbMaxPlayer;
-	}
-
-	public int getTimeOut() {
-		return timeOut;
-	}
-
-	public void setTimeOut(int timeOut) {
-		this.timeOut = timeOut;
+	public void addPlayerList(Player p) throws GameFullException {
+		if (playerList.size() < nbMaxPlayer) {
+			playerList.add(p);
+		} else {
+			throw new GameFullException(
+					"Game is full, can't add another player");
+		}
 	}
 
 	public Rules getR() {
@@ -60,7 +41,17 @@ public class Game implements IGame {
 	public void setR(Rules r) {
 		this.r = r;
 	}
-	private Color round;
-	
-	
+
+	public int getNbMaxPlayer() {
+		return nbMaxPlayer;
+	}
+
+	public int getNbMinPlayer() {
+		return nbMinPlayer;
+	}
+
+	public int getTimeOut() {
+		return timeOut;
+	}
+
 }

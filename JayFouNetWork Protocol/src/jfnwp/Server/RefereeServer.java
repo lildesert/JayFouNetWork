@@ -4,8 +4,8 @@ import java.net.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import jfnwp.Implementation.Message;
-import jfnwp.Implementation.Player;
+import jfnwp.Implementation.*;
+import jfnwp.Interfaces.IGame;
 import jfnwp.Services.MessageService;
 
 import org.apache.logging.log4j.Logger;
@@ -43,7 +43,6 @@ public class RefereeServer extends Thread {
 		Message mess = m.ReadMessage();
 		if (mess.getId() == 1) {
 			Player p = new Player(mess.getData(), s);
-			Info.Instance.addPlayerList(p);
 			System.out.println("FROM CLIENT: " + mess.ToString());
 			m.Ok();
 		} else {
@@ -53,58 +52,76 @@ public class RefereeServer extends Thread {
 		while (true) {
 			mess = m.ReadMessage();
 			switch (mess.getId()) {
-			
-				case 1:
-					break;
-					
-				case 2:
-					break;
-					
-				case 3:
-					break;
-					
-				case 4:
-					break;
-					
-				case 5:
-					break;
-					
-				case 6:
-					break;
-					
-				case 7:
-					break;
-					
-				case 8:
-					break;
-					
-				case 9:
-					break;
-					
-				case 10:
-					break;
-					
-				case 11:
-					break;
-					
-				case 12:
-					break;
-					
-				case 13:
-					break;
-					
-				case 14:
-					m.SendGames();
-					break;
-					
-				case 15:
-					break;
-					
-				case 16:
-					break;
-					
-				default :
-					break;
+
+			case 1:
+				break;
+
+			case 2:
+				String className = mess.getData();
+				Class clazz = null;
+				try {
+					clazz = Class.forName(className);
+					IGame g = (IGame) clazz.newInstance();
+					GameContext gc = new GameContext(g);
+					Info.Instance.addGameList(gc);
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				break;
+
+			case 3:
+				break;
+
+			case 4:
+				break;
+
+			case 5:
+				break;
+
+			case 6:
+				break;
+
+			case 7:
+				break;
+
+			case 8:
+				break;
+
+			case 9:
+				break;
+
+			case 10:
+				break;
+
+			case 11:
+				break;
+
+			case 12:
+				break;
+
+			case 13:
+				break;
+
+			case 14:
+				m.SendGames();
+				break;
+
+			case 15:
+				break;
+
+			case 16:
+				break;
+
+			default:
+				break;
 			}
 		}
 	}
