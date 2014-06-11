@@ -43,7 +43,7 @@ public class RefereeServer extends Thread {
 		Message mess = m.ReadMessage();
 		if (mess.getId() == 1) {
 			Player p = new Player(mess.getData(), s);
-			InfoSingleton.getInstance().addPlayerList(p);
+			Info.Instance.addPlayerList(p);
 			System.out.println("FROM CLIENT: " + mess.ToString());
 			m.Ok();
 		} else {
