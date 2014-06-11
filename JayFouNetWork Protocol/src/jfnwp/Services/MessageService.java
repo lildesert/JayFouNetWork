@@ -1,72 +1,75 @@
 package jfnwp.Services;
 
+import java.net.InetAddress;
 import java.net.Socket;
 
 import jfnwp.Interfaces.IMessages;
 import jfnwp.Interfaces.IMove;
+import jfnwp.Implementation.EnumGame;
 import jfnwp.Implementation.Message;
 
 public class MessageService implements IMessages {
 
 	private Socket s;
-	
-	public MessageService(Socket sock)
-	{
+
+	public MessageService(Socket sock) {
 		s = sock;
 	}
-	
+
 	@Override
-	public void Connect(String name) {
-		// TODO Auto-generated method stub
-		
+	public void Connect(String name, InetAddress c) {
+		Message m = new Message(1);
+		m.setData(name + ";" + c.getHostAddress());
+		NetworkService.SendMessage(s, m);
 	}
 
 	@Override
 	public void Start(String name) {
-		// TODO Auto-generated method stub
-		
+		Message m = new Message(2);
+		m.setData(name);
+		NetworkService.SendMessage(s, m);
 	}
 
 	@Override
 	public void End() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void Move(IMove opponentMove) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void Result(int code, int nbMove, int gameTime) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void ClientMove(IMove m) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void Surrender() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void GetAdresses() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void SendAdresses() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -78,31 +81,48 @@ public class MessageService implements IMessages {
 	@Override
 	public void Nok() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void Wait() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void Imp() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void Error(String errMsg) {
-		// TODO Auto-generated method stub
-		
+		Message m = new Message(14);
+		m.setData(errMsg);
+		NetworkService.SendMessage(s, m);
 	}
 
 	@Override
-	public String ReadMessage() {
+	public Message ReadMessage() {
 		Message m = NetworkService.receiveMessage(s);
-		return m.ToString();
-		//return m;
-	}	
+		return m;
+	}
+
+	@Override
+	public void GetGames() {
+		Message m = new Message(15);
+		NetworkService.SendMessage(s, m);
+	}
+
+	@Override
+	public void SendGames() {
+		Message m = new Message(16);
+		String d = "";
+		for (EnumGame eg : EnumGame.values()) {
+			d += eg.toString();
+		}
+		m.setData(d);
+		NetworkService.SendMessage(s, m);
+	}
 }

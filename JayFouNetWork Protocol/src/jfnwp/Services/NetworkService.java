@@ -9,7 +9,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import jfnwp.Implementation.Message;
-import jfnwp.Server.RefereeServer;
 
 public class NetworkService {
 	
@@ -39,8 +38,7 @@ public class NetworkService {
 			byte[] msg = new byte[msgLen];
 			
 			in.read(msg);
-
-			m = (Message) SerializationService.toObject(msg);
+			m = SerializationService.toMessage(msg);
 			logger.info("Message de taille " +msgLen +" reçu");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
