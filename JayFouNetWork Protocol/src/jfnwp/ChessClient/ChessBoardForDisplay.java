@@ -6,10 +6,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 
-import jfnwp.ChessImplementation.ChessGame;
 import jfnwp.ChessImplementation.ChessMove;
 import jfnwp.ChessImplementation.ChessPiece;
 import jfnwp.ChessImplementation.King;
+import jfnwp.Games.Chess;
 import jfnwp.Implementation.Position;
 import jfnwp.Interfaces.Color;
 
@@ -18,7 +18,7 @@ import jfnwp.Interfaces.Color;
  * @see ChessClient
  * @version 1.0
  */
-public class ChessBoardForDisplay extends ChessGame{
+public class ChessBoardForDisplay extends Chess{
 	
 	private JLabel cadre, fond, cadreEchec;
 	

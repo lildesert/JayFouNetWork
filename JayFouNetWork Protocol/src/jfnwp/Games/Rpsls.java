@@ -1,5 +1,7 @@
-package jfnwp.Implementation;
+package jfnwp.Games;
 
+import jfnwp.Implementation.Game;
+import jfnwp.Implementation.Player;
 import jfnwp.Interfaces.IMove;
 
 public class Rpsls extends Game {

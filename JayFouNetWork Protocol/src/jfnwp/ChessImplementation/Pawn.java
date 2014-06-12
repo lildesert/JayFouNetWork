@@ -1,5 +1,6 @@
 package jfnwp.ChessImplementation;
 
+import jfnwp.Games.Chess;
 import jfnwp.Implementation.Position;
 import jfnwp.Interfaces.Color;
 
@@ -23,7 +24,7 @@ public class Pawn extends ChessPiece {
         }
 	}
 
-	public Boolean checkMove(ChessMove mv, ChessGame board) {
+	public Boolean checkMove(ChessMove mv, Chess board) {
 		
 		Position from = mv.getFrom();
 		Position to = mv.getTo();

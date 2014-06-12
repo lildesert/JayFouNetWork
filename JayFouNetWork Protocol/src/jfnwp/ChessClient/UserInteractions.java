@@ -8,9 +8,9 @@ import java.util.logging.Logger;
 
 import javax.swing.JLayeredPane;
 
-import jfnwp.ChessImplementation.ChessGame;
 import jfnwp.ChessImplementation.ChessMove;
 import jfnwp.ChessImplementation.ChessPiece;
+import jfnwp.Games.Chess;
 import jfnwp.Implementation.Position;
 import jfnwp.Interfaces.Color;
 import jfnwp.Interfaces.Piece;
@@ -25,8 +25,8 @@ public class UserInteractions implements java.awt.event.MouseListener {
     private int click;
     public Color tour;
     private Position start, end;
-    protected ChessGame chessBoard;
-    protected ChessGame chessBoardPrecedent;
+    protected Chess chessBoard;
+    protected Chess chessBoardPrecedent;
     protected JLayeredPane layerPane;
     private Graphics graph;
     public boolean modeDeuxJoueurs = false;
@@ -41,7 +41,7 @@ public class UserInteractions implements java.awt.event.MouseListener {
         modeDeuxJoueurs = bool;
     }
     
-    public void setChessBoard(ChessGame chessBoardPrecedent2) {
+    public void setChessBoard(Chess chessBoardPrecedent2) {
         this.chessBoard = chessBoardPrecedent2;
     }
 

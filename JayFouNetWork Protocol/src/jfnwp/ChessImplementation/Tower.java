@@ -1,5 +1,6 @@
 package jfnwp.ChessImplementation;
 
+import jfnwp.Games.Chess;
 import jfnwp.Implementation.Position;
 import jfnwp.Interfaces.IMove;
 import jfnwp.Interfaces.Color;
@@ -19,7 +20,7 @@ public class Tower extends ChessPiece {
 		firstMouv = true;
 	}
 
-	public Boolean checkMove(ChessMove mv, ChessGame board) {
+	public Boolean checkMove(ChessMove mv, Chess board) {
         
 		Position from = mv.getFrom();
 		Position to = mv.getTo();

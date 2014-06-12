@@ -1,5 +1,13 @@
-package jfnwp.ChessImplementation;
+package jfnwp.Games;
 
+import jfnwp.ChessImplementation.Bishop;
+import jfnwp.ChessImplementation.ChessMove;
+import jfnwp.ChessImplementation.ChessPiece;
+import jfnwp.ChessImplementation.King;
+import jfnwp.ChessImplementation.Knight;
+import jfnwp.ChessImplementation.Pawn;
+import jfnwp.ChessImplementation.Queen;
+import jfnwp.ChessImplementation.Tower;
 import jfnwp.Exception.MoveException;
 import jfnwp.Implementation.Game;
 import jfnwp.Implementation.Player;
@@ -12,12 +20,12 @@ import jfnwp.Interfaces.Piece;
  * The representation of a chess's game
  * @version 2.0
  */
-public class ChessGame extends Game {
+public class Chess extends Game {
 	
 	public Piece[][] board;
 	protected Color winner;
 	
-	public ChessGame(){
+	public Chess(){
 		this.board = new ChessPiece[8][8];
 		resetBoard();
 	}
@@ -183,7 +191,7 @@ public class ChessGame extends Game {
 		int i, j;
         Color kingColor = this.getPiece(from).getColor();
         
-        ChessGame chessTmp = new ChessGame();
+        Chess chessTmp = new Chess();
         for (i = 0; i < 8; i++) {
             for (j = 0; j < 8; j++) {
                 chessTmp.board[i][j] = board[i][j];

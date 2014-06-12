@@ -4,7 +4,10 @@ import java.net.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import jfnwp.Implementation.*;
+import jfnwp.Exception.GameFullException;
+import jfnwp.Games.*;
+import jfnwp.Implementation.Message;
+import jfnwp.Implementation.Player;
 import jfnwp.Interfaces.IGame;
 import jfnwp.Services.MessageService;
 
@@ -16,6 +19,8 @@ public class RefereeServer extends Thread {
 	public static final int port = 9890;
 	private static final int maxThread = 8;
 	private Socket s;
+	private GameContext gc;
+	private Player p;
 	private static Logger logger = LogManager.getLogger(RefereeServer.class
 			.getName());
 	private static WaitingServer waitingServer;
@@ -40,20 +45,22 @@ public class RefereeServer extends Thread {
 
 	public void run() {
 		MessageService m = new MessageService(s);
-		Message mess = m.ReadMessage();
-		if (mess.getId() == 1) {
-			Player p = new Player(mess.getData(), s);
-			System.out.println("FROM CLIENT: " + mess.ToString());
-			m.Ok();
-		} else {
-			m.Error("Bad connect request");
-		}
+		Message mess = new Message();
 
 		while (true) {
-			mess = m.ReadMessage();
+			while (mess == null) {
+				mess = m.ReadMessage();
+			}
 			switch (mess.getId()) {
 
 			case 1:
+				if (p != null) {
+					m.Error("Client already connected");
+				} else {
+					p = new Player(mess.getData(), s);
+					System.out.println("FROM CLIENT: " + mess.ToString());
+					m.Ok();
+				}
 				break;
 
 			case 2:
@@ -61,20 +68,27 @@ public class RefereeServer extends Thread {
 				Class clazz = null;
 				try {
 					clazz = Class.forName(className);
-					IGame g = (IGame) clazz.newInstance();
-					GameContext gc = new GameContext(g);
-					Info.Instance.addGameList(gc);
+					GameContext gac = Info.Instance.getExistingGame(clazz);
+					if (gac != null) {
+						gc = gac;
+						gc.getGame().addPlayerList(p);
+					} else {
+						IGame g = (IGame) clazz.newInstance();
+						g.addPlayerList(p);
+						gc = new GameContext(g);
+						Info.Instance.addGameList(gc);
+					}
+
 				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (GameFullException e) {
 					e.printStackTrace();
 				}
-				
+
 				break;
 
 			case 3:
@@ -111,10 +125,10 @@ public class RefereeServer extends Thread {
 				break;
 
 			case 14:
-				m.SendGames();
 				break;
 
 			case 15:
+				m.SendGames();
 				break;
 
 			case 16:
@@ -123,6 +137,8 @@ public class RefereeServer extends Thread {
 			default:
 				break;
 			}
+
+			mess = null;
 		}
 	}
 }

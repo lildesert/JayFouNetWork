@@ -17,12 +17,20 @@ public abstract class Game implements IGame {
 	protected List<Player> playerList = new ArrayList<Player>();
 
 	public abstract void applyMove(IMove m) throws MoveException;
-
 	public abstract void gameOver();
-
 	public abstract void getWinner();
-	
 	public abstract Player getWinnerPlayer();
+	
+	public boolean isGameFull()
+	{
+		boolean resp = false;
+		if(playerList.size() >= nbMaxPlayer)
+		{
+			resp = true;
+		}
+		
+		return resp;
+	}
 
 	public List<Player> getPlayerList() {
 		return playerList;

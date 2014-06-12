@@ -17,9 +17,9 @@ public class MessageService implements IMessages {
 	}
 
 	@Override
-	public void Connect(String name, InetAddress c) {
+	public void Connect(String name, String ip) {
 		Message m = new Message(1);
-		m.setData(name + ";" + c.getHostAddress());
+		m.setData(name + ";" + ip);
 		NetworkService.SendMessage(s, m);
 	}
 

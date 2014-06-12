@@ -2,6 +2,7 @@ package jfnwp.Services;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.EOFException;
 import java.io.IOException;
 import java.net.Socket;
 
@@ -21,7 +22,7 @@ public class NetworkService {
 			int msgLength = message.length;
 			out.writeInt(msgLength);
 			out.write(message);
-			logger.info("Message de taille "+msgLength + " envoyé");
+			logger.info("Message " +m.getId()+" de taille "+msgLength + " envoyé");
 			out.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -39,10 +40,12 @@ public class NetworkService {
 			
 			in.read(msg);
 			m = SerializationService.toMessage(msg);
-			logger.info("Message de taille " +msgLen +" reçu");
+			logger.info("Message "+m.getId() +" de taille " +msgLen +" reçu");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			if(e.getClass().equals(EOFException.class))
+			{
+				return m;
+			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
