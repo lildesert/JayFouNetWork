@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jfnwp.Exception.GameFullException;
+import jfnwp.Exception.MoveException;
 import jfnwp.Interfaces.IGame;
 import jfnwp.Interfaces.IMove;
 
@@ -15,11 +16,13 @@ public abstract class Game implements IGame {
 	protected int timeOut = 60;
 	protected List<Player> playerList = new ArrayList<Player>();
 
-	public abstract void applyMove(IMove m);
+	public abstract void applyMove(IMove m) throws MoveException;
 
 	public abstract void gameOver();
 
 	public abstract void getWinner();
+	
+	public abstract Player getWinnerPlayer();
 
 	public List<Player> getPlayerList() {
 		return playerList;

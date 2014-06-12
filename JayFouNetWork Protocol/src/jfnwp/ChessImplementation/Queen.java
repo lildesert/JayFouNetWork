@@ -14,7 +14,7 @@ public class Queen extends ChessPiece {
 	}
 
 	@Override
-	public Boolean checkMove(ChessMove mv, ChessBoard board) {
+	public Boolean checkMove(ChessMove mv, ChessGame board) {
 		
 		Position from = mv.getFrom();
 		Position to = mv.getTo();

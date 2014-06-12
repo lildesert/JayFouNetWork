@@ -28,5 +28,17 @@ public class Rpsls extends Game {
 		
 	}
 
+	@Override
+	public boolean isOver() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Player getWinnerPlayer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 }

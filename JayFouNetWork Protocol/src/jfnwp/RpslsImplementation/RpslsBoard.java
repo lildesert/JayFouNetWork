@@ -1,11 +1,13 @@
 package jfnwp.RpslsImplementation;
 
 import java.util.HashMap;
+
+import jfnwp.Implementation.Game;
+import jfnwp.Implementation.Player;
 import jfnwp.Interfaces.Color;
-import jfnwp.Interfaces.IBoard;
 import jfnwp.Interfaces.IMove;
 
-public class RpslsBoard implements IBoard {
+public class RpslsBoard extends Game {
 	
 	private HashMap<Color, IMove> board;
 	private HashMap<Color, Integer> results;
@@ -22,32 +24,35 @@ public class RpslsBoard implements IBoard {
 	}
 	
 	@Override
-	public void applyMove(Color color, IMove m) {
-		if(board.get(color) != null)
-			board.remove(color);
-		board.put(color, m);
+	public void applyMove(IMove m) {
+		if(checkMove(m)){
+			
+		}
 	}
 
-	@Override
-	public boolean checkMove(Color color, IMove m) {
+	public boolean checkMove(IMove m) {
 		return true;
 	}
 
 	@Override
-	public Boolean isFinish(Color turn) {
-		if(rounds == 0)
-			return true;
+	public boolean isOver() {
 		return false;
 	}
 
 	@Override
-	public Color getWinner() {
-		if(results.get(Color.White) > results.get(Color.Black)) {
-			return Color.White;
-		} else if (results.get(Color.White) < results.get(Color.Black)) {
-			return Color.Black;
-		} 
-		return Color.Neutral;
+	public void getWinner() {
+		
+	}
+
+	@Override
+	public void gameOver() {
+		
+	}
+
+	@Override
+	public Player getWinnerPlayer() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

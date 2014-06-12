@@ -9,7 +9,7 @@ public abstract class ChessPiece extends Piece {
 		super(color);
 	}
 	
-	public abstract Boolean checkMove(ChessMove mv, ChessBoard board);
+	public abstract Boolean checkMove(ChessMove mv, ChessGame board);
 	
 	public String toString() {
         String lettre = "B";

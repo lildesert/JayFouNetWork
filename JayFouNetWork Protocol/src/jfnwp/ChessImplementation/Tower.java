@@ -19,7 +19,7 @@ public class Tower extends ChessPiece {
 		firstMouv = true;
 	}
 
-	public Boolean checkMove(ChessMove mv, ChessBoard board) {
+	public Boolean checkMove(ChessMove mv, ChessGame board) {
         
 		Position from = mv.getFrom();
 		Position to = mv.getTo();

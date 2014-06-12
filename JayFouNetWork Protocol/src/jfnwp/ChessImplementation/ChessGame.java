@@ -1,29 +1,69 @@
 package jfnwp.ChessImplementation;
 
-import java.net.URL;
-
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-
+import jfnwp.Exception.MoveException;
+import jfnwp.Implementation.Game;
 import jfnwp.Implementation.Player;
 import jfnwp.Implementation.Position;
 import jfnwp.Interfaces.Color;
-import jfnwp.Interfaces.IBoard;
 import jfnwp.Interfaces.IMove;
 import jfnwp.Interfaces.Piece;
 
 /**
- * The representation of a chess board. 
- * @version 1.0
+ * The representation of a chess's game
+ * @version 2.0
  */
-public class ChessBoard implements IBoard {
+public class ChessGame extends Game {
 	
 	public Piece[][] board;
 	protected Color winner;
 	
-	public ChessBoard(){
+	public ChessGame(){
 		this.board = new ChessPiece[8][8];
+		resetBoard();
+	}
+	
+	@Override
+	public boolean isOver() {
+		if(isMat(Color.Black) || isMat(Color.White))
+			return true;
+		return false;
+	}
+	
+	@Override
+	public void applyMove(IMove m) throws MoveException {
+		if(checkMove(m)) {
+			ChessMove mo = (ChessMove) m;
+			Position from = mo.getFrom();
+			Position to = mo.getTo();
+			Piece p = board[from.getX()][from.getY()];
+			board[from.getX()][from.getY()] = null;
+			board[to.getX()][to.getY()] = p;
+		} else {
+			throw new MoveException();
+		}
+	}
+
+	public boolean checkMove(IMove m) {
+		ChessMove mo = (ChessMove) m;
+		ChessPiece p = (ChessPiece) getPiece(mo.getFrom());
+		if(p == null)
+			return false;
+		if(! p.checkMove(mo, this))
+			return false;
+			
+		return true;
+	}
+	
+	@Override
+	public Player getWinnerPlayer() {
+		return null;
+	}
+	
+	/**
+	 * Reset the board
+	 * @version 1.0
+	 */
+	public void resetBoard() {
         this.board[0][0] = new Tower(Color.Black);
         this.board[0][1] = new Knight(Color.Black);
         this.board[0][2] = new Bishop(Color.Black);
@@ -49,38 +89,6 @@ public class ChessBoard implements IBoard {
         this.board[7][5] = new Bishop(Color.White);
         this.board[7][6] = new Knight(Color.White);
         this.board[7][7] = new Tower(Color.White);
-	}
-	
-	@Override
-	public Boolean isFinish(Color turn) {
-		return isMat(turn);
-	}
-	
-	@Override
-	public void applyMove(Color color, IMove m) {
-		ChessMove mo = (ChessMove) m;
-		Position from = mo.getFrom();
-		Position to = mo.getTo();
-		Piece p = board[from.getX()][from.getY()];
-		board[from.getX()][from.getY()] = null;
-		board[to.getX()][to.getY()] = p;
-	}
-
-	@Override
-	public boolean checkMove(Color color, IMove m) {
-		ChessMove mo = (ChessMove) m;
-		ChessPiece p = (ChessPiece) getPiece(mo.getFrom());
-		if(p == null)
-			return false;
-		if(! p.checkMove(mo, this))
-			return false;
-			
-		return true;
-	}
-	
-	@Override
-	public Color getWinner() {
-		return winner;
 	}
 	
 	/**
@@ -175,7 +183,7 @@ public class ChessBoard implements IBoard {
 		int i, j;
         Color kingColor = this.getPiece(from).getColor();
         
-        ChessBoard chessTmp = new ChessBoard();
+        ChessGame chessTmp = new ChessGame();
         for (i = 0; i < 8; i++) {
             for (j = 0; j < 8; j++) {
                 chessTmp.board[i][j] = board[i][j];
@@ -273,4 +281,16 @@ public class ChessBoard implements IBoard {
 	public Boolean emptySquare(Position position) {
         return this.board[position.getY()][position.getX()] == null;
     }
+
+	@Override
+	public void gameOver() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void getWinner() {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -6,7 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 
-import jfnwp.ChessImplementation.ChessBoard;
+import jfnwp.ChessImplementation.ChessGame;
 import jfnwp.ChessImplementation.ChessMove;
 import jfnwp.ChessImplementation.ChessPiece;
 import jfnwp.ChessImplementation.King;
@@ -18,7 +18,7 @@ import jfnwp.Interfaces.Color;
  * @see ChessClient
  * @version 1.0
  */
-public class ChessBoardForDisplay extends ChessBoard{
+public class ChessBoardForDisplay extends ChessGame{
 	
 	private JLabel cadre, fond, cadreEchec;
 	
