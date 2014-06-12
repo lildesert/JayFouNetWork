@@ -12,6 +12,12 @@ public class Position implements IPosition{
 		this.y = 0;
 	}
 	
+	public Position(String sPosition){
+		String[] splitString = sPosition.split(",", 20);
+		this.x = Integer.valueOf(splitString[0].substring(1));
+		this.y = Integer.valueOf(splitString[1].substring(1));
+	}
+	
 	public Position(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -31,5 +37,9 @@ public class Position implements IPosition{
 
 	public void setY(int y) {
 		this.y = y;
+	}
+	
+	public String toString(){		
+		return "(" + x + "," + y + ")";
 	}
 }

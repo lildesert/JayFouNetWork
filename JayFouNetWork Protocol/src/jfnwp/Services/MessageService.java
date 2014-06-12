@@ -38,8 +38,9 @@ public class MessageService implements IMessages {
 
 	@Override
 	public void Move(IMove opponentMove) {
-		// TODO Auto-generated method stub
-
+		Message m = new Message(4);
+		m.setData(opponentMove.toString());
+		NetworkService.SendMessage(s, m);
 	}
 
 	@Override

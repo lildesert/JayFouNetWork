@@ -14,6 +14,12 @@ public class ChessMove implements IMove{
 		this.to = new Position();
 	}
 	
+	public ChessMove(String sMove) {
+		String[] splitString = sMove.split("/", 20);
+		this.from = new Position(splitString[0]);
+		this.to = new Position(splitString[1]);
+	}
+	
 	public ChessMove(Position from, Position to) {
 		this.from = from;
 		this.to = to;
@@ -44,5 +50,14 @@ public class ChessMove implements IMove{
 	
 	public void setTo(Position to) {
 		this.to = to;
+	}
+	
+	/**
+	 * example : (0,9)(1,9)
+	 * @return String 
+	 * @version 1.0
+	 */
+	public String toString() {
+		return from.toString() + "/" + to.toString();
 	}
 }
