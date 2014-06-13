@@ -121,7 +121,7 @@ public class MessageService implements IMessages {
 		Message m = new Message(16);
 		String d = "";
 		for (EnumGame eg : EnumGame.values()) {
-			d += eg.toString();
+			d += eg.toString() +";";
 		}
 		m.setData(d);
 		NetworkService.SendMessage(s, m);
