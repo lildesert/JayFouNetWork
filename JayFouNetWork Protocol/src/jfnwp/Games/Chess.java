@@ -22,10 +22,12 @@ import jfnwp.Interfaces.Piece;
  */
 public class Chess extends Game {
 	
+	
 	public Piece[][] board;
 	protected Color winner;
 	
 	public Chess(){
+		super.nbMaxPlayer = 2;
 		this.board = new ChessPiece[8][8];
 		resetBoard();
 	}

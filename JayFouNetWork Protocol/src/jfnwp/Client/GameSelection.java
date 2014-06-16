@@ -39,6 +39,10 @@ public class GameSelection extends JPanel {
 
 	}
 
+	public JList getGameList() {
+		return gameList;
+	}
+
 	public DefaultListModel getDlmGameList() {
 		return dlmGameList;
 	}

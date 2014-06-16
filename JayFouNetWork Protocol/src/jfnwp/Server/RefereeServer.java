@@ -67,7 +67,7 @@ public class RefereeServer extends Thread {
 				String className = mess.getData();
 				Class clazz = null;
 				try {
-					clazz = Class.forName(className);
+					clazz = Class.forName("jfnwp.Games."+className);
 					GameContext gac = Info.Instance.getExistingGame(clazz);
 					if (gac != null) {
 						gc = gac;

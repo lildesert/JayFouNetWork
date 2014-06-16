@@ -27,11 +27,13 @@ public class Info {
 		GameContext gc = null;
 		boolean end = false;
 		int i = 0;
-		while (end == false) {
-			if (gameList.get(i).getGame().getClass() == c) {
-				if (!gameList.get(i).getGame().isGameFull()) {
-					end = true;
-					gc = gameList.get(i);
+		if (gameList.size() != 0) {
+			while (end == false) {
+				if (gameList.get(i).getGame().getClass() == c) {
+					if (!gameList.get(i).getGame().isGameFull()) {
+						end = true;
+						gc = gameList.get(i);
+					}
 				}
 			}
 		}

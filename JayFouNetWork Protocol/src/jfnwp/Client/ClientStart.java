@@ -4,7 +4,6 @@ import java.awt.CardLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JList;
 import javax.swing.JPanel;
 
 import java.awt.event.ActionListener;
@@ -24,6 +23,9 @@ public class ClientStart extends JFrame {
 	private Home h;
 	private GameSelection gs;
 	private CardLayout cl = new CardLayout();
+	private MessageService m;
+	private Socket clientSocket;
+	private String name;
 
 	/**
 	 * Launch the application.
@@ -58,11 +60,11 @@ public class ClientStart extends JFrame {
 
 		h.getBtConnect().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Socket clientSocket = null;
 				try {
 					clientSocket = new Socket("localhost", RefereeServer.port);
-					MessageService m = new MessageService(clientSocket);
-					m.Connect(h.getTbName().getText(), ip);
+					m = new MessageService(clientSocket);
+					name = h.getTbName().getText();
+					m.Connect(name, ip);
 					Message mess = m.ReadMessage();
 
 					if (mess.getId() == 10) {
@@ -84,17 +86,29 @@ public class ClientStart extends JFrame {
 				catch (IOException e) {
 					e.printStackTrace();
 				} 
-				finally {
-					try {
-						clientSocket.close();
-					} 
-					catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
 			}
 		});
-		
+		gs.getBtOk().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String game = gs.getGameList().getSelectedValue().toString();
+				m.Start(game);
+				Class c;
+				try {
+					c = Class.forName("jfnwp.Client."+game +"Client");
+					setVisible(false);
+					Client cli = (Client) c.newInstance();
+					cli.setSock(clientSocket);
+					cli.setName(name);
+					cli.start();
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				}
+			}
+			});
 		getContentPane().add(cardPanel);
 		cl.show(cardPanel, "home");
 	}
