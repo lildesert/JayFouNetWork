@@ -1,11 +1,13 @@
 package jfnwp.Games;
 
+import Moves.RpslsMove;
 import jfnwp.Implementation.Game;
 import jfnwp.Implementation.Player;
 import jfnwp.Interfaces.IMove;
 
 public class Rpsls extends Game {
 	
+	RpslsMove waitingMove;
 	
 	public Rpsls()
 	{
@@ -14,7 +16,15 @@ public class Rpsls extends Game {
 
 	@Override
 	public void applyMove(IMove m) {
-		// TODO Auto-generated method stub
+		if(waitingMove == null)
+		{
+			waitingMove = (RpslsMove) m;
+		}
+		else
+		{
+			RpslsMove mv = (RpslsMove) m;
+			int resp = mv.getC().compareTo(waitingMove.getC());
+		}
 		
 	}
 

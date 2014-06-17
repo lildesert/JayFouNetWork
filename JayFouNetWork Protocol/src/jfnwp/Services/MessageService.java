@@ -39,7 +39,9 @@ public class MessageService implements IMessages {
 	@Override
 	public void Move(IMove opponentMove) {
 		Message m = new Message(4);
-		m.setData(opponentMove.toString());
+		if (opponentMove != null) {
+			m.setData(opponentMove.toString());
+		}
 		NetworkService.SendMessage(s, m);
 	}
 
@@ -121,7 +123,7 @@ public class MessageService implements IMessages {
 		Message m = new Message(16);
 		String d = "";
 		for (EnumGame eg : EnumGame.values()) {
-			d += eg.toString() +";";
+			d += eg.toString() + ";";
 		}
 		m.setData(d);
 		NetworkService.SendMessage(s, m);

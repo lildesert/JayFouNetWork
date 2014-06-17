@@ -1,0 +1,20 @@
+package jfnwp.RpslsImplementation;
+
+public class Lizard extends RpslsComponent {
+
+	@Override
+	public int compareTo(RpslsComponent o) {
+			switch (o.getClass().getSimpleName()) {
+			case "Rock":
+				return 0;
+			case "Scissor":
+				return 0;
+			case "Paper":
+				return 1;
+			case "Spock":
+				return 1;
+			default:
+				return -1;
+		}
+	}
+}

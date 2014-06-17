@@ -72,6 +72,10 @@ public class RefereeServer extends Thread {
 					if (gac != null) {
 						gc = gac;
 						gc.getGame().addPlayerList(p);
+						if(gc.getGame().isGameFull())
+						{
+							m.Move(null);
+						}
 					} else {
 						IGame g = (IGame) clazz.newInstance();
 						g.addPlayerList(p);
