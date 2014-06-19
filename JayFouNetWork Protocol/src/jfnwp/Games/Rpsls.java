@@ -2,10 +2,10 @@ package jfnwp.Games;
 
 import java.net.Socket;
 
-import Moves.RpslsMove;
 import jfnwp.Implementation.Game;
 import jfnwp.Implementation.Player;
 import jfnwp.Interfaces.IMove;
+import jfnwp.Moves.RpslsMove;
 import jfnwp.Services.MessageService;
 
 public class Rpsls extends Game {

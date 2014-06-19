@@ -1,4 +1,4 @@
-package Moves;
+package jfnwp.Moves;
 
 import jfnwp.Implementation.Move;
 import jfnwp.RpslsImplementation.*;

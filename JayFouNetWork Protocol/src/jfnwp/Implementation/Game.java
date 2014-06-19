@@ -6,11 +6,11 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Moves.RpslsMove;
 import jfnwp.Exception.GameFullException;
 import jfnwp.Exception.MoveException;
 import jfnwp.Interfaces.IGame;
 import jfnwp.Interfaces.IMove;
+import jfnwp.Moves.RpslsMove;
 import jfnwp.Services.MessageService;
 
 public abstract class Game implements IGame {
