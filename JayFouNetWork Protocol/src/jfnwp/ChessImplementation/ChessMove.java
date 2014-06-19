@@ -1,10 +1,9 @@
 package jfnwp.ChessImplementation;
 
+import jfnwp.Implementation.Move;
 import jfnwp.Implementation.Position;
-import jfnwp.Interfaces.IMove;
-import jfnwp.Interfaces.IPosition;
 
-public class ChessMove implements IMove{
+public class ChessMove extends Move{
 
 	private Position from;
 	private Position to;
@@ -59,5 +58,11 @@ public class ChessMove implements IMove{
 	 */
 	public String toString() {
 		return from.toString() + "/" + to.toString();
+	}
+
+	@Override
+	public void setData(String d) {
+		// TODO Auto-generated method stub
+		
 	}
 }

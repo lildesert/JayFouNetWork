@@ -1,9 +1,12 @@
 package jfnwp.Games;
 
+import java.net.Socket;
+
 import Moves.RpslsMove;
 import jfnwp.Implementation.Game;
 import jfnwp.Implementation.Player;
 import jfnwp.Interfaces.IMove;
+import jfnwp.Services.MessageService;
 
 public class Rpsls extends Game {
 	
@@ -16,14 +19,27 @@ public class Rpsls extends Game {
 
 	@Override
 	public void applyMove(IMove m) {
+		Socket s = null;
 		if(waitingMove == null)
 		{
 			waitingMove = (RpslsMove) m;
+			sendWait(waitingMove.getPlayerIp());
 		}
 		else
 		{
 			RpslsMove mv = (RpslsMove) m;
 			int resp = mv.getC().compareTo(waitingMove.getC());
+			
+			if(resp == 1)
+			{
+				sendMoveResult("win", mv.getPlayerIp());
+				sendMoveResult("loose", waitingMove.getPlayerIp());		
+			}
+			else
+			{
+				sendMoveResult("loose", mv.getPlayerIp());
+				sendMoveResult("win", waitingMove.getPlayerIp());
+			}
 		}
 		
 	}
@@ -50,7 +66,5 @@ public class Rpsls extends Game {
 	public Player getWinnerPlayer() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	
+	}	
 }

@@ -1,15 +1,19 @@
 package Moves;
 
-import jfnwp.Interfaces.IMove;
+import jfnwp.Implementation.Move;
 import jfnwp.RpslsImplementation.*;
 
-public class RpslsMove implements IMove {
+public class RpslsMove extends Move {
 	
-	RpslsComponent c;
+	private RpslsComponent c;
 
-	public RpslsMove(String data)
-	{
-		switch(data)
+	public RpslsComponent getC() {
+		return c;
+	}
+
+	@Override
+	public void setData(String d) {
+		switch(d)
 		{
 		case "Rock" :
 			c = new Rock();
@@ -22,9 +26,5 @@ public class RpslsMove implements IMove {
 		case "Spock" :
 			c = new Spock();
 		}
-	}
-	
-	public RpslsComponent getC() {
-		return c;
 	}
 }

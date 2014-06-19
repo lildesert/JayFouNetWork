@@ -32,6 +32,10 @@ public class Player {
 		this.chatPort = chatPort;
 		this.chatAddress = chatAddress;
 	}
+	
+	public InetAddress getAddress() {
+		return address;
+	}
 
 	public String getNickname() {
 		return nickname;

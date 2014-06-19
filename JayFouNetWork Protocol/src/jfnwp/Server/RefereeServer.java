@@ -5,10 +5,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import jfnwp.Exception.GameFullException;
+import jfnwp.Exception.MoveException;
 import jfnwp.Games.*;
 import jfnwp.Implementation.Message;
 import jfnwp.Implementation.Player;
 import jfnwp.Interfaces.IGame;
+import jfnwp.Interfaces.IMove;
 import jfnwp.Services.MessageService;
 
 import org.apache.logging.log4j.Logger;
@@ -67,13 +69,12 @@ public class RefereeServer extends Thread {
 				String className = mess.getData();
 				Class clazz = null;
 				try {
-					clazz = Class.forName("jfnwp.Games."+className);
+					clazz = Class.forName("jfnwp.Games." + className);
 					GameContext gac = Info.Instance.getExistingGame(clazz);
 					if (gac != null) {
 						gc = gac;
 						gc.getGame().addPlayerList(p);
-						if(gc.getGame().isGameFull())
-						{
+						if (gc.getGame().isGameFull()) {
 							m.Move(null);
 						}
 					} else {
@@ -105,6 +106,22 @@ public class RefereeServer extends Thread {
 				break;
 
 			case 6:
+				try {
+					Class c = Class.forName("jfnwp.Moves."
+							+ gc.getGame().getClass().getSimpleName() + "Move");
+					IMove move = (IMove) c.newInstance();
+					move.setData(mess.getData());
+					gc.applyMove(move);
+				} catch (InstantiationException | IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (MoveException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				break;
 
 			case 7:
