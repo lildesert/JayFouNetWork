@@ -15,7 +15,6 @@ import jfnwp.Services.MessageService;
 
 public abstract class Game implements IGame {
 
-	protected Rules r;
 	protected int nbMaxPlayer;
 	protected int nbMinPlayer = 2;
 	protected int timeOut = 60;
@@ -54,7 +53,7 @@ public abstract class Game implements IGame {
 	public void sendWait(String ip) {
 		Socket s = getPlayerById(ip).getSock();
 		MessageService m = new MessageService(s);
-		m.Wait();
+		m.Wait("Wait for your turn please");
 	}
 	
 	public void sendMoveResult(String result, String ip) {
@@ -80,14 +79,6 @@ public abstract class Game implements IGame {
 		}
 
 		return p;
-	}
-
-	public Rules getR() {
-		return r;
-	}
-
-	public void setR(Rules r) {
-		this.r = r;
 	}
 
 	public int getNbMaxPlayer() {

@@ -1,7 +1,5 @@
 package jfnwp.Interfaces;
 
-import java.net.InetAddress;
-
 import jfnwp.Implementation.Message;
 
 public interface IMessages {
@@ -17,7 +15,7 @@ public interface IMessages {
 	void SendAdresses();
 	void Ok();
 	void Nok();
-	void Wait();
+	void Wait(String info);
 	void Imp();
 	void Error(String errMsg);
 	void GetGames();

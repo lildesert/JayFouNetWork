@@ -4,11 +4,14 @@ import java.awt.CardLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -19,6 +22,9 @@ import jfnwp.Services.MessageService;
 public class ClientStart extends JFrame {
 
 	private static final String ip = "192.168.0.28";
+	private static final String serverIp = "localhost";
+	private static final int serverPort = 9890;
+	
 	private JPanel cardPanel;
 	private Home h;
 	private GameSelection gs;
@@ -61,7 +67,7 @@ public class ClientStart extends JFrame {
 		h.getBtConnect().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					clientSocket = new Socket("localhost", RefereeServer.port);
+					clientSocket = new Socket(serverIp, serverPort);
 					m = new MessageService(clientSocket);
 					name = h.getTbName().getText();
 					m.Connect(name, ip);
@@ -91,25 +97,46 @@ public class ClientStart extends JFrame {
 		gs.getBtOk().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String game = gs.getGameList().getSelectedValue().toString();
+				if(game.length() == 0)
+				{
+					displayMessage("Error, no game selected");
+				}
+				else
+				{}
 				m.Start(game);
 				Class c;
 				try {
 					c = Class.forName("jfnwp.Client."+game +"Client");
 					setVisible(false);
-					Client cli = (Client) c.newInstance();
-					cli.setSock(clientSocket);
-					cli.setName(name);
-					cli.start();
+					Client cli = (Client) c.getDeclaredConstructor(Socket.class, String.class).newInstance(clientSocket, name);
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
-				} catch (InstantiationException e) {
-					e.printStackTrace();
 				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InvocationTargetException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (NoSuchMethodException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 			});
 		getContentPane().add(cardPanel);
 		cl.show(cardPanel, "home");
+	}
+	
+	private void displayMessage(String s)
+	{
+		JOptionPane.showMessageDialog(this, s);
 	}
 }

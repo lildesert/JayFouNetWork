@@ -82,6 +82,7 @@ public class RefereeServer extends Thread {
 						g.addPlayerList(p);
 						gc = new GameContext(g);
 						Info.Instance.addGameList(gc);
+						m.Wait("Wait for another player to join game please");
 					}
 
 				} catch (ClassNotFoundException e) {

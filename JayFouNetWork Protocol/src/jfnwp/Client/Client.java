@@ -1,26 +1,27 @@
 package jfnwp.Client;
 
 import java.net.Socket;
+import javax.swing.JPanel;
 
-public class Client {
+public class Client{
 
 	protected Socket sock;
 	protected String name;
 	
-	public void start()
-	{}
-	
-	public Socket getSock() {
-		return sock;
-	}
 	public void setSock(Socket sock) {
 		this.sock = sock;
 	}
-	public String getName() {
-		return name;
-	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
 	
+	public Client(Socket s, String n)
+	{
+		sock = s;
+		name = n;
+	}
+	
+	public static void main(Socket s, String n) {
+	}
 }

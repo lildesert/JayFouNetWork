@@ -88,9 +88,10 @@ public class MessageService implements IMessages {
 	}
 
 	@Override
-	public void Wait() {
-		// TODO Auto-generated method stub
-
+	public void Wait(String info) {
+		Message m = new Message(12);
+		m.setData(info);
+		NetworkService.SendMessage(s, m);
 	}
 
 	@Override

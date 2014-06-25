@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.Socket;
 import java.net.URL;
 
 import javax.swing.BorderFactory;
@@ -24,6 +25,11 @@ import jfnwp.ChessClient.UserInteractions;
 import jfnwp.Interfaces.Color;
 
 public class ChessClient extends Client {
+
+	public ChessClient(Socket s, String n) {
+		super(s, n);
+		// TODO Auto-generated constructor stub
+	}
 
 	protected static JLayeredPane layeredPane = new JLayeredPane();
     protected static JButton score = new JButton("Score");
