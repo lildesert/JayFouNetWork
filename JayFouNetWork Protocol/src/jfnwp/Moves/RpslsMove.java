@@ -17,14 +17,19 @@ public class RpslsMove extends Move {
 		{
 		case "Rock" :
 			c = new Rock();
+			break;
 		case "Paper" :
 			c = new Paper();
+			break;
 		case "Scissor" :
 			c = new Scissor();
+			break;
 		case "Lizard" :
 			c = new Lizard();
+			break;
 		case "Spock" :
 			c = new Spock();
+			break;
 		}
 	}
 

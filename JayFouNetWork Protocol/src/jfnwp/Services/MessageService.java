@@ -46,9 +46,10 @@ public class MessageService implements IMessages {
 	}
 
 	@Override
-	public void Result(int code, int nbMove, int gameTime) {
-		// TODO Auto-generated method stub
-
+	public void Result(String result) {
+		Message m = new Message(5);
+		m.setData(result);
+		NetworkService.SendMessage(s, m);
 	}
 
 	@Override

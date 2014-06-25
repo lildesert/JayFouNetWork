@@ -44,14 +44,20 @@ public class Rpsls extends Game {
 			
 			if(resp == 1)
 			{
-				sendMoveResult("win", mv.getPlayerIp());
-				sendMoveResult("loose", waitingMove.getPlayerIp());		
+				sendResult("win", mv.getPlayerIp());
+				askMove(mv.getPlayerIp());
+				sendResult("loose", waitingMove.getPlayerIp());
+				sendWait(waitingMove.getPlayerIp());
 			}
 			else
 			{
-				sendMoveResult("loose", mv.getPlayerIp());
-				sendMoveResult("win", waitingMove.getPlayerIp());
+				sendResult("loose", mv.getPlayerIp());
+				sendWait(mv.getPlayerIp());
+				sendResult("win", waitingMove.getPlayerIp());
+				askMove(mv.getPlayerIp());
 			}
+			
+			waitingMove = null;
 		}
 		
 	}

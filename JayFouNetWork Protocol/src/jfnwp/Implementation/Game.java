@@ -60,12 +60,14 @@ public abstract class Game implements IGame {
 		String nextIp = "";
 		boolean find = false;
 		int i = 0;
-		while (find == false) {
+		while (i < playerList.size() || find == false) {
 			if (playerList.get(i).getAddress() != ip) {
 				find = true;
 				nextIp = playerList.get(i).getAddress().toString();
 			}
+			i++;
 		}
+		logger.info("getNextPlayerOk");
 		return nextIp;
 	}
 
@@ -78,13 +80,11 @@ public abstract class Game implements IGame {
 		m.Wait("Wait for your turn please");
 	}
 
-	public void sendMoveResult(String result, String ip) {
+	public void sendResult(String result, String ip) {
 		logger.info("send move result call");
 		Socket s = getPlayerById(ip).getSock();
 		MessageService m = new MessageService(s);
-		IMove mvResult = new RpslsMove();
-		mvResult.setMoveResult(result);
-		m.Move(mvResult);
+		m.Result(result);
 	}
 
 	public void askMove(String ip) {

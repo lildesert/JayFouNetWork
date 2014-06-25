@@ -8,7 +8,7 @@ public interface IMessages {
 	void Start(String name);
 	void End();
 	void Move(IMove opponentMove);
-	void Result(int code, int nbMove, int gameTime);
+	void Result(String result);
 	void ClientMove(IMove m);
 	void Surrender();
 	void GetAdresses();

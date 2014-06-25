@@ -26,6 +26,6 @@ public interface IGame {
 	Player getPlayerById(String ip);
 	String getNextPlayerToMoveIp(String ip);
 	void sendWait(String ip);
-	void sendMoveResult(String result, String ip);
+	void sendResult(String result, String ip);
 	void askMove(String ip);
 }

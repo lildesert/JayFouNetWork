@@ -39,10 +39,6 @@ public class ListenerRpsls implements Observable {
 
 			case 4:
 				logger.info("Message move reçu");
-				if(mess.getData() != null)
-				{
-					infoRpsls.setResult(mess.getData());
-				}
 				infoRpsls.setMsgId("04");
 				infoRpsls.setInfo("It's your turn ! Please make a move.");
 				updateObserver();
@@ -50,6 +46,9 @@ public class ListenerRpsls implements Observable {
 				break;
 
 			case 5:
+				logger.info("Message result reçu "+mess.getData());
+				infoRpsls.setResult(mess.getData());
+				updateObserver();
 				break;
 
 			case 12:
