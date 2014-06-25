@@ -77,6 +77,10 @@ public class RefereeServer extends Thread {
 						if (gc.getGame().isGameFull()) {
 							m.Move(null);
 						}
+						else
+						{
+							m.Wait("Wait for another player to join game please");
+						}
 					} else {
 						IGame g = (IGame) clazz.newInstance();
 						g.addPlayerList(p);
@@ -107,11 +111,13 @@ public class RefereeServer extends Thread {
 				break;
 
 			case 6:
+				logger.info("Move reçu");
 				try {
 					Class c = Class.forName("jfnwp.Moves."
 							+ gc.getGame().getClass().getSimpleName() + "Move");
 					IMove move = (IMove) c.newInstance();
-					move.setData(mess.getData());
+					move.deserialize(mess.getData());
+					move.setPlayerIp(p.getAddress().toString());
 					gc.applyMove(move);
 				} catch (InstantiationException | IllegalAccessException e) {
 					// TODO Auto-generated catch block

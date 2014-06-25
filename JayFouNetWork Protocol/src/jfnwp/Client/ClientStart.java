@@ -21,10 +21,10 @@ import jfnwp.Services.MessageService;
 
 public class ClientStart extends JFrame {
 
-	private static final String ip = "192.168.0.28";
+	private static final String ip = "192.168.0.38";
 	private static final String serverIp = "localhost";
 	private static final int serverPort = 9890;
-	
+
 	private JPanel cardPanel;
 	private Home h;
 	private GameSelection gs;
@@ -55,7 +55,7 @@ public class ClientStart extends JFrame {
 	public ClientStart() {
 		cardPanel = new JPanel();
 		cardPanel.setLayout(cl);
-		
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 
@@ -76,67 +76,66 @@ public class ClientStart extends JFrame {
 					if (mess.getId() == 10) {
 						m.GetGames();
 					}
-					
+
 					mess = m.ReadMessage();
-					
+
 					String[] tabGame = mess.getData().split(";");
 					for (String s : tabGame) {
 						gs.getDlmGameList().addElement(s);
 					}
 					cl.show(cardPanel, "gameSelect");
-					
-				} 
-				catch (UnknownHostException e) {
+
+				} catch (UnknownHostException e) {
 					e.printStackTrace();
-				} 
-				catch (IOException e) {
+				} catch (IOException e) {
 					e.printStackTrace();
-				} 
+				}
 			}
 		});
 		gs.getBtOk().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String game = gs.getGameList().getSelectedValue().toString();
-				if(game.length() == 0)
-				{
+				if (gs.getGameList().getSelectedValue() == null) {
 					displayMessage("Error, no game selected");
-				}
-				else
-				{}
-				m.Start(game);
-				Class c;
-				try {
-					c = Class.forName("jfnwp.Client."+game +"Client");
-					setVisible(false);
-					Client cli = (Client) c.getDeclaredConstructor(Socket.class, String.class).newInstance(clientSocket, name);
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (SecurityException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (NoSuchMethodException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				} else {
+					String game = gs.getGameList().getSelectedValue()
+							.toString();
+
+					m.Start(game);
+					Class c;
+					try {
+						c = Class.forName("jfnwp.Client." + game + "Client");
+						setVisible(false);
+						Client cli = (Client) c.getDeclaredConstructor(
+								Socket.class, String.class).newInstance(
+								clientSocket, name);
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+					} catch (IllegalAccessException e) {
+						e.printStackTrace();
+					} catch (IllegalArgumentException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (SecurityException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (InstantiationException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (InvocationTargetException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (NoSuchMethodException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
-			});
+		});
 		getContentPane().add(cardPanel);
 		cl.show(cardPanel, "home");
 	}
-	
-	private void displayMessage(String s)
-	{
+
+	private void displayMessage(String s) {
 		JOptionPane.showMessageDialog(this, s);
 	}
 }

@@ -24,6 +24,8 @@ public interface IGame {
 	int getNbMinPlayer();
 	int getTimeOut();
 	Player getPlayerById(String ip);
+	String getNextPlayerToMoveIp(String ip);
 	void sendWait(String ip);
 	void sendMoveResult(String result, String ip);
+	void askMove(String ip);
 }

@@ -1,9 +1,8 @@
 package jfnwp.Client;
 
 import java.net.Socket;
-import javax.swing.JPanel;
 
-public class Client{
+public class Client {
 
 	protected Socket sock;
 	protected String name;
@@ -20,8 +19,5 @@ public class Client{
 	{
 		sock = s;
 		name = n;
-	}
-	
-	public static void main(Socket s, String n) {
 	}
 }

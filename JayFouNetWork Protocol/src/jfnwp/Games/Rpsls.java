@@ -2,15 +2,21 @@ package jfnwp.Games;
 
 import java.net.Socket;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import jfnwp.Implementation.Game;
 import jfnwp.Implementation.Player;
 import jfnwp.Interfaces.IMove;
 import jfnwp.Moves.RpslsMove;
+import jfnwp.RpslsImplementation.ListenerRpsls;
 import jfnwp.Services.MessageService;
 
 public class Rpsls extends Game {
 	
-	RpslsMove waitingMove;
+	private RpslsMove waitingMove;
+	private static Logger logger = LogManager.getLogger(Rpsls.class
+			.getName());
 	
 	public Rpsls()
 	{
@@ -19,11 +25,17 @@ public class Rpsls extends Game {
 
 	@Override
 	public void applyMove(IMove m) {
+		logger.info("apply move de Rpsls appelé");
 		Socket s = null;
 		if(waitingMove == null)
 		{
+			logger.info("entrée dans le waitingMove");
 			waitingMove = (RpslsMove) m;
+			logger.info("waitingMove créé");
 			sendWait(waitingMove.getPlayerIp());
+			logger.info("wait envoyé");
+			askMove(getNextPlayerToMoveIp(waitingMove.getPlayerIp()));
+			logger.info("move opponent asked");
 		}
 		else
 		{

@@ -61,8 +61,20 @@ public class ChessMove extends Move{
 	}
 
 	@Override
-	public void setData(String d) {
+	public void serialize(String s) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void deserialize(String d) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getSerializedData() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -8,17 +8,36 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import jfnwp.Client.Interfaces.Observer;
+import jfnwp.Implementation.Data;
+import jfnwp.Interfaces.IMove;
+import jfnwp.Moves.RpslsMove;
+import jfnwp.RpslsImplementation.ListenerRpsls;
+import jfnwp.Services.MessageService;
+
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class RpslsClient extends Client {
 
 	private JFrame frame;
 	private JLabel lblInfo = new JLabel("");
-	private InfoServer is;
+	private String rights = "";
+	private ListenerRpsls is;
+	private JList listMove;
+	private JLabel lblScorePlayer;
+	private JLabel lblScoreOpponent;
+
+	private static Logger logger = LogManager.getLogger(RpslsClient.class
+			.getName());
 
 	public RpslsClient(Socket s, String n) {
 		super(s, n);
@@ -43,18 +62,62 @@ public class RpslsClient extends Client {
 		btnQuit.setBounds(341, 277, 89, 23);
 
 		JButton btnSendMove = new JButton("Send Move");
-		btnSendMove.setBounds(152, 223, 139, 23);
+		btnSendMove.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (rights.equals("12")) {
+					displayMessage("You can't make a move now");
+				} else if (rights.equals("04")) {
+					if (listMove.getSelectedValue() == null) {
+						displayMessage("No move selected");
+					} else {
+						MessageService m = new MessageService(sock);
+						IMove mv = new RpslsMove();
+						mv.serialize(listMove.getSelectedValue().toString());
+						m.ClientMove(mv);
+					}
+				}
+			}
+		});
+		btnSendMove.setBounds(250, 219, 139, 23);
 
-		is = new InfoServer(sock);
+		is = new ListenerRpsls(sock);
 
 		is.addObserver(new Observer() {
-			public void update(String info) {
-				lblInfo.setText(info);
+			public void update(Data i) {
+				lblInfo.setText(i.getInfo());
+				logger.info("update lblInfo ok");
 			}
 		});
 
-		JList listMove = new JList();
-		listMove.setBounds(152, 88, 139, 102);
+		is.addObserver(new Observer() {
+			public void update(Data i) {
+				rights = i.getMsgId();
+				logger.info("update rights ok");
+			}
+		});
+
+		is.addObserver(new Observer() {
+			public void update(Data i) {
+				if (i.getResult() != null) {
+					logger.info("update results enter");
+					if (i.getResult().equals("win")) {
+						logger.info("update results win");
+						int score = Integer.parseInt(lblScorePlayer.getText()) + 1;
+						lblScorePlayer.setText(Integer.toString(score));
+						i.setResult("");
+					} else if (i.getResult().equals("loose")) {
+						logger.info("update results loose");
+						int score = Integer.parseInt(lblScoreOpponent.getText()) + 1;
+						lblScoreOpponent.setText(Integer.toString(score));
+						i.setResult("");
+					}
+				}
+				logger.info("update results ok");
+			}
+		});
+
+		listMove = new JList();
+		listMove.setBounds(250, 88, 139, 102);
 		listMove.setModel(new AbstractListModel() {
 			String[] values = new String[] { "Rock", "Paper", "Scissor",
 					"Lizard", "Spock" };
@@ -77,6 +140,31 @@ public class RpslsClient extends Client {
 		frame.getContentPane().add(listMove);
 		frame.getContentPane().add(btnSendMove);
 		frame.getContentPane().add(btnQuit);
+
+		JLabel lblScores = new JLabel("Scores");
+		lblScores.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblScores.setBounds(76, 82, 75, 25);
+		frame.getContentPane().add(lblScores);
+
+		JLabel lblPseudo = new JLabel(name);
+		lblPseudo.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblPseudo.setBounds(10, 115, 102, 14);
+		frame.getContentPane().add(lblPseudo);
+
+		JLabel lblOther = new JLabel("Opponent");
+		lblOther.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblOther.setBounds(132, 115, 87, 14);
+		frame.getContentPane().add(lblOther);
+
+		lblScorePlayer = new JLabel("0");
+		lblScorePlayer.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblScorePlayer.setBounds(32, 140, 65, 50);
+		frame.getContentPane().add(lblScorePlayer);
+
+		lblScoreOpponent = new JLabel("0");
+		lblScoreOpponent.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblScoreOpponent.setBounds(150, 139, 59, 50);
+		frame.getContentPane().add(lblScoreOpponent);
 		frame.setVisible(true);
 
 		SwingWorker sw = new SwingWorker() {
@@ -88,4 +176,7 @@ public class RpslsClient extends Client {
 		sw.execute();
 	}
 
+	private void displayMessage(String s) {
+		JOptionPane.showMessageDialog(frame, s);
+	}
 }

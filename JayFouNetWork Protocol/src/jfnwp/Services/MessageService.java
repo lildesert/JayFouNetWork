@@ -52,9 +52,10 @@ public class MessageService implements IMessages {
 	}
 
 	@Override
-	public void ClientMove(IMove m) {
-		// TODO Auto-generated method stub
-
+	public void ClientMove(IMove mv) {
+		Message m = new Message(6);
+		m.setData(mv.getSerializedData());
+		NetworkService.SendMessage(s, m);
 	}
 
 	@Override

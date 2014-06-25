@@ -6,14 +6,20 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import jfnwp.Exception.GameFullException;
 import jfnwp.Exception.MoveException;
+import jfnwp.Games.Rpsls;
 import jfnwp.Interfaces.IGame;
 import jfnwp.Interfaces.IMove;
 import jfnwp.Moves.RpslsMove;
 import jfnwp.Services.MessageService;
 
 public abstract class Game implements IGame {
+
+	private static Logger logger = LogManager.getLogger(Game.class.getName());
 
 	protected int nbMaxPlayer;
 	protected int nbMinPlayer = 2;
@@ -49,14 +55,31 @@ public abstract class Game implements IGame {
 					"Game is full, can't add another player");
 		}
 	}
-	
+
+	public String getNextPlayerToMoveIp(String ip) {
+		String nextIp = "";
+		boolean find = false;
+		int i = 0;
+		while (find == false) {
+			if (playerList.get(i).getAddress() != ip) {
+				find = true;
+				nextIp = playerList.get(i).getAddress().toString();
+			}
+		}
+		return nextIp;
+	}
+
 	public void sendWait(String ip) {
+		logger.info("sendWait call" + ip);
 		Socket s = getPlayerById(ip).getSock();
+		logger.info("socket ok");
 		MessageService m = new MessageService(s);
+		logger.info("messServ ok");
 		m.Wait("Wait for your turn please");
 	}
-	
+
 	public void sendMoveResult(String result, String ip) {
+		logger.info("send move result call");
 		Socket s = getPlayerById(ip).getSock();
 		MessageService m = new MessageService(s);
 		IMove mvResult = new RpslsMove();
@@ -64,18 +87,22 @@ public abstract class Game implements IGame {
 		m.Move(mvResult);
 	}
 
+	public void askMove(String ip) {
+		Socket s = getPlayerById(ip).getSock();
+		MessageService m = new MessageService(s);
+		m.Move(null);
+	}
+
 	public Player getPlayerById(String ip) {
 		Player p = null;
 		int i = 0;
-		while (i <= playerList.size()) {
-			try {
-				if (playerList.get(i).getAddress() == InetAddress.getByName(ip)) {
-					p = playerList.get(i);
-				}
-			} catch (UnknownHostException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		boolean end = false;
+		while (i < playerList.size() || end == false) {
+			if (playerList.get(i).getAddress() == ip) {
+				p = playerList.get(i);
+				end = true;
 			}
+			i++;
 		}
 
 		return p;

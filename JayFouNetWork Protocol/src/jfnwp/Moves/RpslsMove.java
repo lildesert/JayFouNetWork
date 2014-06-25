@@ -6,13 +6,13 @@ import jfnwp.RpslsImplementation.*;
 public class RpslsMove extends Move {
 	
 	private RpslsComponent c;
+	private String serialMv;
 
 	public RpslsComponent getC() {
 		return c;
 	}
 
-	@Override
-	public void setData(String d) {
+	public void deserialize(String d) {
 		switch(d)
 		{
 		case "Rock" :
@@ -26,5 +26,15 @@ public class RpslsMove extends Move {
 		case "Spock" :
 			c = new Spock();
 		}
+	}
+
+	@Override
+	public void serialize(String s) {
+		serialMv = s;
+	}
+	
+	public String getSerializedData()
+	{
+		return serialMv;
 	}
 }
