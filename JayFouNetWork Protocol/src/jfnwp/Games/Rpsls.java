@@ -9,7 +9,7 @@ import jfnwp.Implementation.Game;
 import jfnwp.Implementation.Player;
 import jfnwp.Interfaces.IMove;
 import jfnwp.Moves.RpslsMove;
-import jfnwp.RpslsImplementation.ListenerRpsls;
+import jfnwp.Rpsls.ListenerRpsls;
 import jfnwp.Services.MessageService;
 
 public class Rpsls extends Game {

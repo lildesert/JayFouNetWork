@@ -3,6 +3,7 @@ package jfnwp.ChessImplementation;
 import jfnwp.Games.Chess;
 import jfnwp.Implementation.Position;
 import jfnwp.Interfaces.Color;
+import jfnwp.Moves.ChessMove;
 
 /**
  * @see ChessPiece

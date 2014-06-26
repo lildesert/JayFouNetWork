@@ -1,7 +1,6 @@
 package jfnwp.Games;
 
 import jfnwp.ChessImplementation.Bishop;
-import jfnwp.ChessImplementation.ChessMove;
 import jfnwp.ChessImplementation.ChessPiece;
 import jfnwp.ChessImplementation.King;
 import jfnwp.ChessImplementation.Knight;
@@ -15,6 +14,7 @@ import jfnwp.Implementation.Position;
 import jfnwp.Interfaces.Color;
 import jfnwp.Interfaces.IMove;
 import jfnwp.Interfaces.Piece;
+import jfnwp.Moves.ChessMove;
 
 /**
  * The representation of a chess's game

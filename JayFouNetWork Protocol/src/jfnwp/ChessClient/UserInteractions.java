@@ -8,12 +8,12 @@ import java.util.logging.Logger;
 
 import javax.swing.JLayeredPane;
 
-import jfnwp.ChessImplementation.ChessMove;
 import jfnwp.ChessImplementation.ChessPiece;
 import jfnwp.Games.Chess;
 import jfnwp.Implementation.Position;
 import jfnwp.Interfaces.Color;
 import jfnwp.Interfaces.Piece;
+import jfnwp.Moves.ChessMove;
 
 /**
  * To listen the mouse's events for the Chess client

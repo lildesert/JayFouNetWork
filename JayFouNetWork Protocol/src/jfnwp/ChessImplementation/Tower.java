@@ -6,6 +6,7 @@ import jfnwp.Interfaces.IMove;
 import jfnwp.Interfaces.Color;
 import jfnwp.Interfaces.IPosition;
 import jfnwp.Interfaces.Piece;
+import jfnwp.Moves.ChessMove;
 
 /**
  * @see ChessPiece

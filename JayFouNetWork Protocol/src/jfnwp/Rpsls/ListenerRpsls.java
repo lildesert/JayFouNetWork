@@ -1,4 +1,4 @@
-package jfnwp.RpslsImplementation;
+package jfnwp.Rpsls;
 
 import java.net.Socket;
 import java.util.ArrayList;

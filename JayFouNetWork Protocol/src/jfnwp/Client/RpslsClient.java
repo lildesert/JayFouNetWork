@@ -21,7 +21,7 @@ import jfnwp.Implementation.Message;
 import jfnwp.Implementation.ObservableData;
 import jfnwp.Interfaces.IMove;
 import jfnwp.Moves.RpslsMove;
-import jfnwp.RpslsImplementation.ListenerRpsls;
+import jfnwp.Rpsls.ListenerRpsls;
 import jfnwp.Services.MessageService;
 
 import java.awt.Color;

@@ -1,7 +1,7 @@
 package jfnwp.Moves;
 
 import jfnwp.Implementation.Move;
-import jfnwp.RpslsImplementation.*;
+import jfnwp.Rpsls.*;
 
 public class RpslsMove extends Move {
 	

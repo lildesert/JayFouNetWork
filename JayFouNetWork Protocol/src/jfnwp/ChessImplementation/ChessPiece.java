@@ -3,6 +3,7 @@ package jfnwp.ChessImplementation;
 import jfnwp.Games.Chess;
 import jfnwp.Interfaces.Color;
 import jfnwp.Interfaces.Piece;
+import jfnwp.Moves.ChessMove;
 
 public abstract class ChessPiece extends Piece {
 

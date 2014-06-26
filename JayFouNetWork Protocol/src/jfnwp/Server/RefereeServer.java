@@ -25,7 +25,6 @@ public class RefereeServer extends Thread {
 	private Player p;
 	private static Logger logger = LogManager.getLogger(RefereeServer.class
 			.getName());
-	private static WaitingServer waitingServer;
 
 	RefereeServer(Socket sock) {
 		this.s = sock;
@@ -35,7 +34,6 @@ public class RefereeServer extends Thread {
 		ExecutorService executorService = Executors
 				.newFixedThreadPool(maxThread);
 		ServerSocket ssock = new ServerSocket(port);
-		waitingServer = new WaitingServer();
 		logger.info("Server runnning on port " + ssock.getLocalPort()
 				+ " and address " + ssock.getInetAddress());
 		while (true) {

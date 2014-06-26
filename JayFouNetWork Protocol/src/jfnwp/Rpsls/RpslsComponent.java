@@ -1,4 +1,4 @@
-package jfnwp.RpslsImplementation;
+package jfnwp.Rpsls;
 
 public abstract class RpslsComponent implements Comparable<RpslsComponent> {
 
