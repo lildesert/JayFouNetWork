@@ -19,6 +19,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingWorker;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -55,6 +56,7 @@ public class ChessClient extends Client {
 	protected String player = "";
 	private Color tourJoueur;
 	private String chatInfo;
+	private ClientListener cl;
 
 	public ChessClient(Socket s, String n) {
 		super(s, n);
@@ -64,6 +66,7 @@ public class ChessClient extends Client {
 	public void start() {
 
 		player = super.name;
+		cl = new ClientListener(sock);
 
 		fenetre = new JFrame();
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -127,6 +130,14 @@ public class ChessClient extends Client {
 
 		fenetre.setContentPane(layeredPane);
 		fenetre.setVisible(true);
+		
+		SwingWorker sw = new SwingWorker() {
+			protected Object doInBackground() throws Exception {
+				cl.run();
+				return null;
+			}
+		};
+		sw.execute();
 	}
 	
 	private void displayMessage(String s) {
