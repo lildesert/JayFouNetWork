@@ -1,14 +1,10 @@
 package jfnwp.Implementation;
 
-import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 public class Player {
 	private String nickname;
 	private String ipAddress;
-	private int chatPort;
-	private String chatAddress;
 	private Socket sock;
 
 	private EnumGame game;
@@ -18,15 +14,6 @@ public class Player {
 		this.nickname = tab[0];
 		this.ipAddress = tab[1];
 		this.sock = s;
-	}
-
-	public Player(String nickname, Socket s, String a, int chatPort,
-			String chatAddress) {
-		this.nickname = nickname;
-		this.sock = s;
-		this.ipAddress = a;
-		this.chatPort = chatPort;
-		this.chatAddress = chatAddress;
 	}
 
 	public String getAddress() {

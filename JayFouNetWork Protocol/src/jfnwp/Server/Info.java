@@ -9,6 +9,9 @@ import jfnwp.Interfaces.IGame;
 public class Info {
 
 	private List<GameContext> gameList = new ArrayList<GameContext>();
+	
+	private static int port = 10000;
+	private static final String host = "228.0.0.0";
 
 	private Info() {
 	}
@@ -28,16 +31,28 @@ public class Info {
 		boolean end = false;
 		int i = 0;
 		if (gameList.size() != 0) {
-			while (end == false) {
+			while (end == false && i < gameList.size()) {
 				if (gameList.get(i).getGame().getClass() == c) {
 					if (!gameList.get(i).getGame().isGameFull()) {
 						end = true;
 						gc = gameList.get(i);
 					}
 				}
+				
+				i++;
 			}
 		}
 
 		return gc;
+	}
+	
+	public synchronized String getHost()
+	{
+		return host;
+	}
+	
+	public synchronized int getPort()
+	{
+		return port++;
 	}
 }

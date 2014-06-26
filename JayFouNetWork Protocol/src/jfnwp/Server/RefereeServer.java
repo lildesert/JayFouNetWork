@@ -72,6 +72,7 @@ public class RefereeServer extends Thread {
 					clazz = Class.forName("jfnwp.Games." + className);
 					GameContext gac = Info.Instance.getExistingGame(clazz);
 					if (gac != null) {
+						logger.info("Start game reçu, join game existante");
 						gc = gac;
 						gc.getGame().addPlayerList(p);
 						if (gc.getGame().isGameFull()) {
@@ -82,9 +83,10 @@ public class RefereeServer extends Thread {
 							m.Wait("Wait for another player to join game please");
 						}
 					} else {
+						logger.info("Start game reçu, creation nouvelle game");
 						IGame g = (IGame) clazz.newInstance();
 						g.addPlayerList(p);
-						gc = new GameContext(g);
+						gc = new GameContext(g, Info.Instance.getHost(), Info.Instance.getPort());
 						Info.Instance.addGameList(gc);
 						m.Wait("Wait for another player to join game please");
 					}
@@ -135,6 +137,10 @@ public class RefereeServer extends Thread {
 				break;
 
 			case 8:
+				logger.info("GetAdress reçu");
+				String s = gc.getHost() +";" +Integer.toString(gc.getPort()) +";";
+				logger.info(s);
+				m.SendAdress(s);
 				break;
 
 			case 9:

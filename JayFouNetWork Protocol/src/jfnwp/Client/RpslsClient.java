@@ -15,7 +15,9 @@ import javax.swing.SwingWorker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import jfnwp.Chat.ClientChat;
 import jfnwp.Client.Interfaces.Observer;
+import jfnwp.Implementation.Message;
 import jfnwp.Implementation.ObservableData;
 import jfnwp.Interfaces.IMove;
 import jfnwp.Moves.RpslsMove;
@@ -35,6 +37,7 @@ public class RpslsClient extends Client {
 	private JList listMove;
 	private JLabel lblScorePlayer;
 	private JLabel lblScoreOpponent;
+	private String chat;
 
 	private static Logger logger = LogManager.getLogger(RpslsClient.class
 			.getName());
@@ -97,6 +100,13 @@ public class RpslsClient extends Client {
 			public void update(ObservableData i) {
 				rights = i.getMsgId();
 				logger.info("update rights ok");
+			}
+		});
+		
+		is.addObserver(new Observer() {
+			public void update(ObservableData i) {
+				chat = i.getChatData();
+				logger.info("update chat ok " + chat);
 			}
 		});
 
@@ -176,6 +186,27 @@ public class RpslsClient extends Client {
 		lblScoreOpponent.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblScoreOpponent.setBounds(150, 139, 59, 50);
 		frame.getContentPane().add(lblScoreOpponent);
+		
+		JButton btOpenChat = new JButton("Open Chat");
+		btOpenChat.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				MessageService m = new MessageService(sock);
+				
+				while(chat == null)
+				{
+					m.GetAdress();
+					logger.info("Message 9 non reçu");
+				}
+				
+				logger.info("Message 9 reçu");
+				String[] tab = chat.split(";");
+				ClientChat cc = new ClientChat(name, tab[0], Integer.parseInt(tab[1]));
+				chat = null;
+			}
+		});
+		btOpenChat.setBounds(50, 219, 102, 23);
+		frame.getContentPane().add(btOpenChat);
 		frame.setVisible(true);
 
 		SwingWorker sw = new SwingWorker() {

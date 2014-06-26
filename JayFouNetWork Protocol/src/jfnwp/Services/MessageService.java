@@ -65,15 +65,16 @@ public class MessageService implements IMessages {
 	}
 
 	@Override
-	public void GetAdresses() {
-		// TODO Auto-generated method stub
-
+	public void GetAdress() {
+		Message m = new Message(8);
+		NetworkService.SendMessage(s, m);
 	}
 
 	@Override
-	public void SendAdresses() {
-		// TODO Auto-generated method stub
-
+	public void SendAdress(String data) {
+		Message m = new Message(9);
+		m.setData(data);
+		NetworkService.SendMessage(s, m);
 	}
 
 	@Override

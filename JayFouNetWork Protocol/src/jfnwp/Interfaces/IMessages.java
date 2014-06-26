@@ -11,8 +11,8 @@ public interface IMessages {
 	void Result(String result);
 	void ClientMove(IMove m);
 	void Surrender();
-	void GetAdresses();
-	void SendAdresses();
+	void GetAdress();
+	void SendAdress(String data);
 	void Ok();
 	void Nok();
 	void Wait(String info);

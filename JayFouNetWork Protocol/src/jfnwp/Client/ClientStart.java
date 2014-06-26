@@ -21,7 +21,7 @@ import jfnwp.Services.MessageService;
 
 public class ClientStart extends JFrame {
 
-	private static final String ip = "192.168.0.31";
+	private static final String ip = "192.168.0.44";
 	private static final String serverIp = "localhost";
 	private static final int serverPort = 9890;
 

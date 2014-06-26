@@ -5,7 +5,16 @@ public class ObservableData {
 	private String info;
 	private String result;
 	private String msgId;
+	private String chatData;
 	
+	public String getChatData() {
+		return chatData;
+	}
+
+	public void setChatData(String chatData) {
+		this.chatData = chatData;
+	}
+
 	public String getMsgId() {
 		return msgId;
 	}

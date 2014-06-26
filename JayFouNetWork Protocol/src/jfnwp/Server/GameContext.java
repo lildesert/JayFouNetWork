@@ -6,14 +6,26 @@ import jfnwp.Interfaces.IMove;
 
 public class GameContext {
 
-    IGame game;
+    private IGame game;
+    private int port;
+    private String host;
  
-    public GameContext(IGame g)
+    public GameContext(IGame g, String h, int p)
     {
+    	port = p;
+    	host = h;
     	game = g;
     }
  
-    public IGame getGame() {
+    public int getPort() {
+		return port;
+	}
+
+	public String getHost() {
+		return host;
+	}
+
+	public IGame getGame() {
 		return game;
 	}
 

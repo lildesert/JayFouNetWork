@@ -48,6 +48,12 @@ public class ListenerRpsls implements Observable {
 				infoRpsls.setResult(mess.getData());
 				updateObserver();
 				break;
+				
+			case 9:
+				logger.info("Message sendAdress reçu");
+				infoRpsls.setChatData(mess.getData());
+				updateObserver();
+				break;
 
 			case 12:
 				logger.info("Message wait reçu");
