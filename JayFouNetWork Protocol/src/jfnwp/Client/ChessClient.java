@@ -24,9 +24,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import jfnwp.Chat.ClientChat;
-import jfnwp.ChessClient.ChessBoardForDisplay;
-import jfnwp.ChessClient.ChessMessage;
-import jfnwp.ChessClient.UserInteractions;
+import jfnwp.Chess.ChessBoardForDisplay;
+import jfnwp.Chess.ChessMessage;
+import jfnwp.Chess.UserInteractions;
 import jfnwp.Interfaces.Color;
 import jfnwp.Services.MessageService;
 

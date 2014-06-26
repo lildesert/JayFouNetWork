@@ -1,4 +1,4 @@
-package jfnwp.Rpsls;
+package jfnwp.Client;
 
 import java.net.Socket;
 import java.util.ArrayList;
@@ -12,15 +12,15 @@ import jfnwp.Implementation.ObservableData;
 import jfnwp.Implementation.Message;
 import jfnwp.Services.MessageService;
 
-public class ListenerRpsls implements Observable {
+public class ClientListener implements Observable {
 
-	private static Logger logger = LogManager.getLogger(ListenerRpsls.class
+	private static Logger logger = LogManager.getLogger(ClientListener.class
 			.getName());
 	private Socket sock;
 	private ObservableData infoRpsls = new ObservableData();
 	private ArrayList<Observer> listObserver = new ArrayList<Observer>();
 
-	public ListenerRpsls(Socket s) {
+	public ClientListener(Socket s) {
 		sock = s;
 	}
 

@@ -1,4 +1,4 @@
-package jfnwp.ChessClient;
+package jfnwp.Chess;
 
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;

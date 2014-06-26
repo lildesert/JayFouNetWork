@@ -5,11 +5,11 @@ import java.net.Socket;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import jfnwp.Client.ClientListener;
 import jfnwp.Implementation.Game;
 import jfnwp.Implementation.Player;
 import jfnwp.Interfaces.IMove;
 import jfnwp.Moves.RpslsMove;
-import jfnwp.Rpsls.ListenerRpsls;
 import jfnwp.Services.MessageService;
 
 public class Rpsls extends Game {

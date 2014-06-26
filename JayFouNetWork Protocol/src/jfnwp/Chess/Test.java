@@ -1,4 +1,4 @@
-package jfnwp.ChessClient;
+package jfnwp.Chess;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

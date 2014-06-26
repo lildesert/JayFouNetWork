@@ -21,7 +21,6 @@ import jfnwp.Implementation.Message;
 import jfnwp.Implementation.ObservableData;
 import jfnwp.Interfaces.IMove;
 import jfnwp.Moves.RpslsMove;
-import jfnwp.Rpsls.ListenerRpsls;
 import jfnwp.Services.MessageService;
 
 import java.awt.Color;
@@ -33,7 +32,7 @@ public class RpslsClient extends Client {
 	private JFrame frame;
 	private JLabel lblInfo = new JLabel("");
 	private String rights = "";
-	private ListenerRpsls is;
+	private ClientListener is;
 	private JList listMove;
 	private JLabel lblScorePlayer;
 	private JLabel lblScoreOpponent;
@@ -87,7 +86,7 @@ public class RpslsClient extends Client {
 		});
 		btnSendMove.setBounds(250, 219, 139, 23);
 
-		is = new ListenerRpsls(sock);
+		is = new ClientListener(sock);
 
 		is.addObserver(new Observer() {
 			public void update(ObservableData i) {
