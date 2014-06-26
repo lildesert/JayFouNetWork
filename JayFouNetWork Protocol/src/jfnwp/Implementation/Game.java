@@ -72,12 +72,18 @@ public abstract class Game implements IGame {
 	}
 
 	public void sendWait(String ip) {
-		logger.info("sendWait call" + ip);
+		logger.info("sendWait call " + ip);
 		Socket s = getPlayerById(ip).getSock();
-		logger.info("socket ok");
 		MessageService m = new MessageService(s);
-		logger.info("messServ ok");
 		m.Wait("Wait for your turn please");
+	}
+	
+	public void sendError(String txt, String ip)
+	{
+		logger.info("sendError call " + ip);
+		Socket s = getPlayerById(ip).getSock();
+		MessageService m = new MessageService(s);
+		m.Error(txt);
 	}
 
 	public void sendResult(String result, String ip) {

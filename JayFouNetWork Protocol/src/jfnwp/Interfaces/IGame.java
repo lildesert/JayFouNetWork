@@ -28,4 +28,5 @@ public interface IGame {
 	void sendWait(String ip);
 	void sendResult(String result, String ip);
 	void askMove(String ip);
+	void sendError(String txt, String ip);
 }

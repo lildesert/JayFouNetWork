@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 import jfnwp.Client.Interfaces.Observable;
 import jfnwp.Client.Interfaces.Observer;
-import jfnwp.Implementation.Data;
+import jfnwp.Implementation.ObservableData;
 import jfnwp.Implementation.Message;
 import jfnwp.Services.MessageService;
 
@@ -17,7 +17,7 @@ public class ListenerRpsls implements Observable {
 	private static Logger logger = LogManager.getLogger(ListenerRpsls.class
 			.getName());
 	private Socket sock;
-	private Data infoRpsls = new Data();
+	private ObservableData infoRpsls = new ObservableData();
 	private ArrayList<Observer> listObserver = new ArrayList<Observer>();
 
 	public ListenerRpsls(Socket s) {
@@ -25,8 +25,6 @@ public class ListenerRpsls implements Observable {
 	}
 
 	public void run() {
-		try
-		{
 		logger.info("Entrée dans le ThreadClient");
 		MessageService m = new MessageService(sock);
 		Message mess = new Message();
@@ -57,17 +55,19 @@ public class ListenerRpsls implements Observable {
 				infoRpsls.setInfo(mess.getData());
 				updateObserver();
 				break;
+				
+			case 14:
+				logger.info("error msg reçu");
+				infoRpsls.setMsgId("14");
+				infoRpsls.setInfo(mess.getData());
+				updateObserver();
+				break;
 
 			default:
 				break;
 			}
 
 			mess = null;
-		}
-		}
-		catch(Exception e)
-		{
-			logger.error(e.getMessage());
 		}
 	}
 

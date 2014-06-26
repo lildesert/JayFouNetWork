@@ -1,6 +1,6 @@
 package jfnwp.Implementation;
 
-public class Data {
+public class ObservableData {
 
 	private String info;
 	private String result;

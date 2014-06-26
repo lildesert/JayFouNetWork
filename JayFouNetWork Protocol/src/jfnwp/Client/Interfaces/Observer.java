@@ -1,7 +1,7 @@
 package jfnwp.Client.Interfaces;
 
-import jfnwp.Implementation.Data;
+import jfnwp.Implementation.ObservableData;
 
 public interface Observer {
-	void update(Data d);
+	void update(ObservableData d);
 }

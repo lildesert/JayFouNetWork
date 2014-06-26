@@ -13,6 +13,8 @@ public class Spock extends RpslsComponent {
 				return 0;
 			case "Lizard":
 				return 0;
+			case "Spock":
+				return 2;
 			default:
 				return -1;
 		}

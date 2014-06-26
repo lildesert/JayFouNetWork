@@ -7,6 +7,8 @@ public class Paper extends RpslsComponent {
 			switch (o.getClass().getSimpleName()) {
 			case "Rock":
 				return 1;
+			case "Paper":
+				return 2;
 			case "Scissor":
 				return 0;
 			case "Lizard":

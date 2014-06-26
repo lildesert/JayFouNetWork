@@ -16,7 +16,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import jfnwp.Client.Interfaces.Observer;
-import jfnwp.Implementation.Data;
+import jfnwp.Implementation.ObservableData;
 import jfnwp.Interfaces.IMove;
 import jfnwp.Moves.RpslsMove;
 import jfnwp.RpslsImplementation.ListenerRpsls;
@@ -66,7 +66,11 @@ public class RpslsClient extends Client {
 			public void actionPerformed(ActionEvent arg0) {
 				if (rights.equals("12")) {
 					displayMessage("You can't make a move now");
-				} else if (rights.equals("04")) {
+				}
+				else if (rights.equals("14")) {
+					displayMessage("Your game is crashed, please start a new one");
+				} 
+				else if (rights.equals("04")) {
 					if (listMove.getSelectedValue() == null) {
 						displayMessage("No move selected");
 					} else {
@@ -83,32 +87,39 @@ public class RpslsClient extends Client {
 		is = new ListenerRpsls(sock);
 
 		is.addObserver(new Observer() {
-			public void update(Data i) {
+			public void update(ObservableData i) {
 				lblInfo.setText(i.getInfo());
 				logger.info("update lblInfo ok");
 			}
 		});
 
 		is.addObserver(new Observer() {
-			public void update(Data i) {
+			public void update(ObservableData i) {
 				rights = i.getMsgId();
 				logger.info("update rights ok");
 			}
 		});
 
 		is.addObserver(new Observer() {
-			public void update(Data i) {
+			public void update(ObservableData i) {
 				if (i.getResult() != null) {
 					logger.info("update results enter");
 					if (i.getResult().equals("win")) {
 						logger.info("update results win");
 						int score = Integer.parseInt(lblScorePlayer.getText()) + 1;
 						lblScorePlayer.setText(Integer.toString(score));
+						displayMessage("You win !");
 						i.setResult("");
 					} else if (i.getResult().equals("loose")) {
 						logger.info("update results loose");
 						int score = Integer.parseInt(lblScoreOpponent.getText()) + 1;
 						lblScoreOpponent.setText(Integer.toString(score));
+						displayMessage("You loose !");
+						i.setResult("");
+					}
+					else if (i.getResult().equals("tie")) {
+						logger.info("update results tie");
+						displayMessage("It's a tie game !");
 						i.setResult("");
 					}
 				}

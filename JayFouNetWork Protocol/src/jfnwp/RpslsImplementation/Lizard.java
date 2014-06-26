@@ -11,6 +11,8 @@ public class Lizard extends RpslsComponent {
 				return 0;
 			case "Paper":
 				return 1;
+			case "Lizard":
+				return 2;
 			case "Spock":
 				return 1;
 			default:

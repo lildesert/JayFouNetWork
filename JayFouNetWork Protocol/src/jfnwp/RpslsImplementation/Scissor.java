@@ -9,6 +9,8 @@ public class Scissor extends RpslsComponent{
 				return 0;
 			case "Paper":
 				return 1;
+			case "Scissor":
+				return 2;
 			case "Lizard":
 				return 1;
 			case "Spock":
