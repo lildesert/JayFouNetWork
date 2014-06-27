@@ -49,6 +49,7 @@ public class ClientListener implements Observable {
 				logger.info("Message result reçu "+mess.getData());
 				infoRpsls.setResult(mess.getData());
 				updateObserver();
+				infoRpsls.setResult("");
 				break;
 				
 			case 9:
@@ -86,7 +87,8 @@ public class ClientListener implements Observable {
 		}
 		catch(Exception e)
 		{
-			logger.info("fail "+e.getMessage());
+			e.printStackTrace();
+			logger.info("fail " +e.getMessage());
 		}
 	}
 

@@ -1,8 +1,14 @@
 package jfnwp.Chess;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import jfnwp.Interfaces.IPosition;
 
 public class Position implements IPosition{
+	
+	private static Logger logger = LogManager.getLogger(Position.class
+			.getName());
 	
 	private int x;
 	private int y;
@@ -13,9 +19,10 @@ public class Position implements IPosition{
 	}
 	
 	public Position(String sPosition){
+		logger.info("constructeur Position " +sPosition);
 		String[] splitString = sPosition.split(",", 20);
-		this.x = Integer.valueOf(splitString[0].substring(1));
-		this.y = Integer.valueOf(splitString[1].substring(1));
+		this.x = Integer.valueOf(splitString[0]);
+		this.y = Integer.valueOf(splitString[1]);
 	}
 	
 	public Position(int x, int y) {
@@ -40,6 +47,6 @@ public class Position implements IPosition{
 	}
 	
 	public String toString(){		
-		return "(" + x + "," + y + ")";
+		return  x + "," + y;
 	}
 }

@@ -8,7 +8,6 @@ import java.net.Socket;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -25,6 +24,7 @@ import jfnwp.Chess.Color;
 import jfnwp.Chess.UserInteractions;
 import jfnwp.Client.Interfaces.Observer;
 import jfnwp.Implementation.ObservableData;
+import jfnwp.Moves.ChessMove;
 import jfnwp.Services.MessageService;
 
 import java.awt.event.MouseAdapter;
@@ -48,7 +48,6 @@ public class ChessClient extends Client {
 
 	protected static JFrame fenetre;
 	protected String player = "";
-	private Color tourJoueur;
 	private String chatInfo;
 	private ClientListener cl;
 	private String rights;
@@ -137,7 +136,7 @@ public class ChessClient extends Client {
 					if (infGame.equals("white")) {
 						inter.tour = Color.White;
 					} else if (infGame.equals("black")) {
-						inter.tour = Color.White;
+						inter.tour = Color.Black;
 					}
 				}
 				logger.info("update gameInfo ok");
@@ -164,6 +163,29 @@ public class ChessClient extends Client {
 					}
 				}
 				logger.info("update info ok");
+			}
+		});
+		
+		cl.addObserver(new Observer() {
+			public void update(ObservableData i) {
+				if (i.getResult() != null) {
+					logger.info("update results enter");
+					if(i.getResult().equals("win"))
+					{
+						displayMessage("You win !");
+					}
+					else if(i.getResult().equals("loose"))
+					{
+						displayMessage("You loose !");
+					}
+					else if(i.getResult().length() != 0)
+					{
+						ChessMove mv = new ChessMove();
+						mv.deserialize(i.getResult());
+						inter.testDeplacementValid(mv.getFrom(), mv.getTo());
+					}
+				}
+				logger.info("update results ok");
 			}
 		});
 

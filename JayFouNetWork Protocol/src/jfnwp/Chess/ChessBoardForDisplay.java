@@ -18,12 +18,14 @@ import jfnwp.Moves.ChessMove;
  */
 public class ChessBoardForDisplay extends Chess{
 	
-	private JLabel cadre, fond, cadreEchec;
+	private JLabel cadre;
+	private JLabel fond = getImage("ressources/chessboard.jpg");
+	private JLabel cadreEchec;
 	
 	public ChessBoardForDisplay() {
 		this.cadreEchec = getImage("ressources/echec.png");
         this.cadre = getImage("ressources/selection.png");
-        this.fond = getImage("ressources/chessboard.jpg");
+        //this.fond = getImage("ressources/chessboard.jpg");
 	}
 	
 	/**
@@ -68,7 +70,7 @@ public class ChessBoardForDisplay extends Chess{
 	 * @version 1.0
 	 */
 	public void displayBackground(JLayeredPane layeredPane) {
-        layeredPane.add(this.fond);
+        layeredPane.add(getImage("ressources/chessboard.jpg"));
     }
 	
 	/**

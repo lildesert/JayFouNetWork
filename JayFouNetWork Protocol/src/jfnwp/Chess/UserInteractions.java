@@ -105,11 +105,44 @@ public class UserInteractions implements java.awt.event.MouseListener {
 		}
 		tour = Color.White;
 	}
+	
+	public void testDeplacementValid(Position start, Position end) {
+		logger.info("testDeplacement call "+tour);
+		ChessPiece piece = (ChessPiece) chessBoard.getPiece(start);	
+		//if (piece.getColor() == tour) {
+			//if (piece.checkMove(new ChessMove(start, end), chessBoard)) {
+				//if (!chessBoard.becomeMat(new ChessMove(start, end))) {
+					int i, j;
+					for (i = 0; i < 8; i++) {
+						for (j = 0; j < 8; j++) {
+							chessBoardPrecedent.board[j][i] = this.chessBoard.board[j][i];
+						}
+					}
+					chessBoard.movePiece(start, end);
+				/*} else {
+					System.out.println("You are mat");
+				}
+			} else {
+				System.out.println("Incorrect move !");
+			}*/
+		/*} else {
+			System.out.println("Not your turn !");
+		}*/
+		if (((ChessBoardForDisplay) this.chessBoard).displayMat(tour,
+				this.layerPane)) {
+		} else {
+
+		}
+		((ChessBoardForDisplay) this.chessBoard).refresh(layerPane);
+	}
 
 	public void testDeplacement(Position start, Position end) {
 		logger.info("testDeplacement call");
-		ChessPiece piece = (ChessPiece) chessBoard.getPiece(start);
-		if (piece.getColor() == tour) {
+		//ChessPiece piece = (ChessPiece) chessBoard.getPiece(start);
+		
+		m.ClientMove(new ChessMove(start, end).toString());
+		
+		/*if (piece.getColor() == tour) {
 			if (piece.checkMove(new ChessMove(start, end), chessBoard)) {
 				if (!chessBoard.becomeMat(new ChessMove(start, end))) {
 					int i, j;
@@ -127,7 +160,7 @@ public class UserInteractions implements java.awt.event.MouseListener {
 			}
 		} else {
 			System.out.println("Not your turn !");
-		}
+		}*/
 		if (((ChessBoardForDisplay) this.chessBoard).displayMat(tour,
 				this.layerPane)) {
 		} else {
@@ -142,7 +175,7 @@ public class UserInteractions implements java.awt.event.MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		logger.info("mousePressed call");
+		logger.info("mousePressed call "+tour);
 		if (chessCli.getRights().equals("12")) {
 			displayMessage(chessCli.getMsgInfo());
 		} 

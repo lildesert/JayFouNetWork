@@ -1,6 +1,7 @@
 package jfnwp.Games;
 
-import java.net.Socket;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import jfnwp.Chess.Color;
 import jfnwp.Chess.Piece;
@@ -26,6 +27,8 @@ import jfnwp.Services.MessageService;
  */
 public class Chess extends Game {
 	
+	private static Logger logger = LogManager.getLogger(Chess.class
+			.getName());
 	
 	public Piece[][] board;
 	protected Color winner;
@@ -58,15 +61,20 @@ public class Chess extends Game {
 	
 	@Override
 	public void applyMove(IMove m) throws MoveException {
-		if(checkMove(m)) {
-			ChessMove mo = (ChessMove) m;
+		ChessMove mo = (ChessMove) m;
+		if(checkMove(mo)) {
+			sendResult(mo.toString(), mo.getPlayerIp());
+			sendResult(mo.toString(), getNextPlayerToMoveIp(mo.getPlayerIp()));
+			sendWait(mo.getPlayerIp());
+			askMove(getNextPlayerToMoveIp(mo.getPlayerIp()));
+			
 			Position from = mo.getFrom();
 			Position to = mo.getTo();
 			Piece p = board[from.getX()][from.getY()];
 			board[from.getX()][from.getY()] = null;
 			board[to.getX()][to.getY()] = p;
 		} else {
-			throw new MoveException();
+			sendError("Incorrect move", mo.getPlayerIp());
 		}
 	}
 
