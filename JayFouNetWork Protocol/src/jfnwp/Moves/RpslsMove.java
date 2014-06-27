@@ -6,7 +6,6 @@ import jfnwp.Rpsls.*;
 public class RpslsMove extends Move {
 	
 	private RpslsComponent c;
-	private String serialMv;
 
 	public RpslsComponent getC() {
 		return c;

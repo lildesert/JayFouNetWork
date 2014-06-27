@@ -1,5 +1,7 @@
 package jfnwp.Games;
 
+import java.net.Socket;
+
 import jfnwp.Chess.Color;
 import jfnwp.Chess.Piece;
 import jfnwp.Chess.Position;
@@ -10,11 +12,13 @@ import jfnwp.ChessImplementation.Knight;
 import jfnwp.ChessImplementation.Pawn;
 import jfnwp.ChessImplementation.Queen;
 import jfnwp.ChessImplementation.Tower;
+import jfnwp.Exception.GameFullException;
 import jfnwp.Exception.MoveException;
 import jfnwp.Implementation.Game;
 import jfnwp.Implementation.Player;
 import jfnwp.Interfaces.IMove;
 import jfnwp.Moves.ChessMove;
+import jfnwp.Services.MessageService;
 
 /**
  * The representation of a chess's game
@@ -30,6 +34,19 @@ public class Chess extends Game {
 		super.nbMaxPlayer = 2;
 		this.board = new ChessPiece[8][8];
 		resetBoard();
+	}
+	
+	public void addPlayerList(Player p) throws GameFullException {
+		super.addPlayerList(p);
+		MessageService m = new MessageService(p.getSock());
+		if(super.playerList.size() == 1)
+		{
+			m.Info("white");
+		}
+		else
+		{
+			m.Info("black");
+		}
 	}
 	
 	@Override

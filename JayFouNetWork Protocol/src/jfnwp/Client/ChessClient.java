@@ -132,6 +132,20 @@ public class ChessClient extends Client {
 
 		cl.addObserver(new Observer() {
 			public void update(ObservableData i) {
+				String infGame = i.getGameInfo();
+				if (inter.tour == null) {
+					if (infGame.equals("white")) {
+						inter.tour = Color.White;
+					} else if (infGame.equals("black")) {
+						inter.tour = Color.White;
+					}
+				}
+				logger.info("update gameInfo ok");
+			}
+		});
+
+		cl.addObserver(new Observer() {
+			public void update(ObservableData i) {
 				rights = i.getMsgId();
 				logger.info("update rights ok");
 			}
@@ -139,13 +153,15 @@ public class ChessClient extends Client {
 
 		cl.addObserver(new Observer() {
 			public void update(ObservableData i) {
-				if (!i.getInfo().equals(msgInfo)) {
-					msgInfo = i.getInfo();
-					display = true;
-				}
-				if (display == true) {
-					displayMessage(msgInfo);
-					display = false;
+				if (i.getInfo() != null) {
+					if (!i.getInfo().equals(msgInfo)) {
+						msgInfo = i.getInfo();
+						display = true;
+					}
+					if (display == true) {
+						displayMessage(msgInfo);
+						display = false;
+					}
 				}
 				logger.info("update info ok");
 			}

@@ -25,6 +25,8 @@ public class ClientListener implements Observable {
 	}
 
 	public void run() {
+		try
+		{
 		logger.info("Entrée dans le ThreadClient");
 		MessageService m = new MessageService(sock);
 		Message mess = new Message();
@@ -68,12 +70,23 @@ public class ClientListener implements Observable {
 				infoRpsls.setInfo(mess.getData());
 				updateObserver();
 				break;
+				
+			case 17:
+				logger.info("info msg reçu");
+				infoRpsls.setGameInfo(mess.getData());
+				updateObserver();
+				break;
 
 			default:
 				break;
 			}
 
 			mess = null;
+		}
+		}
+		catch(Exception e)
+		{
+			logger.info("fail "+e.getMessage());
 		}
 	}
 

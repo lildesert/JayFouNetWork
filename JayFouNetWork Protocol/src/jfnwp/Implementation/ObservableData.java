@@ -6,7 +6,16 @@ public class ObservableData {
 	private String result;
 	private String msgId;
 	private String chatData;
+	private String gameInfo;
 	
+	public String getGameInfo() {
+		return gameInfo;
+	}
+
+	public void setGameInfo(String gameInfo) {
+		this.gameInfo = gameInfo;
+	}
+
 	public String getChatData() {
 		return chatData;
 	}

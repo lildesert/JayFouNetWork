@@ -128,4 +128,11 @@ public class MessageService implements IMessages {
 		m.setData(d);
 		NetworkService.SendMessage(s, m);
 	}
+
+	@Override
+	public void Info(String inf) {
+		Message m = new Message(17);
+		m.setData(inf);
+		NetworkService.SendMessage(s, m);
+	}
 }

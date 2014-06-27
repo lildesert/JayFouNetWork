@@ -64,6 +64,7 @@ public class ClientChat {
 		contentPane.add(lblChatroom);
 
 		epChat = new JEditorPane();
+		epChat.setEditable(false);
 		epChat.setBounds(47, 44, 357, 161);
 		contentPane.add(epChat);
 

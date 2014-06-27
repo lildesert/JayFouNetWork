@@ -44,7 +44,6 @@ public class UserInteractions implements java.awt.event.MouseListener {
 
 	public UserInteractions(Socket s, ChessClient cc) {
 		this.click = 0;
-		this.tour = Color.White;
 		this.chessBoardPrecedent = new ChessBoardForDisplay();
 		m = new MessageService(s);
 		chessCli = cc;
@@ -151,7 +150,11 @@ public class UserInteractions implements java.awt.event.MouseListener {
 		logger.info("mousePressed call");
 		if (chessCli.getRights().equals("12")) {
 			displayMessage(chessCli.getMsgInfo());
-		} else {
+		} 
+		else if (chessCli.getRights().equals("14")) {
+			displayMessage("Your game is crashed, please start a new one");
+		} 
+		else if (chessCli.getRights().equals("04")) {
 			if (e.getX() > 36 && e.getX() < 600 - 36 && e.getY() > 36
 					&& e.getY() < 600 - 36) {
 				Position pClick = new Position((e.getX() - 36) / 66,
