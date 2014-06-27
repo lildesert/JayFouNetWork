@@ -119,11 +119,6 @@ public class UserInteractions implements java.awt.event.MouseListener {
 						}
 					}
 					chessBoard.movePiece(start, end);
-					if (tour == Color.White) {
-						tour = Color.Black;
-					} else {
-						tour = Color.White;
-					}
 				} else {
 					System.out.println("You are mat");
 				}
@@ -168,6 +163,10 @@ public class UserInteractions implements java.awt.event.MouseListener {
 									.clickChoixPiece(this.layerPane, pClick);
 							this.click++;
 							this.start = pClick;
+						}
+						else
+						{
+							displayMessage("This is not your color !");
 						}
 					}
 				} else {
