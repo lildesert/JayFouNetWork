@@ -18,8 +18,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import jfnwp.Interfaces.Color;
-
 public class ChessMenu {
 	protected static JLayeredPane layeredPane = new JLayeredPane();
     protected static JButton score = new JButton("Score");
@@ -56,13 +54,13 @@ public class ChessMenu {
             public void actionPerformed(ActionEvent arg0) {
                 if( ! inter.chessBoardPrecedent.equals(inter.chessBoard) ) {
                     inter.setChessBoard(inter.chessBoardPrecedent);
-                    if(inter.modeDeuxJoueurs){
+                    /*if(inter.modeDeuxJoueurs){
                         if( inter.tour == Color.Black ){
                             inter.tour = Color.White;
                         } else {
                             inter.tour = Color.Black;
                         }
-                    }
+                    }*/
                     ((ChessBoardForDisplay) inter.chessBoard).refresh(inter.layerPane);
                 }
             }
@@ -98,7 +96,7 @@ public class ChessMenu {
                         	player = username.getText();
                         
                             fenetre.setTitle("Chess - " + player);
-                            inter = new UserInteractions();
+                            //inter = new UserInteractions();
 
                             layeredPane.setPreferredSize(new Dimension(610, 680));
                             layeredPane.addMouseListener(inter);
@@ -108,7 +106,7 @@ public class ChessMenu {
                             inter.setChessBoard(chessboard);
                             inter.setLayerPane(layeredPane);
                             inter.setGraph(layeredPane.getGraphics());
-                            inter.setModedeuxJoueurs(false);
+                            //inter.setModedeuxJoueurs(false);
 
                             chessboard.refresh(layeredPane);
                         }

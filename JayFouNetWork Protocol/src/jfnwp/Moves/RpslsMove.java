@@ -32,14 +32,4 @@ public class RpslsMove extends Move {
 			break;
 		}
 	}
-
-	@Override
-	public void serialize(String s) {
-		serialMv = s;
-	}
-	
-	public String getSerializedData()
-	{
-		return serialMv;
-	}
 }

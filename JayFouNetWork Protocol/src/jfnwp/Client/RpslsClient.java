@@ -77,9 +77,7 @@ public class RpslsClient extends Client {
 						displayMessage("No move selected");
 					} else {
 						MessageService m = new MessageService(sock);
-						IMove mv = new RpslsMove();
-						mv.serialize(listMove.getSelectedValue().toString());
-						m.ClientMove(mv);
+						m.ClientMove(listMove.getSelectedValue().toString());
 					}
 				}
 			}

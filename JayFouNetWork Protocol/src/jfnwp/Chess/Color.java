@@ -1,4 +1,4 @@
-package jfnwp.Interfaces;
+package jfnwp.Chess;
 
 /**
  * Used to attach a color to a Piece. 

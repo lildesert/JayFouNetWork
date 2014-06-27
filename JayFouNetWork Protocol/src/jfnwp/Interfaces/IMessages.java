@@ -7,9 +7,9 @@ public interface IMessages {
 	void Connect(String name, String ip);
 	void Start(String name);
 	void End();
-	void Move(IMove opponentMove);
+	void Move();
 	void Result(String result);
-	void ClientMove(IMove m);
+	void ClientMove(String mv);
 	void Surrender();
 	void GetAdress();
 	void SendAdress(String data);

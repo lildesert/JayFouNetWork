@@ -1,8 +1,8 @@
 package jfnwp.ChessImplementation;
 
+import jfnwp.Chess.Color;
+import jfnwp.Chess.Position;
 import jfnwp.Games.Chess;
-import jfnwp.Implementation.Position;
-import jfnwp.Interfaces.Color;
 import jfnwp.Moves.ChessMove;
 
 /**

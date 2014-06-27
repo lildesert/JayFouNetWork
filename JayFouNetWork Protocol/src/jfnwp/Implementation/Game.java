@@ -92,7 +92,7 @@ public abstract class Game implements IGame {
 	public void askMove(String ip) {
 		Socket s = getPlayerById(ip).getSock();
 		MessageService m = new MessageService(s);
-		m.Move(null);
+		m.Move();
 	}
 
 	public Player getPlayerById(String ip) {

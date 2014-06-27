@@ -36,11 +36,8 @@ public class MessageService implements IMessages {
 	}
 
 	@Override
-	public void Move(IMove opponentMove) {
+	public void Move() {
 		Message m = new Message(4);
-		if (opponentMove != null) {
-			m.setData(opponentMove.toString());
-		}
 		NetworkService.SendMessage(s, m);
 	}
 
@@ -52,9 +49,9 @@ public class MessageService implements IMessages {
 	}
 
 	@Override
-	public void ClientMove(IMove mv) {
+	public void ClientMove(String mv) {
 		Message m = new Message(6);
-		m.setData(mv.getSerializedData());
+		m.setData(mv);
 		NetworkService.SendMessage(s, m);
 	}
 

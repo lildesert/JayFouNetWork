@@ -1,14 +1,11 @@
 package jfnwp.Client;
 
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.Socket;
-import java.net.URL;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,8 +14,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.SwingWorker;
 
 import org.apache.logging.log4j.LogManager;
@@ -26,9 +21,10 @@ import org.apache.logging.log4j.Logger;
 
 import jfnwp.Chat.ClientChat;
 import jfnwp.Chess.ChessBoardForDisplay;
-import jfnwp.Chess.ChessMessage;
+import jfnwp.Chess.Color;
 import jfnwp.Chess.UserInteractions;
-import jfnwp.Interfaces.Color;
+import jfnwp.Client.Interfaces.Observer;
+import jfnwp.Implementation.ObservableData;
 import jfnwp.Services.MessageService;
 
 import java.awt.event.MouseAdapter;
@@ -38,13 +34,11 @@ public class ChessClient extends Client {
 
 	private static Logger logger = LogManager.getLogger(ChessClient.class
 			.getName());
-	
+
 	protected static JLayeredPane layeredPane = new JLayeredPane();
 	protected static JButton score = new JButton("Score");
 	protected static JButton joueur;
-	/****** Ask The Name ******/
-	protected static JTextField username = new JTextField();
-	public static JLabel text;
+
 	/******* MENU *********/
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu jeuMenu = new JMenu("Jeu");
@@ -57,6 +51,9 @@ public class ChessClient extends Client {
 	private Color tourJoueur;
 	private String chatInfo;
 	private ClientListener cl;
+	private String rights;
+	private String msgInfo;
+	private boolean display = true;
 
 	public ChessClient(Socket s, String n) {
 		super(s, n);
@@ -73,7 +70,6 @@ public class ChessClient extends Client {
 		fenetre.setLocationRelativeTo(null);
 		fenetre.pack();
 
-		
 		quit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -86,16 +82,16 @@ public class ChessClient extends Client {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				MessageService m = new MessageService(sock);
-				
-				while(chatInfo == null)
-				{
+
+				while (chatInfo == null) {
 					m.GetAdress();
 					logger.info("Message 9 non reçu");
 				}
-				
+
 				logger.info("Message 9 reçu");
 				String[] tab = chatInfo.split(";");
-				ClientChat cc = new ClientChat(name, tab[0], Integer.parseInt(tab[1]));
+				ClientChat cc = new ClientChat(name, tab[0], Integer
+						.parseInt(tab[1]));
 				chat = null;
 			}
 		});
@@ -114,7 +110,7 @@ public class ChessClient extends Client {
 				.setBorder(BorderFactory.createEmptyBorder(50, 200, 50, 200));
 
 		fenetre.setTitle("Chess - " + player);
-		inter = new UserInteractions();
+		inter = new UserInteractions(sock, this);
 
 		layeredPane.setPreferredSize(new Dimension(610, 680));
 		layeredPane.addMouseListener(inter);
@@ -124,13 +120,40 @@ public class ChessClient extends Client {
 		inter.setChessBoard(chessboard);
 		inter.setLayerPane(layeredPane);
 		inter.setGraph(layeredPane.getGraphics());
-		inter.setModedeuxJoueurs(false);
 
 		chessboard.refresh(layeredPane);
 
+		cl.addObserver(new Observer() {
+			public void update(ObservableData i) {
+				chatInfo = i.getChatData();
+				logger.info("update chat ok");
+			}
+		});
+
+		cl.addObserver(new Observer() {
+			public void update(ObservableData i) {
+				rights = i.getMsgId();
+				logger.info("update rights ok");
+			}
+		});
+
+		cl.addObserver(new Observer() {
+			public void update(ObservableData i) {
+				if (!i.getInfo().equals(msgInfo)) {
+					msgInfo = i.getInfo();
+					display = true;
+				}
+				if (display == true) {
+					displayMessage(msgInfo);
+					display = false;
+				}
+				logger.info("update info ok");
+			}
+		});
+
 		fenetre.setContentPane(layeredPane);
 		fenetre.setVisible(true);
-		
+
 		SwingWorker sw = new SwingWorker() {
 			protected Object doInBackground() throws Exception {
 				cl.run();
@@ -139,7 +162,15 @@ public class ChessClient extends Client {
 		};
 		sw.execute();
 	}
-	
+
+	public String getRights() {
+		return rights;
+	}
+
+	public String getMsgInfo() {
+		return msgInfo;
+	}
+
 	private void displayMessage(String s) {
 		JOptionPane.showMessageDialog(fenetre, s);
 	}

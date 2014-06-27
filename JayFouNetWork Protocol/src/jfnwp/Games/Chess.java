@@ -1,5 +1,8 @@
 package jfnwp.Games;
 
+import jfnwp.Chess.Color;
+import jfnwp.Chess.Piece;
+import jfnwp.Chess.Position;
 import jfnwp.ChessImplementation.Bishop;
 import jfnwp.ChessImplementation.ChessPiece;
 import jfnwp.ChessImplementation.King;
@@ -10,10 +13,7 @@ import jfnwp.ChessImplementation.Tower;
 import jfnwp.Exception.MoveException;
 import jfnwp.Implementation.Game;
 import jfnwp.Implementation.Player;
-import jfnwp.Implementation.Position;
-import jfnwp.Interfaces.Color;
 import jfnwp.Interfaces.IMove;
-import jfnwp.Interfaces.Piece;
 import jfnwp.Moves.ChessMove;
 
 /**

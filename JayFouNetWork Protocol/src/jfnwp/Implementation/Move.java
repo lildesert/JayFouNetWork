@@ -8,7 +8,6 @@ public abstract class Move implements IMove {
 	protected String moveResult;
 	
 	public abstract void deserialize(String d);
-	public abstract String getSerializedData();
 	
 	@Override
 	public void setPlayerIp(String ip) {

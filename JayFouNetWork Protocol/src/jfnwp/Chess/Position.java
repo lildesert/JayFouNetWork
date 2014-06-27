@@ -1,4 +1,4 @@
-package jfnwp.Implementation;
+package jfnwp.Chess;
 
 import jfnwp.Interfaces.IPosition;
 

@@ -74,7 +74,7 @@ public class RefereeServer extends Thread {
 						gc = gac;
 						gc.getGame().addPlayerList(p);
 						if (gc.getGame().isGameFull()) {
-							m.Move(null);
+							m.Move();
 						}
 						else
 						{

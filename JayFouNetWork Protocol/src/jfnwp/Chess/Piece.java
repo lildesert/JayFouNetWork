@@ -1,6 +1,5 @@
-package jfnwp.Interfaces;
+package jfnwp.Chess;
 
-import jfnwp.Interfaces.Color;
 
 public abstract class Piece {
 	protected Color color;

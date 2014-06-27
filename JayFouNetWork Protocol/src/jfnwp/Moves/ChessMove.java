@@ -1,7 +1,7 @@
 package jfnwp.Moves;
 
+import jfnwp.Chess.Position;
 import jfnwp.Implementation.Move;
-import jfnwp.Implementation.Position;
 
 public class ChessMove extends Move{
 
@@ -11,12 +11,6 @@ public class ChessMove extends Move{
 	public ChessMove() {
 		this.from = new Position();
 		this.to = new Position();
-	}
-	
-	public ChessMove(String sMove) {
-		String[] splitString = sMove.split("/", 20);
-		this.from = new Position(splitString[0]);
-		this.to = new Position(splitString[1]);
 	}
 	
 	public ChessMove(Position from, Position to) {
@@ -61,20 +55,9 @@ public class ChessMove extends Move{
 	}
 
 	@Override
-	public void serialize(String s) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void deserialize(String d) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String getSerializedData() {
-		// TODO Auto-generated method stub
-		return null;
+		String[] splitString = d.split("/", 20);
+		this.from = new Position(splitString[0]);
+		this.to = new Position(splitString[1]);
 	}
 }

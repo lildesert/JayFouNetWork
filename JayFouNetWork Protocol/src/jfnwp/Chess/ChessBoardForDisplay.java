@@ -9,13 +9,11 @@ import javax.swing.JLayeredPane;
 import jfnwp.ChessImplementation.ChessPiece;
 import jfnwp.ChessImplementation.King;
 import jfnwp.Games.Chess;
-import jfnwp.Implementation.Position;
-import jfnwp.Interfaces.Color;
 import jfnwp.Moves.ChessMove;
 
 /**
  * User Interface for the Chess client
- * @see ChessClient
+ * @see ChessClient2
  * @version 1.0
  */
 public class ChessBoardForDisplay extends Chess{
