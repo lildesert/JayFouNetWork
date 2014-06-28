@@ -11,6 +11,10 @@ import org.apache.logging.log4j.Logger;
 
 import jfnwp.Implementation.Message;
 
+/**
+ * Class used for sending and receiving messages with the socket s passed as parameter
+ * @version 1.0
+ */
 public class NetworkService {
 	
 	private static Logger logger = LogManager.getLogger(NetworkService.class.getName());
