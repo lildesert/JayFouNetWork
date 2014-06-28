@@ -1,5 +1,11 @@
 package jfnwp.Rpsls;
 
+import jfnwp.Implementation.Move;
+
+/**
+ * @see RpslsComponent
+ * @version 1.0
+ */
 public class Lizard extends RpslsComponent {
 
 	@Override

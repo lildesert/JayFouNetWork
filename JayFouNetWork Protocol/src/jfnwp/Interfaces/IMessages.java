@@ -3,7 +3,7 @@ package jfnwp.Interfaces;
 import jfnwp.Implementation.Message;
 
 public interface IMessages {
-
+	
 	void Connect(String name, String ip);
 	void Start(String name);
 	void End();

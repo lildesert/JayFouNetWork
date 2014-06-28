@@ -1,8 +1,13 @@
 package jfnwp.Moves;
 
+import jfnwp.Chess.Piece;
 import jfnwp.Chess.Position;
 import jfnwp.Implementation.Move;
 
+/**
+ * @see Move
+ * @version 1.0
+ */
 public class ChessMove extends Move{
 
 	private Position from;

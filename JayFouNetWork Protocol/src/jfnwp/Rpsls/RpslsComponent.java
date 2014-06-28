@@ -1,5 +1,8 @@
 package jfnwp.Rpsls;
 
+/**
+ * @version 1.0
+ */
 public abstract class RpslsComponent implements Comparable<RpslsComponent> {
 
 	@Override

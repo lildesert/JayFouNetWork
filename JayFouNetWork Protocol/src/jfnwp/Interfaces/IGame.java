@@ -13,7 +13,6 @@ import jfnwp.Services.MessageService;
 public interface IGame {
 
 	public void applyMove(IMove m) throws MoveException;
-	//Cette méthode n'est pas dans la classe abstraite Game ???
 	public boolean isOver();
 	public boolean isGameFull();
 	public void gameOver(String ip);

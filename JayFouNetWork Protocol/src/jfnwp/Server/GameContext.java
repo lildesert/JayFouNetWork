@@ -4,6 +4,9 @@ import jfnwp.Exception.MoveException;
 import jfnwp.Interfaces.IGame;
 import jfnwp.Interfaces.IMove;
 
+/**
+ * @version 1.0
+ */
 public class GameContext {
 
     private IGame game;

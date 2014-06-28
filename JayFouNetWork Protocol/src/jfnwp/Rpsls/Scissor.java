@@ -1,5 +1,9 @@
 package jfnwp.Rpsls;
 
+/**
+ * @see RpslsComponent
+ * @version 1.0
+ */
 public class Scissor extends RpslsComponent{
 
 	@Override

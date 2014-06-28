@@ -5,6 +5,11 @@ import org.apache.logging.log4j.Logger;
 
 import jfnwp.Interfaces.IPosition;
 
+/**
+ * A position on a game board. 
+ * A space on the board is represented by an x and an y
+ * @version 1.0
+ */
 public class Position implements IPosition{
 	
 	private static Logger logger = LogManager.getLogger(Position.class
@@ -18,6 +23,11 @@ public class Position implements IPosition{
 		this.y = 0;
 	}
 	
+	/**
+	 * Build a position from a string. 
+	 * @param String who should be as : x,y
+	 * @version 1.0
+	 */
 	public Position(String sPosition){
 		logger.info("constructeur Position " +sPosition);
 		String[] splitString = sPosition.split(",", 20);
@@ -46,6 +56,10 @@ public class Position implements IPosition{
 		this.y = y;
 	}
 	
+	/**
+	 * Build the string code from a position
+	 * @version 1.0
+	 */
 	public String toString(){		
 		return  x + "," + y;
 	}
