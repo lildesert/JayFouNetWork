@@ -21,7 +21,7 @@ import org.apache.logging.log4j.LogManager;
  */
 public class RefereeServer extends Thread {
 
-	public static final int port = 9890;
+	public static int port;
 	private static final int maxThread = 8;
 	private Socket s;
 	private GameContext gc;
@@ -34,6 +34,14 @@ public class RefereeServer extends Thread {
 	}
 
 	public static void main(String args[]) throws Exception {
+		
+		try {
+			port = Integer.parseInt(args[0]);
+		} catch (Exception e) {
+			logger.info("Argument Error " + e.getMessage());
+			port = 9890;
+		}
+		
 		ExecutorService executorService = Executors
 				.newFixedThreadPool(maxThread);
 		ServerSocket ssock = new ServerSocket(port);

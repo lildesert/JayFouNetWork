@@ -7,11 +7,15 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -21,9 +25,12 @@ import jfnwp.Services.MessageService;
 
 public class ClientStart extends JFrame {
 
-	private static final String ip = "192.168.0.28";
-	private static final String serverIp = "localhost";
-	private static final int serverPort = 9890;
+	private static String ip;
+	private static String serverIp;
+	private static int serverPort;
+	
+	private static Logger logger = LogManager.getLogger(ClientStart.class
+			.getName());
 
 	private JPanel cardPanel;
 	private Home h;
@@ -37,6 +44,18 @@ public class ClientStart extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
+		try {
+			ip = InetAddress.getLocalHost().toString();
+			serverIp = args[0];
+			serverPort = Integer.parseInt(args[1]);
+		} catch (Exception e) {
+			logger.info("Argument Error " + e.getMessage());
+			ip = "192.168.0.1";
+			serverIp = "localhost";
+			serverPort = 9890;
+		}
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
