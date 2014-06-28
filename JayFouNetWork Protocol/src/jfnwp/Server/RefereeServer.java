@@ -19,7 +19,7 @@ import org.apache.logging.log4j.LogManager;
 public class RefereeServer extends Thread {
 
 	public static int port;
-	private static final int maxThread = 8;
+	private static final int maxThread = 30;
 	private Socket s;
 	private GameContext gc;
 	private Player p;
