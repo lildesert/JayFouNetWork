@@ -178,6 +178,13 @@ public class ChessClient extends Client {
 					{
 						displayMessage("You loose !");
 					}
+					else if(i.getResult().equals("mat"))
+					{
+						ChessMove mv = new ChessMove();
+						mv.deserialize(i.getResult());
+						inter.testDeplacementValid(mv.getFrom(), mv.getTo());
+						displayMessage("You are mat !");
+					}
 					else if(i.getResult().length() != 0)
 					{
 						ChessMove mv = new ChessMove();

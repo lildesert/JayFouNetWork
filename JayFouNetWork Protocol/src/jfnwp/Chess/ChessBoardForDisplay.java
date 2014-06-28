@@ -102,8 +102,8 @@ public class ChessBoardForDisplay extends Chess{
         if(this.mayBeTaken(positionRoi)){
         	layerPane.removeAll();
             this.displayPieces(layerPane);
-            layerPane.add(this.cadreEchec);
-            this.cadreEchec.setLocation(35 + positionRoi.getX() * 66, 35 + positionRoi.getY() * 66);
+            layerPane.add(getImage("ressources/echec.png"));
+            getImage("ressources/echec.png").setLocation(35 + positionRoi.getX() * 66, 35 + positionRoi.getY() * 66);
             this.displayBackground(layerPane);
             return true;
         }
