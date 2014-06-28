@@ -29,6 +29,9 @@ public class Tower extends ChessPiece {
 		if(mv.noMove())
 			return false;
 		
+		if(from.getX() != to.getX() && from.getY() != to.getY())
+			return false;
+		
         if(!board.noPiece(to) && board.samePlayer(from, to))
             return false;
         
