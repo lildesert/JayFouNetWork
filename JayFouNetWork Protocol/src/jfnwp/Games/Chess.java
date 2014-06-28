@@ -44,11 +44,11 @@ public class Chess extends Game {
 		MessageService m = new MessageService(p.getSock());
 		if(super.playerList.size() == 1)
 		{
-			m.Info("white");
+			m.Info("black");
 		}
 		else
 		{
-			m.Info("black");
+			m.Info("white");
 		}
 	}
 	
@@ -70,11 +70,12 @@ public class Chess extends Game {
 			
 			Position from = mo.getFrom();
 			Position to = mo.getTo();
-			Piece p = board[from.getX()][from.getY()];
-			board[from.getX()][from.getY()] = null;
-			board[to.getX()][to.getY()] = p;
+			Piece p = board[from.getY()][from.getX()];
+			board[from.getY()][from.getX()] = null;
+			board[to.getY()][to.getX()] = p;
 		} else {
 			sendError("Incorrect move", mo.getPlayerIp());
+			askMove(mo.getPlayerIp());
 		}
 	}
 

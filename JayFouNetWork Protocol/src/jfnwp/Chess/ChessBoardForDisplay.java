@@ -19,13 +19,13 @@ import jfnwp.Moves.ChessMove;
 public class ChessBoardForDisplay extends Chess{
 	
 	private JLabel cadre;
-	private JLabel fond = getImage("ressources/chessboard.jpg");
+	private JLabel fond;
 	private JLabel cadreEchec;
 	
 	public ChessBoardForDisplay() {
 		this.cadreEchec = getImage("ressources/echec.png");
         this.cadre = getImage("ressources/selection.png");
-        //this.fond = getImage("ressources/chessboard.jpg");
+        this.fond = getImage("ressources/chessboard.jpg");
 	}
 	
 	/**

@@ -11,7 +11,6 @@ public abstract class ChessPiece extends Piece {
 		super(color);
 	}
 	
-	//Ou est l'implémentation de cette méthode ??? (Fait tout péter)
 	public abstract Boolean checkMove(ChessMove mv, Chess board);
 	
 	public String toString() {
