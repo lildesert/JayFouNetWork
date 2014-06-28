@@ -16,7 +16,7 @@ public interface IGame {
 	//Cette méthode n'est pas dans la classe abstraite Game ???
 	public boolean isOver();
 	public boolean isGameFull();
-	public void gameOver();
+	public void gameOver(String ip);
 	public void getWinner();
 	public Player getWinnerPlayer();
 	void addPlayerList(Player p) throws GameFullException;

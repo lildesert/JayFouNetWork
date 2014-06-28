@@ -7,7 +7,16 @@ public class ObservableData {
 	private String msgId;
 	private String chatData;
 	private String gameInfo;
+	private String endGame;
 	
+	public String getEndGame() {
+		return endGame;
+	}
+
+	public void setEndGame(String endGame) {
+		this.endGame = endGame;
+	}
+
 	public String getGameInfo() {
 		return gameInfo;
 	}

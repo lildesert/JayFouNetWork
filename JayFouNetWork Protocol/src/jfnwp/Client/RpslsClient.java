@@ -1,6 +1,7 @@
 package jfnwp.Client;
 
 import java.awt.Font;
+import java.io.IOException;
 import java.net.Socket;
 
 import javax.swing.AbstractListModel;
@@ -63,6 +64,14 @@ public class RpslsClient extends Client {
 		JButton btnQuit = new JButton("Quit");
 		btnQuit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				MessageService m = new MessageService(sock);
+				m.End();
+				try {
+					sock.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				System.exit(0);
 			}
 		});
@@ -73,11 +82,9 @@ public class RpslsClient extends Client {
 			public void actionPerformed(ActionEvent arg0) {
 				if (rights.equals("12")) {
 					displayMessage("You can't make a move now");
-				}
-				else if (rights.equals("14")) {
+				} else if (rights.equals("14")) {
 					displayMessage("Your game is crashed, please start a new one");
-				} 
-				else if (rights.equals("04")) {
+				} else if (rights.equals("04")) {
 					if (listMove.getSelectedValue() == null) {
 						displayMessage("No move selected");
 					} else {
@@ -104,11 +111,29 @@ public class RpslsClient extends Client {
 				logger.info("update rights ok");
 			}
 		});
-		
+
 		is.addObserver(new Observer() {
 			public void update(ObservableData i) {
 				chat = i.getChatData();
 				logger.info("update chat ok " + chat);
+			}
+		});
+
+		is.addObserver(new Observer() {
+			public void update(ObservableData i) {
+				if (i.getEndGame() != null) {
+					if (i.getEndGame().equals("quit")) {
+						displayMessage("Your opponent quit");
+						try {
+							sock.close();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						System.exit(0);
+					}
+				}
+				logger.info("game not over");
 			}
 		});
 
@@ -128,8 +153,7 @@ public class RpslsClient extends Client {
 						lblScoreOpponent.setText(Integer.toString(score));
 						displayMessage("You loose !");
 						i.setResult("");
-					}
-					else if (i.getResult().equals("tie")) {
+					} else if (i.getResult().equals("tie")) {
 						logger.info("update results tie");
 						displayMessage("It's a tie game !");
 						i.setResult("");
@@ -188,22 +212,22 @@ public class RpslsClient extends Client {
 		lblScoreOpponent.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblScoreOpponent.setBounds(150, 139, 59, 50);
 		frame.getContentPane().add(lblScoreOpponent);
-		
+
 		JButton btOpenChat = new JButton("Open Chat");
 		btOpenChat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
 				MessageService m = new MessageService(sock);
-				
-				while(chat == null)
-				{
+
+				while (chat == null) {
 					m.GetAdress();
 					logger.info("Message 9 non reçu");
 				}
-				
+
 				logger.info("Message 9 reçu");
 				String[] tab = chat.split(";");
-				ClientChat cc = new ClientChat(name, tab[0], Integer.parseInt(tab[1]));
+				ClientChat cc = new ClientChat(name, tab[0], Integer
+						.parseInt(tab[1]));
 				chat = null;
 			}
 		});

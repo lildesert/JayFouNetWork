@@ -1,8 +1,5 @@
 package jfnwp.Chat;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -15,10 +12,11 @@ import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.UnknownHostException;
 
+import javax.swing.JScrollBar;
 import javax.swing.SwingConstants;
-import javax.swing.JEditorPane;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 import java.awt.event.ActionListener;
@@ -27,18 +25,22 @@ import java.awt.event.ActionEvent;
 import jfnwp.Client.Interfaces.Observer;
 import jfnwp.Implementation.ObservableData;
 
+import javax.swing.JTextPane;
+import javax.swing.JScrollPane;
+
 public class ClientChat {
 
 	private JFrame frame;
 	private JPanel contentPane;
 	private JTextField tbMess;
-	private JEditorPane epChat;
 	private InetAddress group;
 	private MulticastSocket s;
 	private String hostname;
 	private int port;
 	private Recevoir r;
 	private String name;
+	private JTextPane epChat;
+	private JScrollPane mOutputScroll;
 
 	/**
 	 * Create the frame.
@@ -63,11 +65,6 @@ public class ClientChat {
 		lblChatroom.setBounds(10, 11, 424, 22);
 		contentPane.add(lblChatroom);
 
-		epChat = new JEditorPane();
-		epChat.setEditable(false);
-		epChat.setBounds(47, 44, 357, 161);
-		contentPane.add(epChat);
-
 		JButton btSend = new JButton("Send");
 		btSend.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -84,11 +81,24 @@ public class ClientChat {
 		contentPane.add(tbMess);
 		tbMess.setColumns(10);
 		
+		mOutputScroll = new JScrollPane();
+		mOutputScroll.setBounds(57, 62, 324, 135);
+		mOutputScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		contentPane.add(mOutputScroll);
+		
+		epChat = new JTextPane();
+		mOutputScroll.setViewportView(epChat);
+		
 		r.addObserver(new Observer() {
 			public void update(ObservableData i) {
 				String s = epChat.getText();
 				s += i.getInfo() +"\n";
 				epChat.setText(s);
+				boolean scroll = isViewAtBottom();
+				if (scroll)
+				{
+			        scrollToBottom();
+				}
 			}
 		});
 
@@ -132,5 +142,26 @@ public class ClientChat {
 		};
 		
 		sw.execute();
+	}
+	
+	private boolean isViewAtBottom()
+	{
+	    JScrollBar sb = mOutputScroll.getVerticalScrollBar();
+	    int min = sb.getValue() + sb.getVisibleAmount();
+	    int max = sb.getMaximum();
+	    System.out.println(min + " " + max);
+	    return min == max;
+	}
+
+	private void scrollToBottom()
+	{
+	    SwingUtilities.invokeLater(
+	        new Runnable()
+	        {
+	            public void run()
+	            {
+	                mOutputScroll.getVerticalScrollBar().setValue(mOutputScroll.getVerticalScrollBar().getMaximum());
+	            }
+	        });
 	}
 }

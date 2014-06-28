@@ -110,6 +110,7 @@ public class RefereeServer extends Thread {
 				break;
 
 			case 3:
+				Info.Instance.deleteGame(gc, p.getAddress());
 				break;
 
 			case 4:

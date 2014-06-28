@@ -69,12 +69,6 @@ public class Rpsls extends Game {
 	}
 
 	@Override
-	public void gameOver() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void getWinner() {
 		// TODO Auto-generated method stub
 

@@ -24,7 +24,14 @@ public abstract class Game implements IGame {
 
 	public abstract void applyMove(IMove m) throws MoveException;
 
-	public abstract void gameOver();
+	public void gameOver(String ip)
+	{
+		String ipOpponent = getNextPlayerToMoveIp(ip);
+		logger.info("gameOver call " + ipOpponent);
+		Socket s = getPlayerById(ipOpponent).getSock();
+		MessageService m = new MessageService(s);
+		m.End();
+	}
 
 	public abstract void getWinner();
 

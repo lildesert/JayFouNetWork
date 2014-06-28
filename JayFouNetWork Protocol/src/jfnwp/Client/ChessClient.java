@@ -3,6 +3,7 @@ package jfnwp.Client;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.net.Socket;
 
 import javax.swing.BorderFactory;
@@ -72,6 +73,14 @@ public class ChessClient extends Client {
 		quit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				MessageService m = new MessageService(sock);
+				m.End();
+				try {
+					sock.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				System.exit(0);
 			}
 		});
@@ -126,6 +135,24 @@ public class ChessClient extends Client {
 			public void update(ObservableData i) {
 				chatInfo = i.getChatData();
 				logger.info("update chat ok");
+			}
+		});
+		
+		cl.addObserver(new Observer() {
+			public void update(ObservableData i) {
+				if (i.getEndGame() != null) {
+					if (i.getEndGame().equals("quit")) {
+						displayMessage("Your opponent quit");
+						try {
+							sock.close();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						System.exit(0);
+					}
+				}
+				logger.info("game not over");
 			}
 		});
 

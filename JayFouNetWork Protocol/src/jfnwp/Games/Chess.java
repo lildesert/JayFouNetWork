@@ -286,6 +286,7 @@ public class Chess extends Game {
                 if (board[i][j] != null) {
                     ChessPiece pTmp = (ChessPiece) board[i][j];
                     ChessMove mv = new ChessMove(new Position(j, i), p);
+                    //Erreur ici NullPointerException
                     if (!pTmp.getColor().equals(piece.getColor()) && pTmp.checkMove(mv, this))
                         return true;
                 }
@@ -338,12 +339,6 @@ public class Chess extends Game {
 	public Boolean emptySquare(Position position) {
         return this.board[position.getY()][position.getX()] == null;
     }
-
-	@Override
-	public void gameOver() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void getWinner() {

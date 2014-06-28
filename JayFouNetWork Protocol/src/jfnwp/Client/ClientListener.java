@@ -37,12 +37,17 @@ public class ClientListener implements Observable {
 			}
 			switch (mess.getId()) {
 
+			case 3:
+				logger.info("msg end game reçu");
+				infoRpsls.setEndGame("quit");
+				updateObserver();
+				break;
+			
 			case 4:
 				logger.info("Message move reçu");
 				infoRpsls.setMsgId("04");
 				infoRpsls.setInfo("It's your turn ! Please make a move.");
 				updateObserver();
-				logger.info("fin switch 4");
 				break;
 
 			case 5:

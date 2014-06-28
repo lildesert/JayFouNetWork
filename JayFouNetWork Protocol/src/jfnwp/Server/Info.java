@@ -55,4 +55,16 @@ public class Info {
 	{
 		return port++;
 	}
+	
+	public synchronized void deleteGame(GameContext gc, String ip)
+	{
+		for(int i = 0; i < gameList.size(); i++)
+		{
+			if(gameList.get(i) == gc)
+			{
+				gameList.get(i).getGame().gameOver(ip);
+				gameList.remove(i);
+			}
+		}
+	}
 }

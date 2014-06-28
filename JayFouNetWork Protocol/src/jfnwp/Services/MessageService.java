@@ -31,8 +31,8 @@ public class MessageService implements IMessages {
 
 	@Override
 	public void End() {
-		// TODO Auto-generated method stub
-
+		Message m = new Message(3);
+		NetworkService.SendMessage(s, m);
 	}
 
 	@Override
