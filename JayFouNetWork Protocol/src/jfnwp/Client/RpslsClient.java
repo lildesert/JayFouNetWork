@@ -61,6 +61,11 @@ public class RpslsClient extends Client {
 		lblRockPaperScissor.setFont(new Font("Tahoma", Font.BOLD, 20));
 
 		JButton btnQuit = new JButton("Quit");
+		btnQuit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
 		btnQuit.setBounds(341, 277, 89, 23);
 
 		JButton btnSendMove = new JButton("Send Move");

@@ -173,10 +173,12 @@ public class ChessClient extends Client {
 					if(i.getResult().equals("win"))
 					{
 						displayMessage("You win !");
+						System.exit(0);
 					}
 					else if(i.getResult().equals("loose"))
 					{
 						displayMessage("You loose !");
+						System.exit(0);
 					}
 					else if(i.getResult().length() != 0)
 					{
