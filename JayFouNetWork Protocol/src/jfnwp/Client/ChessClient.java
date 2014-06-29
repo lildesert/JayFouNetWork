@@ -200,11 +200,27 @@ public class ChessClient extends Client {
 					if(i.getResult().equals("win"))
 					{
 						displayMessage("You win !");
+						MessageService m = new MessageService(sock);
+						m.End();
+						try {
+							sock.close();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						System.exit(0);
 					}
 					else if(i.getResult().equals("loose"))
 					{
 						displayMessage("You loose !");
+						MessageService m = new MessageService(sock);
+						m.End();
+						try {
+							sock.close();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						System.exit(0);
 					}
 					else if(i.getResult().length() != 0)
