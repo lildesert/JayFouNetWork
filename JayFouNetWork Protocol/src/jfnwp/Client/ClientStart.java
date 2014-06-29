@@ -23,6 +23,10 @@ import jfnwp.Implementation.Message;
 import jfnwp.Server.RefereeServer;
 import jfnwp.Services.MessageService;
 
+/**
+ * Main class of the client program. 
+ * @version 1.0
+ */
 public class ClientStart extends JFrame {
 
 	private static String ip;
@@ -42,6 +46,8 @@ public class ClientStart extends JFrame {
 
 	/**
 	 * Launch the application.
+	 * @param args or default configuration
+	 * @version 1.0
 	 */
 	public static void main(String[] args) {
 		
@@ -70,6 +76,7 @@ public class ClientStart extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @version 1.0
 	 */
 	public ClientStart() {
 		cardPanel = new JPanel();
@@ -132,19 +139,14 @@ public class ClientStart extends JFrame {
 					} catch (IllegalAccessException e) {
 						e.printStackTrace();
 					} catch (IllegalArgumentException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (SecurityException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (InstantiationException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (InvocationTargetException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (NoSuchMethodException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}

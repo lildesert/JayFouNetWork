@@ -16,6 +16,9 @@ public abstract class ChessPiece extends Piece {
 		super(color);
 	}
 	
+	/**
+	 * Check if a movement is valid
+	 */
 	public abstract Boolean checkMove(ChessMove mv, Chess board);
 	
 	/**

@@ -2,6 +2,10 @@ package jfnwp.Interfaces;
 
 import jfnwp.Implementation.Message;
 
+/**
+ * Interface IMessages
+ * @version 1.0
+ */
 public interface IMessages {
 	
 	//Message Id = 1

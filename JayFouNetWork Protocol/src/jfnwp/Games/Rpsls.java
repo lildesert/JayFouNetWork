@@ -20,7 +20,13 @@ public class Rpsls extends Game {
 	public Rpsls() {
 		nbMaxPlayer = 2;
 	}
-
+	
+	/**
+	 * Main function.
+	 * Apply a move.
+	 * @param Imove m
+	 * @version 1.0
+	 */
 	@Override
 	public void applyMove(IMove m) {
 		logger.info("apply move of Rpsls");

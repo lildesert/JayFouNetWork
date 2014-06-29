@@ -28,6 +28,10 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * The GUI of Rpsls game
+ * @version 1.0
+ */
 public class RpslsClient extends Client {
 
 	private JFrame frame;
@@ -49,6 +53,7 @@ public class RpslsClient extends Client {
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @version 1.0
 	 */
 	private void initialize() {
 		frame = new JFrame();

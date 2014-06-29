@@ -6,6 +6,10 @@ import java.util.List;
 import jfnwp.Implementation.Player;
 import jfnwp.Interfaces.IGame;
 
+/**
+ * Information about a game
+ * @version 1.0
+ */
 public class Info {
 
 	private List<GameContext> gameList = new ArrayList<GameContext>();

@@ -9,6 +9,10 @@ import jfnwp.Client.Interfaces.Observable;
 import jfnwp.Client.Interfaces.Observer;
 import jfnwp.Implementation.ObservableData;
 
+/**
+ * Is responsible for receiving messages and 
+ * alert the GUI
+ */
 public class Recevoir implements Runnable, Observable {
 	
 	private String hostname;
@@ -22,6 +26,10 @@ public class Recevoir implements Runnable, Observable {
 		port = p;
 	}
 	
+	/**
+	 * Begin receiving messages
+     * @version 1.0
+     */
     public void run() {
         try
         {
@@ -41,15 +49,27 @@ public class Recevoir implements Runnable, Observable {
             e.printStackTrace();
         }
     }
-
+    
+    /**
+     * Add an observer
+     * @version 1.0
+     */
     public void addObserver(Observer obs) {
 		this.listObserver.add(obs);
 	}
-
+    
+    /**
+     * Remove an observer
+     * @version 1.0
+     */
 	public void delObserver() {
 		this.listObserver = new ArrayList<Observer>();
 	}
-
+	
+	/**
+	 * Prevent observers
+     * @version 1.0
+     */
 	public void updateObserver() {
 		for (Observer obs : this.listObserver) {
 			obs.update(data);

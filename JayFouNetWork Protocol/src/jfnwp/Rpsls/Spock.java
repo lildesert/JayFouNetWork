@@ -5,7 +5,11 @@ package jfnwp.Rpsls;
  * @version 1.0
  */
 public class Spock extends RpslsComponent {
-
+	
+	/**
+	 * Get the winner
+	 * @param RpslsComponent
+	 */
 	@Override
 	public int compareTo(RpslsComponent o) {
 			switch (o.getClass().getSimpleName()) {

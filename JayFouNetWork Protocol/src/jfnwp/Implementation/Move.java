@@ -2,6 +2,9 @@ package jfnwp.Implementation;
 
 import jfnwp.Interfaces.IMove;
 
+/**
+ * @version 1.0
+ */
 public abstract class Move implements IMove {
 
 	protected String playerIp;

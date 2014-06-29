@@ -2,6 +2,10 @@ package jfnwp.Implementation;
 
 import java.net.Socket;
 
+/**
+ * The representation of a player. 
+ * @version 1.0
+ */
 public class Player {
 	private String nickname;
 	private String ipAddress;

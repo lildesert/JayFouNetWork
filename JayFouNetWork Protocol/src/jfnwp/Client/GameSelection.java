@@ -9,6 +9,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JList;
 
+/**
+ * This class enable player to select a game 
+ * @version 1.0
+ */
 public class GameSelection extends JPanel {
 
 	private JList gameList;
@@ -17,6 +21,7 @@ public class GameSelection extends JPanel {
 	
 	/**
 	 * Create the panel.
+	 * @version 1.0
 	 */
 	public GameSelection() {
 		setLayout(null);

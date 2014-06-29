@@ -18,6 +18,10 @@ public class King extends ChessPiece {
 		firstMouv = true;
 	}
 	
+	/**
+	 * Check if a movement is valid
+	 * @version 1.0
+	 */
 	@Override
 	public Boolean checkMove(ChessMove mv, Chess board) {
 		

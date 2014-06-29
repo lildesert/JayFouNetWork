@@ -2,6 +2,11 @@ package jfnwp.Client;
 
 import java.net.Socket;
 
+/**
+ * A generic client. 
+ * New client must inherit from this class. 
+ * @version 1.0
+ */
 public class Client {
 
 	protected Socket sock;
