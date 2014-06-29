@@ -6,6 +6,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * Window where the player enters the authentication information. 
+ * @version 1.0
+ */
 public class Home extends JPanel {
 
 	private JTextField tbName;
@@ -13,6 +17,7 @@ public class Home extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @version 1.0
 	 */
 	public Home() {
 		setLayout(null);

@@ -4,6 +4,13 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Represent a message 
+ * 	--> ID
+ *  --> Content
+ * @see RFC
+ * @version 1.0
+ */
 public class Message implements Serializable {
 
 	private int id;
@@ -35,6 +42,11 @@ public class Message implements Serializable {
 		return messageMap.get(id) +"\n" +"Data : "+data;
 	}
 	
+	/**
+	 * IP and type of message
+	 * @see RFC
+	 * @version 1.0
+	 */
 	Map<Integer, String> messageMap = new HashMap<Integer, String>()
 	{
 		{

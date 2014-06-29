@@ -24,7 +24,11 @@ public class Pawn extends ChessPiece {
             this.startingLine = 1;
         }
 	}
-
+	
+	/**
+	 * Check if a movement is valid
+	 * @version 1.0
+	 */
 	public Boolean checkMove(ChessMove mv, Chess board) {
 		
 		Position from = mv.getFrom();

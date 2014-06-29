@@ -1,5 +1,9 @@
 package jfnwp.Implementation;
 
+/**
+ * 
+ * @version 1.0
+ */
 public class ObservableData {
 
 	private String info;

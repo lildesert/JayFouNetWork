@@ -20,7 +20,7 @@ import jfnwp.Services.MessageService;
 /**
  * To listen the mouse's events for the Chess client
  * 
- * @see ChessClient2
+ * @see Chess
  * @version 1.0
  */
 public class UserInteractions implements java.awt.event.MouseListener {
@@ -58,6 +58,11 @@ public class UserInteractions implements java.awt.event.MouseListener {
 		this.layerPane = layerPane;
 	}
 	
+	/**
+	 * Test if a movement is valid
+	 * @param start
+	 * @param end
+	 */
 	public void testDeplacementValid(Position start, Position end) {
 		logger.info("testDeplacement call "+tour);
 		ChessPiece piece = (ChessPiece) chessBoard.getPiece(start);	
@@ -92,7 +97,11 @@ public class UserInteractions implements java.awt.event.MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 	}
-
+	
+	/**
+	 * When the mouse is pressed, displays the possible movements
+	 * or perform the movement
+	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
 		logger.info("mousePressed call "+tour);

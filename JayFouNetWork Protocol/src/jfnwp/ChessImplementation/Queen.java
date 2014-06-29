@@ -14,7 +14,11 @@ public class Queen extends ChessPiece {
 	public Queen(Color color) {
 		super(color);
 	}
-
+	
+	/**
+	 * Check if a movement is valid
+	 * @version 1.0
+	 */
 	@Override
 	public Boolean checkMove(ChessMove mv, Chess board) {
 		

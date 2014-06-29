@@ -20,7 +20,11 @@ public class Tower extends ChessPiece {
 		super(color);
 		firstMouv = true;
 	}
-
+	
+	/**
+	 * Check if a movement is valid
+	 * @version 1.0
+	 */
 	public Boolean checkMove(ChessMove mv, Chess board) {
         
 		Position from = mv.getFrom();

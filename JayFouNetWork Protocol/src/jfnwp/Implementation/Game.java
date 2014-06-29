@@ -13,8 +13,14 @@ import jfnwp.Interfaces.IGame;
 import jfnwp.Interfaces.IMove;
 import jfnwp.Services.MessageService;
 
+/**
+ * Implementation of IGame
+ * Manage common function in all games
+ * @version 1.0
+ */
 public abstract class Game implements IGame {
 
+	// Log all the events
 	private static Logger logger = LogManager.getLogger(Game.class.getName());
 
 	protected int nbMaxPlayer;
@@ -23,7 +29,12 @@ public abstract class Game implements IGame {
 	protected List<Player> playerList = new ArrayList<Player>();
 
 	public abstract void applyMove(IMove m) throws MoveException;
-
+	
+	/**
+	 * Stop a game
+	 * @param String ip
+	 * @version 1.0
+	 */
 	public void gameOver(String ip)
 	{
 		String ipOpponent = getNextPlayerToMoveIp(ip);
@@ -36,7 +47,11 @@ public abstract class Game implements IGame {
 	public abstract void getWinner();
 
 	public abstract Player getWinnerPlayer();
-
+	
+	/**
+	 * Check if a game is full 
+	 * @version 1.0
+	 */
 	public boolean isGameFull() {
 		boolean resp = false;
 		if (playerList.size() >= nbMaxPlayer) {
@@ -50,6 +65,11 @@ public abstract class Game implements IGame {
 		return playerList;
 	}
 
+	/**
+	 * Add a player in the game
+	 * @version 1.0
+	 * @param Player p
+	 */
 	public void addPlayerList(Player p) throws GameFullException {
 		if (playerList.size() < nbMaxPlayer) {
 			playerList.add(p);
@@ -58,7 +78,13 @@ public abstract class Game implements IGame {
 					"Game is full, can't add another player");
 		}
 	}
-
+	
+	/** 
+	 * Get the player with the ip given in parameter
+	 * @version 1.0
+	 * @param String IP
+	 * @return String of the player
+	 */
 	public String getNextPlayerToMoveIp(String ip) {
 		String nextIp = "";
 		boolean find = false;
@@ -73,7 +99,12 @@ public abstract class Game implements IGame {
 		logger.info("getNextPlayerOk");
 		return nextIp;
 	}
-
+	
+	/**
+	 * Ask to the players in waiting list to wait for others players
+	 * @param String IP
+	 * @version 1.0
+	 */
 	public void sendWait(String ip) {
 		logger.info("sendWait call " + ip);
 		Socket s = getPlayerById(ip).getSock();
@@ -81,6 +112,12 @@ public abstract class Game implements IGame {
 		m.Wait("Wait for your turn please");
 	}
 	
+	/**
+	 * Warn player of an error
+	 * @version 1.0
+	 * @param String txt : error
+	 * @param String ip 
+	 */
 	public void sendError(String txt, String ip)
 	{
 		logger.info("sendError call " + ip);
@@ -88,20 +125,35 @@ public abstract class Game implements IGame {
 		MessageService m = new MessageService(s);
 		m.Error(txt);
 	}
-
+	
+	/**
+	 * Send the result
+	 * @version 1.0
+	 * @param String result
+	 * @param String ip 
+	 */
 	public void sendResult(String result, String ip) {
 		logger.info("send move result call");
 		Socket s = getPlayerById(ip).getSock();
 		MessageService m = new MessageService(s);
 		m.Result(result);
 	}
-
+	
+	/**
+	 * Ask a move to the player with the given ip
+	 * @version 1.0
+	 * @param String ip 
+	 */
 	public void askMove(String ip) {
 		Socket s = getPlayerById(ip).getSock();
 		MessageService m = new MessageService(s);
 		m.Move();
 	}
-
+	
+	/**
+	 * @version 1.0
+	 * @param String ip 
+	 */
 	public Player getPlayerById(String ip) {
 		Player p = null;
 		int i = 0;

@@ -7,6 +7,11 @@ import jfnwp.Interfaces.IMove;
 import jfnwp.Implementation.EnumGame;
 import jfnwp.Implementation.Message;
 
+/**
+ * Class used to encapsulate the messages to be send
+ * and create a new message object for the content that is received
+ * @version 1.0
+ */
 public class MessageService implements IMessages {
 
 	private Socket s;

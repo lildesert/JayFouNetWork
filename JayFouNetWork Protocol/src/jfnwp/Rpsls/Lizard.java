@@ -7,7 +7,11 @@ import jfnwp.Implementation.Move;
  * @version 1.0
  */
 public class Lizard extends RpslsComponent {
-
+	
+	/**
+	 * Get the winner
+	 * @param RpslsComponent
+	 */
 	@Override
 	public int compareTo(RpslsComponent o) {
 			switch (o.getClass().getSimpleName()) {

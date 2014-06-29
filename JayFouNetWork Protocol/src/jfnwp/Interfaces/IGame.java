@@ -8,7 +8,7 @@ import jfnwp.Services.MessageService;
 
 /**
  * Interface IGame.
- * @version 0.1
+ * @version 1.0
  */
 public interface IGame {
 

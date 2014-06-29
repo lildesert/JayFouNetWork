@@ -99,6 +99,10 @@ public class ClientChat {
 		epChat = new JTextPane();
 		mOutputScroll.setViewportView(epChat);
 		
+		/*
+		 * A an observer to update the GUI when the program
+		 * is receiving a new message
+		 */
 		r.addObserver(new Observer() {
 			public void update(ObservableData i) {
 				String s = epChat.getText();
@@ -112,10 +116,14 @@ public class ClientChat {
 			}
 		});
 
-		
 		frame.setVisible(true);
 	}
-
+	
+	/**
+	 * Send a message to the opponent
+	 * @param msg
+	 * @version 1.0
+	 */
 	private void sendMessage(String msg) {
 		DatagramPacket dp = new DatagramPacket(msg.getBytes(), msg.length(),
 				group, port);
@@ -125,7 +133,11 @@ public class ClientChat {
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * Add a player to the chat
+	 * @version 1.0
+	 */
 	private void joinChat() {
 		try {
 			group = InetAddress.getByName(hostname);
@@ -151,6 +163,10 @@ public class ClientChat {
 		sw.execute();
 	}
 	
+	/**
+	 * @version 1.0
+	 * @return boolean
+	 */
 	private boolean isViewAtBottom()
 	{
 	    JScrollBar sb = mOutputScroll.getVerticalScrollBar();
@@ -159,7 +175,10 @@ public class ClientChat {
 	    System.out.println(min + " " + max);
 	    return min == max;
 	}
-
+	
+	/**
+	 * @version 1.0
+	 */
 	private void scrollToBottom()
 	{
 	    SwingUtilities.invokeLater(

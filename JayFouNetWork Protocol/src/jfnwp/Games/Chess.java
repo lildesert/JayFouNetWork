@@ -38,6 +38,10 @@ public class Chess extends Game {
 		resetBoard();
 	}
 	
+	/**
+	 * Add a player in the waiting list (see nbMaxPlayer)
+	 * @param Player
+	 */
 	public void addPlayerList(Player p) throws GameFullException {
 		super.addPlayerList(p);
 		MessageService m = new MessageService(p.getSock());
@@ -93,7 +97,12 @@ public class Chess extends Game {
 			askMove(mo.getPlayerIp());
 		}
 	}
-
+	
+	/**
+	 * Check if a move is correct
+	 * @param IMove m
+	 * @return Bolean 
+	 */
 	public boolean checkMove(IMove m) {
 		ChessMove mo = (ChessMove) m;
 		ChessPiece p = (ChessPiece) getPiece(mo.getFrom());
@@ -336,6 +345,12 @@ public class Chess extends Game {
         return false;
 	}
 	
+	/**
+	 * Check if a Square is empty (no piece)
+	 * @param position
+	 * @return Boolean
+	 * @version 1.0
+	 */
 	public Boolean emptySquare(Position position) {
         return this.board[position.getY()][position.getX()] == null;
     }

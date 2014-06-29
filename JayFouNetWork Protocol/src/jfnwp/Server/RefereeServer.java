@@ -17,6 +17,7 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
 /**
+ * The main class of the server.
  * @version 1.0
  */
 public class RefereeServer extends Thread {
@@ -33,6 +34,13 @@ public class RefereeServer extends Thread {
 		this.s = sock;
 	}
 
+	/**
+	 * Start the main component of the server.
+	 * Waiting for new players
+	 * @param args
+	 * @throws Exception
+	 * @version 1.0
+	 */
 	public static void main(String args[]) throws Exception {
 		
 		try {
@@ -54,10 +62,15 @@ public class RefereeServer extends Thread {
 		}
 	}
 
+	/**
+	 * Start a new referee server
+	 * @version 1.0
+	 */
 	public void run() {
 		MessageService m = new MessageService(s);
 		Message mess = new Message();
-
+		
+		// Catch different types of messages
 		while (true) {
 			while (mess == null) {
 				mess = m.ReadMessage();

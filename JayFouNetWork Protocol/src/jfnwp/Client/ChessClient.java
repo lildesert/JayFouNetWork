@@ -31,10 +31,14 @@ import jfnwp.Services.MessageService;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * The GUI of chess game
+ * @version 1.0
+ */
 public class ChessClient extends Client {
-
-	private static Logger logger = LogManager.getLogger(ChessClient.class
-			.getName());
+	
+	//Used to record all actions 
+	private static Logger logger = LogManager.getLogger(ChessClient.class.getName());
 
 	protected static JLayeredPane layeredPane = new JLayeredPane();
 	protected static JButton score = new JButton("Score");
@@ -59,7 +63,11 @@ public class ChessClient extends Client {
 		super(s, n);
 		start();
 	}
-
+	
+	/**
+	 * Start the game
+	 * @version 1.0
+	 */
 	public void start() {
 
 		player = super.name;
@@ -205,7 +213,6 @@ public class ChessClient extends Client {
 						try {
 							sock.close();
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 						System.exit(0);
@@ -218,7 +225,6 @@ public class ChessClient extends Client {
 						try {
 							sock.close();
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 						System.exit(0);

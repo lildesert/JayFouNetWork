@@ -12,10 +12,14 @@ import jfnwp.Implementation.ObservableData;
 import jfnwp.Implementation.Message;
 import jfnwp.Services.MessageService;
 
+/**
+ * Observer pattern to alert clients of new messages
+ * @version 1.0
+ */
 public class ClientListener implements Observable {
-
-	private static Logger logger = LogManager.getLogger(ClientListener.class
-			.getName());
+	
+	// Log all the events
+	private static Logger logger = LogManager.getLogger(ClientListener.class.getName());
 	private Socket sock;
 	private ObservableData infoRpsls = new ObservableData();
 	private ArrayList<Observer> listObserver = new ArrayList<Observer>();
@@ -24,6 +28,11 @@ public class ClientListener implements Observable {
 		sock = s;
 	}
 
+	/**
+	 * Catch all the input events
+	 * @see Message
+	 * @version 1.0
+	 */
 	public void run() {
 		try
 		{
@@ -96,15 +105,23 @@ public class ClientListener implements Observable {
 			logger.info("fail " +e.getMessage());
 		}
 	}
-
+	
+	/**
+	 * Add an observer
+	 */
 	public void addObserver(Observer obs) {
 		this.listObserver.add(obs);
 	}
-
+	
+	/**
+	 * Remove observers
+	 */
 	public void delObserver() {
 		this.listObserver = new ArrayList<Observer>();
 	}
-
+	/**
+	 * Prevent observers
+	 */
 	public void updateObserver() {
 		for (Observer obs : this.listObserver) {
 			obs.update(infoRpsls);

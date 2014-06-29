@@ -11,6 +11,12 @@ import java.nio.ByteBuffer;
 
 import jfnwp.Implementation.Message;
 
+/**
+ * Used to transform String into Byte Array
+ * and Byte Array into String
+ * @see NetworkService
+ * @version 1.0
+ */
 public class SerializationService {
 
 	public static byte[] toByteArray(Message m) throws IOException {
