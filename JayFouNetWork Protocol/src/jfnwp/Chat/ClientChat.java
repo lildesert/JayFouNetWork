@@ -28,20 +28,30 @@ import jfnwp.Implementation.ObservableData;
 import javax.swing.JTextPane;
 import javax.swing.JScrollPane;
 
+/**
+ * Class to interact with the opponent with 
+ * a graphical user interface. 
+ * Class is called by the clients. 
+ * The protocol used is UDP. 
+ * @version 1.0
+ */
 public class ClientChat {
 
 	private JFrame frame;
 	private JPanel contentPane;
-	private JTextField tbMess;
-	private InetAddress group;
-	private MulticastSocket s;
-	private String hostname;
-	private int port;
-	private Recevoir r;
-	private String name;
 	private JTextPane epChat;
 	private JScrollPane mOutputScroll;
-
+	private JTextField tbMess;
+	
+	private String name;
+	private String hostname;
+	
+	private InetAddress group;
+	private MulticastSocket s;
+	
+	private int port;
+	private Recevoir r;
+	
 	/**
 	 * Create the frame.
 	 */
@@ -112,7 +122,6 @@ public class ClientChat {
 		try {
 			s.send(dp);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -123,10 +132,8 @@ public class ClientChat {
 			s = new MulticastSocket(port);
 			s.joinGroup(group);
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

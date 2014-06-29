@@ -27,8 +27,7 @@ import jfnwp.Services.MessageService;
  */
 public class Chess extends Game {
 	
-	private static Logger logger = LogManager.getLogger(Chess.class
-			.getName());
+	private static Logger logger = LogManager.getLogger(Chess.class.getName());
 	
 	public Piece[][] board;
 	protected Color winner;
@@ -79,20 +78,15 @@ public class Chess extends Game {
 			{
 				col = Color.Black;
 			}
-			if(isMat(col))
-			{
+			if(isMat(col)) {
 				sendResult("win", mo.getPlayerIp());
 				sendResult("loose", getNextPlayerToMoveIp(mo.getPlayerIp()));
+			} else {
+				sendResult(mo.toString(), mo.getPlayerIp());
+				sendResult(mo.toString(), getNextPlayerToMoveIp(mo.getPlayerIp()));
+				sendWait(mo.getPlayerIp());
+				askMove(getNextPlayerToMoveIp(mo.getPlayerIp()));
 			}
-			else
-			{
-			
-			sendResult(mo.toString(), mo.getPlayerIp());
-			sendResult(mo.toString(), getNextPlayerToMoveIp(mo.getPlayerIp()));
-			sendWait(mo.getPlayerIp());
-			askMove(getNextPlayerToMoveIp(mo.getPlayerIp()));
-			}
-			
 			
 		} else {
 			sendError("Incorrect move", mo.getPlayerIp());
@@ -286,7 +280,6 @@ public class Chess extends Game {
                 if (board[i][j] != null) {
                     ChessPiece pTmp = (ChessPiece) board[i][j];
                     ChessMove mv = new ChessMove(new Position(j, i), p);
-                    //Erreur ici NullPointerException
                     if (!pTmp.getColor().equals(piece.getColor()) && pTmp.checkMove(mv, this))
                         return true;
                 }

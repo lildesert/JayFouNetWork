@@ -23,14 +23,14 @@ public class Rpsls extends Game {
 
 	@Override
 	public void applyMove(IMove m) {
-		logger.info("apply move de Rpsls appelé");
+		logger.info("apply move of Rpsls");
 		Socket s = null;
 		if (waitingMove == null) {
-			logger.info("entrée dans le waitingMove");
+			logger.info("entry in waitingMove");
 			waitingMove = (RpslsMove) m;
-			logger.info("waitingMove créé");
+			logger.info("waitingMove created");
 			sendWait(waitingMove.getPlayerIp());
-			logger.info("wait envoyé");
+			logger.info("wait sent");
 			askMove(getNextPlayerToMoveIp(waitingMove.getPlayerIp()));
 			logger.info("move opponent asked");
 		} else {
