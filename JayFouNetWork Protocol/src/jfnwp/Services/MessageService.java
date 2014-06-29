@@ -56,12 +56,6 @@ public class MessageService implements IMessages {
 	}
 
 	@Override
-	public void Surrender() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void GetAdress() {
 		Message m = new Message(8);
 		NetworkService.SendMessage(s, m);
@@ -81,22 +75,10 @@ public class MessageService implements IMessages {
 	}
 
 	@Override
-	public void Nok() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void Wait(String info) {
 		Message m = new Message(12);
 		m.setData(info);
 		NetworkService.SendMessage(s, m);
-	}
-
-	@Override
-	public void Imp() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

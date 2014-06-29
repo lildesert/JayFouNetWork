@@ -116,12 +116,6 @@ public class RefereeServer extends Thread {
 				Info.Instance.deleteGame(gc, p.getAddress());
 				break;
 
-			case 4:
-				break;
-
-			case 5:
-				break;
-
 			case 6:
 				logger.info("Move reçu");
 				try {
@@ -143,9 +137,6 @@ public class RefereeServer extends Thread {
 				}
 				break;
 
-			case 7:
-				break;
-
 			case 8:
 				logger.info("GetAdress reçu");
 				String s = gc.getHost() +";" +Integer.toString(gc.getPort()) +";";
@@ -153,29 +144,8 @@ public class RefereeServer extends Thread {
 				m.SendAdress(s);
 				break;
 
-			case 9:
-				break;
-
-			case 10:
-				break;
-
-			case 11:
-				break;
-
-			case 12:
-				break;
-
-			case 13:
-				break;
-
-			case 14:
-				break;
-
 			case 15:
 				m.SendGames();
-				break;
-
-			case 16:
 				break;
 
 			default:
