@@ -8,6 +8,4 @@ public interface IMove {
 	void deserialize(String s);
 	void setPlayerIp(String ip);
 	String getPlayerIp();
-	String getMoveResult();
-	void setMoveResult(String s);
 }

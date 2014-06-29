@@ -57,7 +57,7 @@ public class ClientStart extends JFrame {
 			serverPort = Integer.parseInt(args[1]);
 		} catch (Exception e) {
 			logger.info("Argument Error " + e.getMessage());
-			ip = "192.168.0.10";
+			ip = "192.168.0.3";
 			serverIp = "localhost";
 			serverPort = 9890;
 		}

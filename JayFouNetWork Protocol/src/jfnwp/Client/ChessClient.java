@@ -46,7 +46,7 @@ public class ChessClient extends Client {
 
 	/******* MENU *********/
 	private JMenuBar menuBar = new JMenuBar();
-	private JMenu jeuMenu = new JMenu("Jeu");
+	private JMenu jeuMenu = new JMenu("Game");
 	private JMenu chat = new JMenu("Chat");
 	private JMenuItem quit = new JMenuItem("Quit");
 	private UserInteractions inter;

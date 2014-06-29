@@ -8,7 +8,6 @@ import jfnwp.Interfaces.IMove;
 public abstract class Move implements IMove {
 
 	protected String playerIp;
-	protected String moveResult;
 	
 	public abstract void deserialize(String d);
 	
@@ -19,13 +18,5 @@ public abstract class Move implements IMove {
 
 	public String getPlayerIp() {
 		return playerIp;
-	}
-	
-	public String getMoveResult() {
-		return moveResult;
-	}
-
-	public void setMoveResult(String moveResult) {
-		this.moveResult = moveResult;
 	}
 }
