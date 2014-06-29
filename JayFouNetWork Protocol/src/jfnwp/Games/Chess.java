@@ -101,7 +101,9 @@ public class Chess extends Game {
 			return false;
 		if(! p.checkMove(mo, this))
 			return false;
-			
+		if(becomeMat(mo))
+			return false;
+		
 		return true;
 	}
 	
@@ -319,9 +321,14 @@ public class Chess extends Game {
 	                positionTmp.setX(y);
 	                positionTmp.setY(x);
 	                ChessMove mv = new ChessMove(kingPosition, positionTmp);
-	                if (piece.checkMove(mv, this))
-	                	if(!mayBeTaken(positionTmp))
+	                if (piece.checkMove(mv, this)) {
+	                	movePiece(kingPosition, positionTmp);
+	                	if(!mayBeTaken(positionTmp)) {
+	                		movePiece(positionTmp, kingPosition);
 	                		return false;
+	                	}
+	                	movePiece(positionTmp, kingPosition);
+	                }
 	            }
 	        }
 	        return true;

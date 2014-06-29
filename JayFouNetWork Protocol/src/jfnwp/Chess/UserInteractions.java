@@ -33,11 +33,8 @@ public class UserInteractions implements java.awt.event.MouseListener {
 	private int click;
 	public Color tour;
 	private Position start, end;
-	// Changé à public
 	public Chess chessBoard;
-	// Changé à public
 	public Chess chessBoardPrecedent;
-	// Changé à public
 	public JLayeredPane layerPane;
 	private Graphics graph;
 	private ChessClient chessCli;

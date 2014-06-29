@@ -48,6 +48,16 @@ public class ChessBoardForDisplay extends Chess{
     }
 	
 	/**
+	 * Get an image to inform the player which piece he selected
+	 * Version : no possible move
+	 * @version 1.0
+	 */
+	public void displaySelectionNoMove(JLayeredPane layeredPane, Position p) {
+        layeredPane.add(this.cadreEchec);
+        this.cadreEchec.setLocation(35 + p.getX() * 66, 35 + p.getY() * 66);
+    }
+	
+	/**
 	 * Insert pieces in the layeredPane
 	 * @version 1.0
 	 */
@@ -114,10 +124,11 @@ public class ChessBoardForDisplay extends Chess{
 	 * Display the possible moves for a piece
 	 * @version 1.0
 	 */
-	public void displayPossibleMoves(JLayeredPane layeredPane, Position p) {
+	public Boolean displayPossibleMoves(JLayeredPane layeredPane, Position p) {
         ChessPiece piece = (ChessPiece) getPiece(p);
         Position positionTmp = new Position();
         JLabel image;
+        Boolean possibleMoves = false; 
         int x, y;
         for (y = 0; y < 8; y++) {
             for (x = 0; x < 8; x++) {
@@ -127,9 +138,11 @@ public class ChessBoardForDisplay extends Chess{
                     image = getImage("ressources/coupsPossibles.png");
                     layeredPane.add(image);
                     image.setLocation(35 + positionTmp.getX() * 66, 35 + positionTmp.getY() * 66);
+                    possibleMoves = true;
                 }
             }
         }
+        return possibleMoves;
     }
 	
 	/**
@@ -139,8 +152,11 @@ public class ChessBoardForDisplay extends Chess{
 	public void clickChoixPiece(JLayeredPane layeredPane, Position p) {
         layeredPane.removeAll();        
         this.displayPieces(layeredPane);
-        this.displaySelection(layeredPane, p);
-        this.displayPossibleMoves(layeredPane, p);
+        if (this.displayPossibleMoves(layeredPane, p)) {
+        	this.displaySelection(layeredPane, p);
+        } else {
+        	displaySelectionNoMove(layeredPane, p);
+        }
         this.displayBackground(layeredPane);
     }
 }
